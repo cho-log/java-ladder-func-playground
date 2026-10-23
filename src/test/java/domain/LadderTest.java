@@ -11,7 +11,7 @@ class LadderTest {
     @Test
     @DisplayName("높이만큼 줄이 생성된다.")
     void 높이만큼_줄이_생성된다() {
-        Ladder ladder = Ladder.create(new LadderSize(4), new LadderSize(3), () -> true);
+        Ladder ladder = Ladder.create(new LadderSize(4), new LadderSize(4), () -> true);
 
         assertThat(ladder.lines()).hasSize(4);
     }
@@ -19,7 +19,7 @@ class LadderTest {
     @Test
     @DisplayName("각 줄은 너비만큼 지점을 가진다.")
     void 각_줄은_너비만큼_지점을_가진다() {
-        Ladder ladder = Ladder.create(new LadderSize(4), new LadderSize(3), () -> true);
+        Ladder ladder = Ladder.create(new LadderSize(4), new LadderSize(4), () -> true);
 
         List<Line> lines = ladder.lines();
 
