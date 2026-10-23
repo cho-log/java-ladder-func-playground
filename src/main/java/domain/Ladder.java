@@ -14,11 +14,16 @@ public class Ladder {
     }
 
     public static Ladder create(LadderSize height, LadderSize width, BooleanGenerator booleanGenerator) {
+        width = toPointCount(width); //세로줄 개수(넓이)를 칸 개수로 바꾼다.
         List<Line> lines = new ArrayList<>();
         for (int index = 0; index < height.value(); index++) {
             lines.add(Line.create(width, booleanGenerator));
         }
         return new Ladder(lines);
+    }
+
+    private static LadderSize toPointCount(LadderSize width) { //세로줄 개수(넓이)를 칸 개수로 바꾼다.
+        return new LadderSize(width.value() - 1);
     }
 
     public List<Line> lines() {

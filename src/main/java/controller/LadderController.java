@@ -9,7 +9,7 @@ import view.OutputView;
 public class LadderController {
 
     private static final LadderSize LADDER_HEIGHT = new LadderSize(4);
-    private static final LadderSize LADDER_WIDTH = new LadderSize(3);
+    private static final LadderSize LADDER_WIDTH = new LadderSize(4);
 
     private final OutputView outputView;
 
