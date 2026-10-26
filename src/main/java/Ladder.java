@@ -4,9 +4,9 @@ import java.util.List;
 public class Ladder {
     private final List<Line> lines;
 
-    public Ladder(int width, int height) {
+    public Ladder(Width width, Height height) {
         this.lines = new ArrayList<>();
-        generateLines(width, height );
+        generateLines(width.getWidth(), height.getHeight());
     }
 
     private void generateLines(int width, int height) {
