@@ -1,7 +1,11 @@
 import java.util.Scanner;
 
 public class InputView {
-    private final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner;
+
+    public InputView(Scanner scanner) {
+        this.scanner = scanner;
+    }
 
     public int readWidth() {
         System.out.println("사다리의 넓이는 몇 개인가요?");
