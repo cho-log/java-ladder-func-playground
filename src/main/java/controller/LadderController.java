@@ -2,6 +2,7 @@ package controller;
 
 import domain.BooleanGenerator;
 import domain.Ladder;
+import domain.LadderGame;
 import domain.LadderSize;
 import domain.RandomBooleanGenerator;
 import view.InputView;
@@ -24,5 +25,6 @@ public class LadderController {
         LadderSize height = inputView.readHeight();
         Ladder ladder = Ladder.create(height, width, new RandomBooleanGenerator());
         outputView.printLadder(ladder);
+        outputView.printResult(new LadderGame(ladder).play()); // 사다리를 타고 내려간 최종 위치들을 반환
     }
 }
