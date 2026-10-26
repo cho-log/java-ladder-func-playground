@@ -1,8 +1,11 @@
 package view;
 
 import domain.Ladder;
+import domain.LadderResult;
 import domain.Line;
 import domain.Point;
+import domain.Position;
+import java.util.List;
 
 public class OutputView {
 
@@ -30,6 +33,19 @@ public class OutputView {
             return LadderFormat.CONNECTED.symbol(); //연결되어있으면 -----를 반환
         }
         return LadderFormat.EMPTY.symbol(); //연결되어있지 않으면 공백 5칸을 반환
+    }
+
+
+    public void printResult(LadderResult result) {
+        System.out.println();
+        List<Position> arrivals = result.arrivals();
+        for (int start = 0; start < arrivals.size(); start++) {
+            System.out.println(formatArrival(start, arrivals.get(start)));
+        }
+    }
+
+    private String formatArrival(int start, Position arrival) {
+        return start + MessageFormat.RESULT_ARROW.message() + arrival.value();
     }
 
 }
