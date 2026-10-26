@@ -50,6 +50,26 @@ class LineTest {
         }
     }
 
+    @Test
+    @DisplayName("[연결, 안 이음, 연결]에서 각 위치가 올바르게 이동한다.")
+    void 연결_안이음_연결_줄에서_각_위치가_이동한다() {
+        Line line = Line.create(new LadderSize(3), () -> true);
+
+        assertThat(line.move(new Position(0)).value()).isEqualTo(1);
+        assertThat(line.move(new Position(1)).value()).isEqualTo(0);
+        assertThat(line.move(new Position(2)).value()).isEqualTo(3);
+        assertThat(line.move(new Position(3)).value()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("연결이 없으면 위치가 그대로다.")
+    void 연결이_없으면_위치가_그대로다() {
+        Line line = Line.create(new LadderSize(3), () -> false);
+
+        assertThat(line.move(new Position(0)).value()).isEqualTo(0);
+        assertThat(line.move(new Position(3)).value()).isEqualTo(3);
+    }
+
     private boolean hasAdjacentConnection(Line line) {
         for (int index = 1; index < line.points().size(); index++) {
             if (line.points().get(index - 1).isConnected() && line.points().get(index).isConnected()) {
