@@ -1,7 +1,8 @@
 public class Application {
     public static void main(String[] args) {
-        Ladder ladder = new Ladder(4, 4);
-        LadderOutputView ladderOutputView = new LadderOutputView();
-        ladderOutputView.print(ladder);
+        InputView inputView = new InputView();
+        OutputView outputView = new OutputView();
+        LadderController ladderController = new LadderController(inputView, outputView);
+        ladderController.run();
     }
 }

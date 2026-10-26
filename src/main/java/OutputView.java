@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class LadderOutputView {
-    public void print(Ladder ladder) {
+public class OutputView {
+    public void printLadder(Ladder ladder) {
+        System.out.println("\n실행결과\n");
+
         for (Line line : ladder.getLines()) {
-            System.out.println(formatLine(line));
+            System.out.println("     " + formatLine(line));
         }
     }
 
@@ -25,5 +27,9 @@ public class LadderOutputView {
         result.add("|");
 
         return String.join("", result);
+    }
+
+    public void printError(String error) {
+        System.out.println(error);
     }
 }

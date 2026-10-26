@@ -11,9 +11,6 @@
 ### `Ladder` 객체
 - `Line` 여러개를 관리
 
-### `LadderOutputView`
-- `Ladder` 객체를 받아서 문자열로 변환
-- 문자열로 변환된 사다리 출력
 
 ## 2단계 - 사다리 생성
 ### `Width`
