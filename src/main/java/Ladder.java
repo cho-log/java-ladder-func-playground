@@ -18,4 +18,12 @@ public class Ladder {
     public List<Line> getLines() {
         return List.copyOf(lines);
     }
+
+    public int findDestination(int position) {
+        for (Line line : lines) {
+            position = line.moveFrom(position);
+        }
+
+        return position;
+    }
 }

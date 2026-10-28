@@ -33,4 +33,42 @@ public class Line {
     public List<Boolean> getPoints() {
         return List.copyOf(points);
     }
+
+    public int moveFrom(int position) {
+        if (position == 0) {
+            return moveRightIfConnected(position);
+        }
+
+        if (position == points.size()) {
+            return moveLeftIfConnected(position);
+        }
+
+        return moveHorizontally(position);
+    }
+
+    private int moveLeftIfConnected(int position) {
+        if (points.get(position - 1)) {
+            return position - 1;
+        }
+
+        return position;
+    }
+
+    private int moveRightIfConnected(int position) {
+        if (points.get(position)) {
+            return position + 1;
+        }
+
+        return position;
+    }
+
+    private int moveHorizontally(int position) {
+        int result = moveLeftIfConnected(position);
+
+        if (result != position) {
+            return result;
+        }
+
+        return moveRightIfConnected(position);
+    }
 }
