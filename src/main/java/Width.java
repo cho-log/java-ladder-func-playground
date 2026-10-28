@@ -14,7 +14,7 @@ public class Width {
         }
     }
 
-    public int getWidth() {
-        return width;
+    public int getConnectionSlotCount() {
+        return width - 1;
     }
 }

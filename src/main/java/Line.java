@@ -6,9 +6,9 @@ public class Line {
     private final List<Boolean> points;
     private final Random random = new Random();
 
-    public Line(int width) {
+    public Line(Width width) {
         this.points = new ArrayList<>();
-        generatePoints(width - 1);
+        generatePoints(width.getConnectionSlotCount());
     }
 
     private void generatePoints(int pointCount) {

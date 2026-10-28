@@ -12,7 +12,7 @@ public class LineTest {
     @Test
     void 가로줄은_연속해서_연결되지_않는다() {
         // given
-        Line line = new Line(4);
+        Line line = new Line(new Width(4));
 
         // when
         List<Boolean> points = line.getPoints();

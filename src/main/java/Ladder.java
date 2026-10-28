@@ -6,10 +6,10 @@ public class Ladder {
 
     public Ladder(Width width, Height height) {
         this.lines = new ArrayList<>();
-        generateLines(width.getWidth(), height.getHeight());
+        generateLines(width, height.getHeight());
     }
 
-    private void generateLines(int width, int height) {
+    private void generateLines(Width width, int height) {
         for (int i = 0; i < height; i++) {
             lines.add(new Line(width));
         }
