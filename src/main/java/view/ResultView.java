@@ -25,11 +25,10 @@ public class ResultView {
     }
 
     private static int calculateColumnWidth(Outcomes outcomes) {
-        int columnWidth = MIN_COLUMN_WIDTH;
-        for (Outcome outcome : outcomes.getValues()) {
-            columnWidth = Math.max(columnWidth, outcome.getValue().length() + 1);
-        }
-        return columnWidth;
+        return Math.max(MIN_COLUMN_WIDTH, outcomes.getValues().stream()
+                .map(Outcome::getValue)
+                .mapToInt(String::length)
+                .max().orElse(0) + 1);
     }
 
     private static void printNames(Participants participants, int columnWidth) {
