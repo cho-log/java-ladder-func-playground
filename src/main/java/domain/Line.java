@@ -4,18 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Line {
-    private static final int CONNECTION_COUNT = 3;
-
     private final List<Connection> connections;
 
-    public Line(ConnectionGenerator generator) {
-        this.connections = createConnections(generator);
+    public Line(LadderWidth width, ConnectionGenerator generator) {
+        this.connections = createConnections(width, generator);
     }
 
-    private List<Connection> createConnections(ConnectionGenerator generator) {
+    private List<Connection> createConnections(LadderWidth width, ConnectionGenerator generator) {
         List<Connection> connections = new ArrayList<>();
         Connection previous = Connection.DISCONNECTED;
-        for (int index = 0; index < CONNECTION_COUNT; index++) {
+        for (int index = 0; index < width.getConnectionCount(); index++) {
             previous = previous.next(generator);
             connections.add(previous);
         }
