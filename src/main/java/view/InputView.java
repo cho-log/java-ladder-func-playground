@@ -21,7 +21,9 @@ public class InputView {
     }
 
     private static List<String> readValues(Scanner scanner) {
-        return Arrays.asList(scanner.nextLine().split(",", -1));
+        return Arrays.stream(scanner.nextLine().split(",", -1))
+                .map(String::trim)
+                .toList();
     }
 
     public static LadderHeight readHeight(Scanner scanner) {
