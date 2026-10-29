@@ -40,17 +40,13 @@ public class ResultView {
     }
 
     private static void printLadder(Ladder ladder, int columnWidth) {
-        for (Line line : ladder.getLines()) {
-            printLine(line, columnWidth);
-        }
+        ladder.getLines().forEach(line -> printLine(line, columnWidth));
     }
 
     private static void printLine(Line line, int columnWidth) {
-        StringBuilder result = new StringBuilder(VERTICAL_LINE);
-        for (Connection connection : line.getConnections()) {
-            result.append(toSymbol(connection, columnWidth - 1)).append(VERTICAL_LINE);
-        }
-        System.out.println(result);
+        System.out.println(VERTICAL_LINE + line.getConnections().stream()
+                .map(connection -> toSymbol(connection, columnWidth - 1) + VERTICAL_LINE)
+                .collect(Collectors.joining()));
     }
 
     private static String toSymbol(Connection connection, int width) {
