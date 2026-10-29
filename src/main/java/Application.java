@@ -14,5 +14,6 @@ public class Application {
         LadderHeight height = InputView.readHeight(scanner);
         Ladder ladder = new Ladder(width, height, new RandomConnectionGenerator());
         ResultView.print(ladder);
+        ResultView.printPaths(ladder.getPaths());
     }
 }
