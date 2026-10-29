@@ -21,4 +21,21 @@ public class Ladder {
     public List<Line> getLines() {
         return lines;
     }
+
+    public Position move(Position start) {
+        Position current = start;
+        for (Line line : lines) {
+            current = line.move(current);
+        }
+        return current;
+    }
+
+    public List<LadderPath> getPaths() {
+        List<LadderPath> paths = new ArrayList<>();
+        for (int start = 0; start < lines.get(0).getWidth().getValue(); start++) {
+            Position position = new Position(start);
+            paths.add(new LadderPath(position, move(position)));
+        }
+        return List.copyOf(paths);
+    }
 }
