@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Ladder {
     private final List<Line> lines;
@@ -11,11 +12,9 @@ public class Ladder {
     }
 
     private List<Line> createLines(LadderWidth width, LadderHeight height, ConnectionGenerator generator) {
-        List<Line> lines = new ArrayList<>();
-        for (int index = 0; index < height.getValue(); index++) {
-            lines.add(new Line(width, generator));
-        }
-        return List.copyOf(lines);
+        return Stream.generate(() -> new Line(width, generator))
+                .limit(height.getValue())
+                .toList();
     }
 
     public List<Line> getLines() {
