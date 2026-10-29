@@ -1,7 +1,6 @@
 package view;
 
 import domain.LadderHeight;
-import domain.LadderWidth;
 import domain.Outcomes;
 import domain.Participants;
 import domain.ResultQuery;
@@ -45,10 +44,5 @@ public class InputView {
 
     public static ResultQuery readQuery(Scanner scanner) {
         return new ResultQuery(scanner.nextLine());
-    }
-
-    public static LadderWidth readWidth(Scanner scanner) {
-        System.out.println("사다리의 넓이는 몇 개인가요?");
-        return new LadderWidth(readInteger(scanner));
     }
 }
