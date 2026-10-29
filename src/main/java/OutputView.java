@@ -32,4 +32,11 @@ public class OutputView {
     public void printError(String error) {
         System.out.println(error);
     }
+
+    public void printResult(Width width, Ladder ladder) {
+        System.out.println();
+        for (int i = 0; i < width.getWidth(); i++) {
+            System.out.println(i + " -> " + ladder.findDestination(i));
+        }
+    }
 }

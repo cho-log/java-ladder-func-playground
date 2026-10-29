@@ -22,5 +22,6 @@ public class LadderController {
         Height height = new Height(inputView.readHeight());
         Ladder ladder = ladderFactory.createLadder(width, height);
         outputView.printLadder(ladder);
+        outputView.printResult(width, ladder);
     }
 }
