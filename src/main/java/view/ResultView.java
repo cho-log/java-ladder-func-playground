@@ -2,7 +2,10 @@ package view;
 
 import domain.Connection;
 import domain.Ladder;
+import domain.LadderPath;
 import domain.Line;
+
+import java.util.List;
 
 public class ResultView {
     private static final String VERTICAL_LINE = "|";
@@ -29,5 +32,12 @@ public class ResultView {
             return CONNECTED_LINE;
         }
         return DISCONNECTED_LINE;
+    }
+
+    public static void printPaths(List<LadderPath> paths) {
+        System.out.println();
+        for (LadderPath path : paths) {
+            System.out.println(path.getStart().getValue() + " -> " + path.getEnd().getValue());
+        }
     }
 }
