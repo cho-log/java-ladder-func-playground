@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Outcomes {
@@ -11,11 +10,7 @@ public class Outcomes {
     }
 
     private List<Outcome> createOutcomes(List<String> values) {
-        List<Outcome> outcomes = new ArrayList<>();
-        for (String value : values) {
-            outcomes.add(new Outcome(value));
-        }
-        return List.copyOf(outcomes);
+        return values.stream().map(Outcome::new).toList();
     }
 
     public void validateCount(LadderWidth width) {
