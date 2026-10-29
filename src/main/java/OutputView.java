@@ -33,10 +33,14 @@ public class OutputView {
         System.out.println(error);
     }
 
-    public void printResult(Width width, Ladder ladder) {
+    public void printResult(LadderResults results) {
         System.out.println();
-        for (int i = 0; i < width.getWidth(); i++) {
-            System.out.println(i + " -> " + ladder.findDestination(i));
+
+        for (int i = 0; i < results.size(); i++) {
+            Position start = new Position(i);
+            Position destination = results.getDestination(start);
+
+            System.out.println(start.getValue() + " -> " + destination.getValue());
         }
     }
 }

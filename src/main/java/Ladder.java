@@ -32,7 +32,7 @@ public class Ladder {
         return List.copyOf(lines);
     }
 
-    public int findDestination(int position) {
+    public Position findDestination(Position position) {
         for (Line line : lines) {
             position = line.moveFrom(position);
         }

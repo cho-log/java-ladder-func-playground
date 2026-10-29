@@ -39,38 +39,48 @@ public class Line {
         return points.size() == other.points.size();
     }
 
-    public int moveFrom(int position) {
-        if (position == 0) {
+    public Position moveFrom(Position position) {
+        validatePosition(position);
+
+        if (position.getValue() == 0) {
             return moveRightIfConnected(position);
         }
 
-        if (position == points.size()) {
+        if (position.getValue() == points.size()) {
             return moveLeftIfConnected(position);
         }
 
         return moveHorizontally(position);
     }
 
-    private int moveLeftIfConnected(int position) {
-        if (points.get(position - 1)) {
-            return position - 1;
+    private void validatePosition(Position position) {
+        if (position.getValue() > points.size()) {
+            throw new IllegalArgumentException(
+                    "위치가 사다리 범위를 벗어났습니다."
+            );
+        }
+    }
+
+    private Position moveLeftIfConnected(Position position) {
+        if (points.get(position.getValue() - 1)) {
+            return position.moveLeft();
         }
 
         return position;
     }
 
-    private int moveRightIfConnected(int position) {
-        if (points.get(position)) {
-            return position + 1;
+    private Position moveRightIfConnected(Position position) {
+        if (points.get(position.getValue())) {
+            return position.moveRight();
         }
 
         return position;
     }
 
-    private int moveHorizontally(int position) {
-        int result = moveLeftIfConnected(position);
+    private Position moveHorizontally(Position position) {
+        Position result = moveLeftIfConnected(position);
 
-        if (result != position) {
+        if (!result.equals(position)) {
             return result;
         }
 

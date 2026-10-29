@@ -20,8 +20,11 @@ public class LadderController {
     public void runApp() {
         Width width = new Width(inputView.readWidth());
         Height height = new Height(inputView.readHeight());
+
         Ladder ladder = ladderFactory.createLadder(width, height);
+        LadderResults results = new LadderResults(width, ladder);
+
         outputView.printLadder(ladder);
-        outputView.printResult(width, ladder);
+        outputView.printResult(results);
     }
 }
