@@ -2,32 +2,74 @@ import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SuppressWarnings("NonAsciiCharacters")
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 public class LadderTest {
     @Test
-    void 입력한_높이만큼_Line이_생성된다() {
-        Ladder ladder = new Ladder(new Width(4), new Height(4));
+    void 사다리_높이가_0인_경우_예외가_발생한다() {
+        // given
+        List<Line> lines = List.of();
 
-        assertEquals(4, ladder.getLines().size());
+        // when & then
+        assertThrows(IllegalArgumentException.class, () -> new Ladder(lines));
     }
 
     @Test
-    void 입력한_넓이보다_하나_작은_연결_상태가_생성된다() {
-        Ladder ladder = new Ladder(new Width(4), new Height(4));
+    void 사다리_넓이가_서로_다르면_예외가_발생한다() {
+        // given
+        List<Boolean> line1 = List.of(true, false, true);
+        List<Boolean> line2 = List.of(true, false);
 
-        for (Line line : ladder.getLines()) {
-            assertEquals(3, line.getPoints().size());
-        }
+        List<Line> lines = List.of(
+                new Line(line1),
+                new Line(line2)
+        );
+
+        // when & then
+        assertThrows(IllegalArgumentException.class, () -> new Ladder(lines));
     }
 
     @Test
-    void 최소_넓이와_높이로_사다리를_생성할_수_있다() {
-        Ladder ladder = new Ladder(new Width(2), new Height(1));
+    void 유효한_Line_정보로_사다리를_생성한다() {
+        // given
+        List<Boolean> line1 = List.of(true, false, true);
+        List<Boolean> line2 = List.of(true, false, true);
 
-        assertEquals(1, ladder.getLines().size());
-        assertEquals(1, ladder.getLines().get(0).getPoints().size());
+        List<Line> lines = List.of(
+                new Line(line1),
+                new Line(line2)
+        );
+
+        // when
+        Ladder ladder = new Ladder(lines);
+
+        // then
+        assertEquals(lines, ladder.getLines());
+    }
+
+    @Test
+    void 출발점에서_도착점을_찾는다() {
+        // given
+        List<Boolean> line1 = List.of(true, false, true);
+        List<Boolean> line2 = List.of(false, true, false);
+
+        List<Line> lines = List.of(
+                new Line(line1),
+                new Line(line2)
+        );
+
+        // when
+        Ladder ladder = new Ladder(lines);
+
+        // then
+        assertEquals(2, ladder.findDestination(0));
+        assertEquals(0, ladder.findDestination(1));
+        assertEquals(3, ladder.findDestination(2));
+        assertEquals(1, ladder.findDestination(3));
     }
 }
