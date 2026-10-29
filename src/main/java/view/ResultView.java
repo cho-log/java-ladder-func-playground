@@ -11,6 +11,7 @@ import domain.Participants;
 import domain.ResultQuery;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ResultView {
     private static final int MIN_COLUMN_WIDTH = 6;
@@ -32,10 +33,10 @@ public class ResultView {
     }
 
     private static void printNames(Participants participants, int columnWidth) {
-        for (ParticipantName name : participants.getNames()) {
-            System.out.printf("%-" + columnWidth + "s", name.getValue());
-        }
-        System.out.println();
+        System.out.println(participants.getNames().stream()
+                .map(ParticipantName::getValue)
+                .map(name -> String.format("%-" + columnWidth + "s", name))
+                .collect(Collectors.joining()));
     }
 
     private static void printLadder(Ladder ladder, int columnWidth) {
@@ -60,10 +61,10 @@ public class ResultView {
     }
 
     private static void printOutcomes(Outcomes outcomes, int columnWidth) {
-        for (Outcome outcome : outcomes.getValues()) {
-            System.out.printf("%-" + columnWidth + "s", outcome.getValue());
-        }
-        System.out.println();
+        System.out.println(outcomes.getValues().stream()
+                .map(Outcome::getValue)
+                .map(value -> String.format("%-" + columnWidth + "s", value))
+                .collect(Collectors.joining()));
     }
 
     public static void printResults(ResultQuery query, GameResults results) {
