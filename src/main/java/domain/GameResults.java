@@ -3,6 +3,7 @@ package domain;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class GameResults {
     private final Map<ParticipantName, Outcome> results;
@@ -21,11 +22,8 @@ public class GameResults {
     }
 
     public Outcome getResult(ParticipantName name) {
-        Outcome outcome = results.get(name);
-        if (outcome == null) {
-            throw new IllegalArgumentException("참여하지 않은 사람입니다: " + name.getValue());
-        }
-        return outcome;
+        return Optional.ofNullable(results.get(name))
+                .orElseThrow(() -> new IllegalArgumentException("참여하지 않은 사람입니다: " + name.getValue()));
     }
 
     public Map<ParticipantName, Outcome> getResults() {
