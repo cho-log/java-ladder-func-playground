@@ -1,10 +1,12 @@
 public class LadderController {
     private final InputView inputView;
     private final OutputView outputView;
+    private final LadderFactory ladderFactory;
 
-    public LadderController(InputView inputView, OutputView outputView) {
+    public LadderController(InputView inputView, OutputView outputView, LadderFactory ladderFactory) {
         this.inputView = inputView;
         this.outputView = outputView;
+        this.ladderFactory = ladderFactory;
     }
 
     public void run() {
@@ -18,7 +20,7 @@ public class LadderController {
     public void runApp() {
         Width width = new Width(inputView.readWidth());
         Height height = new Height(inputView.readHeight());
-        Ladder ladder = new Ladder(width, height);
+        Ladder ladder = ladderFactory.createLadder(width, height);
         outputView.printLadder(ladder);
     }
 }

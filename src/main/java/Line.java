@@ -35,6 +35,10 @@ public class Line {
         return points;
     }
 
+    public boolean isSameWidth(Line other) {
+        return points.size() == other.points.size();
+    }
+
     public int moveFrom(int position) {
         if (position == 0) {
             return moveRightIfConnected(position);

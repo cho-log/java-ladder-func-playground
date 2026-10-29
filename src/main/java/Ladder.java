@@ -3,17 +3,29 @@ import java.util.List;
 
 public class Ladder {
     private final List<Line> lines;
-    private final ConnectionGenerator connectionGenerator;
 
-    public Ladder(Width width, Height height) {
-        this.lines = new ArrayList<>();
-        this.connectionGenerator = new ConnectionGenerator();
-        generateLines(width, height.getHeight());
+    public Ladder(List<Line> lines) {
+        this.lines = List.copyOf(lines);
+        validateLines(lines);
     }
 
-    private void generateLines(Width width, int height) {
-        for (int i = 0; i < height; i++) {
-            lines.add(new Line(connectionGenerator.generatePoints(width)));
+    private void validateLines(List<Line> lines) {
+        if (lines.isEmpty()) {
+            throw new IllegalArgumentException(
+                    "사다리 높이는 1개 이상이여야 합니다."
+            );
+        }
+
+        for (Line line : lines) {
+            validateLine(line);
+        }
+    }
+
+    private void validateLine(Line line) {
+        if (!lines.get(0).isSameWidth(line)) {
+            throw new IllegalArgumentException(
+                    "사다리 넓이는 모두 같아야 합니다."
+            );
         }
     }
 
