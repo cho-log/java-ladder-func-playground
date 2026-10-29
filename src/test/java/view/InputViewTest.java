@@ -19,7 +19,21 @@ class InputViewTest {
     @ParameterizedTest
     @ValueSource(strings = {"1", " 5 "})
     void readsPositiveSize(String input) {
-        assertThat(InputView.readWidth(new Scanner(input)).getValue())
+        assertThat(InputView.readHeight(new Scanner(input)).getValue())
                 .isEqualTo(Integer.parseInt(input.trim()));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"neo,", ",neo", "neo,,brie"})
+    void rejectsEmptyNameInCommaSeparatedInput(String input) {
+        assertThatThrownBy(() -> InputView.readParticipants(new Scanner(input)))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"꽝,", ",5000", "꽝,,5000"})
+    void rejectsEmptyOutcomeInCommaSeparatedInput(String input) {
+        assertThatThrownBy(() -> InputView.readOutcomes(new Scanner(input)))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
