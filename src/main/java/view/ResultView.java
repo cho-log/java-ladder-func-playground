@@ -10,7 +10,6 @@ import domain.ParticipantName;
 import domain.Participants;
 import domain.ResultQuery;
 
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ResultView {
@@ -73,8 +72,7 @@ public class ResultView {
     }
 
     private static void printAll(GameResults results) {
-        for (Map.Entry<ParticipantName, Outcome> result : results.getResults().entrySet()) {
-            System.out.println(result.getKey().getValue() + " : " + result.getValue().getValue());
-        }
+        results.getResults().forEach((name, outcome) ->
+                System.out.println(name.getValue() + " : " + outcome.getValue()));
     }
 }
