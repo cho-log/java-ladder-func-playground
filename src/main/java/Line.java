@@ -1,37 +1,38 @@
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Line {
     private final List<Boolean> points;
-    private final Random random = new Random();
 
-    public Line(Width width) {
-        this.points = new ArrayList<>();
-        generatePoints(width.getConnectionSlotCount());
+    public Line(List<Boolean> points) {
+        validatePoints(points);
+        this.points = List.copyOf(points);
     }
 
-    private void generatePoints(int pointCount) {
-        for (int i = 0; i < pointCount; i++) {
-            boolean point = generatePoint();
-            points.add(point);
-        }
-    }
-
-    private boolean generatePoint() {
+    private void validatePoints(List<Boolean> points) {
         if (points.isEmpty()) {
-            return random.nextBoolean();
+            throw new IllegalArgumentException(
+                    "사다리 넓이는 2개 이상이여야 합니다."
+            );
         }
 
-        if (points.get(points.size() - 1)) {
-            return false;
-        }
+        for (int i = 0; i < points.size() - 1; i++) {
+            boolean current = points.get(i);
+            boolean next = points.get(i + 1);
 
-        return random.nextBoolean();
+            validateAdjacentPoints(current, next);
+        }
+    }
+
+    private void validateAdjacentPoints(boolean currentPoint, boolean nextPoint) {
+        if (currentPoint && nextPoint) {
+            throw new IllegalArgumentException(
+                    "가로줄은 연속될 수 없습니다."
+            );
+        }
     }
 
     public List<Boolean> getPoints() {
-        return List.copyOf(points);
+        return points;
     }
 
     public int moveFrom(int position) {
