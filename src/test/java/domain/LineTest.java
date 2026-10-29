@@ -10,7 +10,7 @@ class LineTest {
     @Test
     void preventsAdjacentConnections() {
         // 준비
-        Line line = new Line(() -> Connection.CONNECTED);
+        Line line = new Line(new LadderWidth(4), () -> Connection.CONNECTED);
         // 검증
         assertThat(line.getConnections()).containsExactly(
                 Connection.CONNECTED, Connection.DISCONNECTED, Connection.CONNECTED);
@@ -19,7 +19,7 @@ class LineTest {
     @Test
     void keepsAllSectionsDisconnected() {
         // 준비
-        Line line = new Line(() -> Connection.DISCONNECTED);
+        Line line = new Line(new LadderWidth(4), () -> Connection.DISCONNECTED);
         // 검증
         assertThat(line.getConnections()).containsExactly(
                 Connection.DISCONNECTED, Connection.DISCONNECTED, Connection.DISCONNECTED);
@@ -28,7 +28,7 @@ class LineTest {
     @Test
     void connectsMiddleSectionWithoutConnectingLastSection() {
         // 준비
-        Line line = new Line(new FixedConnectionGenerator(
+        Line line = new Line(new LadderWidth(4), new FixedConnectionGenerator(
                 List.of(Connection.DISCONNECTED, Connection.CONNECTED)));
         // 검증
         assertThat(line.getConnections()).containsExactly(
