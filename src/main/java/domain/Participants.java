@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -13,11 +12,7 @@ public class Participants {
     }
 
     private List<ParticipantName> createNames(List<String> names) {
-        List<ParticipantName> participants = new ArrayList<>();
-        for (String name : names) {
-            participants.add(new ParticipantName(name));
-        }
-        return List.copyOf(participants);
+        return names.stream().map(ParticipantName::new).toList();
     }
 
     private void validateNames() {
