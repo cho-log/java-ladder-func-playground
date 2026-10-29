@@ -67,9 +67,9 @@ public class LadderTest {
         Ladder ladder = new Ladder(lines);
 
         // then
-        assertEquals(2, ladder.findDestination(0));
-        assertEquals(0, ladder.findDestination(1));
-        assertEquals(3, ladder.findDestination(2));
-        assertEquals(1, ladder.findDestination(3));
+        assertEquals(new Position(2), ladder.findDestination(new Position(0)));
+        assertEquals(new Position(0), ladder.findDestination(new Position(1)));
+        assertEquals(new Position(3), ladder.findDestination(new Position(2)));
+        assertEquals(new Position(1), ladder.findDestination(new Position(3)));
     }
 }
