@@ -1,7 +1,7 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Ladder {
@@ -30,11 +30,9 @@ public class Ladder {
     }
 
     public List<LadderPath> getPaths() {
-        List<LadderPath> paths = new ArrayList<>();
-        for (int start = 0; start < lines.get(0).getWidth().getValue(); start++) {
-            Position position = new Position(start);
-            paths.add(new LadderPath(position, move(position)));
-        }
-        return List.copyOf(paths);
+        return IntStream.range(0, lines.get(0).getWidth().getValue())
+                .mapToObj(Position::new)
+                .map(start -> new LadderPath(start, move(start)))
+                .toList();
     }
 }
