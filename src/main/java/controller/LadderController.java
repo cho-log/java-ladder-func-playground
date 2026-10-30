@@ -1,3 +1,5 @@
+package controller;
+
 public class LadderController {
     private final InputView inputView;
     private final OutputView outputView;

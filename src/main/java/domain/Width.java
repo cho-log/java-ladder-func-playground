@@ -1,3 +1,5 @@
+package domain;
+
 public class Width {
     private final int width;
 

@@ -1,3 +1,5 @@
+package domain;
+
 public class Height {
     private final int height;
 

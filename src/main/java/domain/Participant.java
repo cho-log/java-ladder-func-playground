@@ -1,3 +1,5 @@
+package domain;
+
 public class Participant {
     private final String name;
 
