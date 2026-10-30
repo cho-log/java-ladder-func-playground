@@ -32,4 +32,8 @@ public class Participants {
 
         return index;
     }
+
+    public Participant getParticipantByPosition(Position position) {
+        return participants.get(position.getValue());
+    }
 }
