@@ -32,4 +32,8 @@ public class GameInputParser {
 
         return outcomesList;
     }
+
+    public String normalizeName(String name) {
+        return name.trim();
+    }
 }

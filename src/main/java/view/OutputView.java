@@ -70,4 +70,21 @@ public class OutputView {
             System.out.println(start.getValue() + " -> " + destination.getValue());
         }
     }
+
+    public void printPersonalGameResult(GameResult gameResult) {
+        System.out.println("\n실행 결과");
+        System.out.println(gameResult.getOutcome().getOutcome());
+    }
+
+    public void printAllGameResults(GameResults gameResults) {
+        System.out.println("\n실행 결과");
+
+        for (GameResult gameResult : gameResults.getGameResults()) {
+            System.out.println(formatGameResult(gameResult));
+        }
+    }
+
+    private String formatGameResult(GameResult gameResult) {
+        return gameResult.getParticipant().getName() + " : " + gameResult.getOutcome().getOutcome();
+    }
 }

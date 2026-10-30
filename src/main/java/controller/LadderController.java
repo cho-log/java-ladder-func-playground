@@ -1,11 +1,13 @@
 package controller;
 
+import domain.GameResult;
 import domain.GameResults;
 import domain.Height;
 import domain.Ladder;
 import domain.LadderFactory;
 import domain.LadderResults;
 import domain.Outcomes;
+import domain.Participant;
 import domain.Participants;
 import domain.Width;
 import parser.GameInputParser;
@@ -46,12 +48,27 @@ public class LadderController {
         GameResults gameResults = new GameResults(participants, outcomes, results);
 
         outputView.printLadder(ladder, gameResults, outcomes);
-        outputView.printResult(results);
+
+        requestResults(participants, gameResults);
     }
 
     private void validateGameSetup(Participants participants, Outcomes outcomes) {
         if (participants.getSize() != outcomes.getSize()) {
             throw new IllegalArgumentException("참여자 수와 당첨 결과 수가 같아야 합니다.");
         }
+    }
+
+    private void requestResults(Participants participants, GameResults gameResults) {
+        String target = inputView.readResultTarget();
+
+        while (!"all".equals(target)) {
+            Participant participant = participants.getParticipant(target);
+            GameResult gameResult = gameResults.getGameResult(participant);
+            outputView.printPersonalGameResult(gameResult);
+
+            target = inputView.readResultTarget();
+        }
+
+        outputView.printAllGameResults(gameResults);
     }
 }
