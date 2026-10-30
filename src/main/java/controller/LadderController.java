@@ -2,14 +2,16 @@ package controller;
 
 import domain.Ladder;
 import domain.random.ConnectionGenerator;
+import view.InputView;
 import view.OutputView;
 
 public class LadderController {
-    // InputVIew 추가
+    private final InputView inputView;
     private final OutputView outputView;
     private final ConnectionGenerator connectionGenerator;
 
-    public LadderController(OutputView outputView, ConnectionGenerator connectionGenerator) {
+    public LadderController(InputView inputView, OutputView outputView, ConnectionGenerator connectionGenerator) {
+        this.inputView = inputView;
         this.outputView = outputView;
         this.connectionGenerator = connectionGenerator;
     }
