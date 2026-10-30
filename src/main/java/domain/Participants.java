@@ -6,7 +6,14 @@ public class Participants {
     private final List<Participant> participants;
 
     public Participants(List<Participant> participants) {
+        validate(participants);
         this.participants = List.copyOf(participants);
+    }
+
+    private void validate(List<Participant> participants) {
+        if (participants.size() < 2) {
+            throw new IllegalArgumentException("참여자는 최소 두 명이여야 합니다.");
+        }
     }
 
     public int getSize() {
