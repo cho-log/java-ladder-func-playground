@@ -3,8 +3,8 @@ package domain;
 import exception.ErrorMessage;
 
 public class Width {
-    private final int width;
     private static final int MINIMUM_WIDTH = 2;
+    private final int width;
 
     public Width(int width){
         validateWidth(width);
