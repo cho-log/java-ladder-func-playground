@@ -1,7 +1,6 @@
 package domain.outcome;
 
 import domain.ladder.Position;
-
 import java.util.List;
 
 public class Outcomes {

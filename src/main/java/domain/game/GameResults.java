@@ -23,13 +23,17 @@ public class GameResults {
     }
 
     private void validateResults(Participants participants, Outcomes outcomes, LadderResults ladderResults) {
-        if (participants.getSize() != outcomes.getSize()
-        || participants.getSize() != ladderResults.size()) {
+        if (participants.getSize() != outcomes.getSize() ||
+                participants.getSize() != ladderResults.size()) {
             throw new IllegalArgumentException("참여자 수와 결과 수가 같아야 합니다.");
         }
     }
 
-    private List<GameResult> calculateGameResults(Participants participants, Outcomes outcomes, LadderResults ladderResults) {
+    private List<GameResult> calculateGameResults(
+            Participants participants,
+            Outcomes outcomes,
+            LadderResults ladderResults
+    ) {
         List<GameResult> gameResults = new ArrayList<>();
 
         for (int i = 0; i < participants.getSize(); i++) {
