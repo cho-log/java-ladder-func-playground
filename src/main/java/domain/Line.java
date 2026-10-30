@@ -15,9 +15,9 @@ public class Line {
         this.connections = connections;
     }
 
-    public static Line createLine(int connectionCount, ConnectionGenerator generator){
+    public static Line createLine(Width width, ConnectionGenerator generator){
         List<Connection> connections = new ArrayList<>();
-        for (int i = 0; i < connectionCount; i++){
+        for (int i = 0; i < width.connectionCount(); i++){
             connections.add(nextConnection(connections,generator));
         }
         return new Line(connections);
