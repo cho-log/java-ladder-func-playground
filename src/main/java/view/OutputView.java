@@ -1,5 +1,10 @@
 package view;
 
+import domain.Ladder;
+import domain.LadderResults;
+import domain.Line;
+import domain.Position;
+
 import java.util.ArrayList;
 import java.util.List;
 
