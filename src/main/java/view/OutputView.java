@@ -34,18 +34,18 @@ public class OutputView {
 
         for (Boolean point : line.getPoints()) {
             result.add("|");
-
-            if (point) {
-                result.add("-----");
-                continue;
-            }
-
-            result.add("     ");
+            result.add(addHyphenIfConnected(point));
         }
-
         result.add("|");
 
         return String.join("", result);
+    }
+
+    private String addHyphenIfConnected(Boolean point) {
+        if (point) {
+            return "-----";
+        }
+        return "     ";
     }
 
     private void printOutcomes(Outcomes outcomes) {
