@@ -22,4 +22,19 @@ public class Ladder {
     public List<Line> getLines() {
         return Collections.unmodifiableList(lines);
     }
+
+    private Position findEndPosition(Position position) {
+        for (Line line : lines) {
+            position = line.move(position);
+        }
+        return position;
+    }
+
+    public EndPositions findEndPositions(Width width) {
+        List<Position> endPositions = new ArrayList<>();
+        for (int i = 0; i <= width.connectionCount(); i++) {
+            endPositions.add(findEndPosition(new Position(i)));
+        }
+        return new EndPositions(endPositions);
+    }
 }
