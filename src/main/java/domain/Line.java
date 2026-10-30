@@ -40,4 +40,32 @@ public class Line {
     public List<Connection> getConnections(){
         return Collections.unmodifiableList(connections);
     }
+
+    public Position move(Position position){
+        if (isRightConnected(position)) {
+            return position.moveToRight();
+        }
+
+        if (isLeftConnected(position)) {
+            return position.moveToLeft();
+        }
+
+        return position;
+    }
+
+    private boolean isRightConnected(Position position){
+        int rightIndex = position.getPosition();
+        if (rightIndex >= connections.size()) {
+            return false;
+        }
+        return connections.get(rightIndex).equals(Connection.CONNECTED);
+    }
+
+    private boolean isLeftConnected(Position position){
+        int leftIndex = position.getPosition() - 1;
+        if (leftIndex < 0) {
+            return false;
+        }
+        return connections.get(leftIndex).equals(Connection.CONNECTED);
+    }
 }
