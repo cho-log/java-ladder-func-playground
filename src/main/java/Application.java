@@ -1,6 +1,6 @@
 import controller.LadderController;
-import domain.ConnectionGenerator;
-import domain.LadderFactory;
+import domain.ladder.ConnectionGenerator;
+import domain.ladder.LadderFactory;
 import view.InputView;
 import view.OutputView;
 

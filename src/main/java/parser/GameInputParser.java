@@ -1,7 +1,7 @@
 package parser;
 
-import domain.Outcome;
-import domain.Participant;
+import domain.outcome.Outcome;
+import domain.participant.Participant;
 
 import java.util.ArrayList;
 import java.util.List;

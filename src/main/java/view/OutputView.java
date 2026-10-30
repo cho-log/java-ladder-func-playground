@@ -1,12 +1,12 @@
 package view;
 
-import domain.GameResult;
-import domain.GameResults;
-import domain.Ladder;
-import domain.LadderResults;
-import domain.Line;
-import domain.Outcomes;
-import domain.Position;
+import domain.game.GameResult;
+import domain.game.GameResults;
+import domain.ladder.Ladder;
+import domain.ladder.LadderResults;
+import domain.ladder.Line;
+import domain.outcome.Outcomes;
+import domain.ladder.Position;
 
 import java.util.ArrayList;
 import java.util.List;

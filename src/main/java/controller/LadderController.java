@@ -1,16 +1,16 @@
 package controller;
 
-import domain.GameResult;
-import domain.GameResults;
-import domain.GameSetup;
-import domain.Height;
-import domain.Ladder;
-import domain.LadderFactory;
-import domain.LadderResults;
-import domain.Outcomes;
-import domain.Participant;
-import domain.Participants;
-import domain.Width;
+import domain.game.GameResult;
+import domain.game.GameResults;
+import domain.game.GameSetup;
+import domain.ladder.Height;
+import domain.ladder.Ladder;
+import domain.ladder.LadderFactory;
+import domain.ladder.LadderResults;
+import domain.outcome.Outcomes;
+import domain.participant.Participant;
+import domain.participant.Participants;
+import domain.ladder.Width;
 import parser.GameInputParser;
 import view.InputView;
 import view.OutputView;
