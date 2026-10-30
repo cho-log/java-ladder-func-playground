@@ -4,6 +4,7 @@ import domain.outcome.Outcome;
 import domain.participant.Participant;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class GameInputParser {
@@ -23,7 +24,7 @@ public class GameInputParser {
     public List<Outcome> parseOutcomes(String outcomes) {
         List<Outcome> outcomesList = new ArrayList<>();
 
-        String[] values = outcomes.split(",");
+        List<String> values = Arrays.asList(outcomes.split(","));
 
         for (String value : values) {
             Outcome outcome = new Outcome(value);
@@ -31,9 +32,5 @@ public class GameInputParser {
         }
 
         return outcomesList;
-    }
-
-    public String normalizeName(String name) {
-        return name.trim();
     }
 }
