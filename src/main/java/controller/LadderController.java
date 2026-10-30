@@ -1,6 +1,8 @@
 package controller;
 
+import domain.Height;
 import domain.Ladder;
+import domain.Width;
 import domain.random.ConnectionGenerator;
 import view.InputView;
 import view.OutputView;
@@ -17,7 +19,10 @@ public class LadderController {
     }
 
     public void run() {
-        Ladder ladder = Ladder.createLadder(4, 4, connectionGenerator);
+        Width width = new Width(inputView.getWidth());
+        Height height = new Height(inputView.getHeight());
+
+        Ladder ladder = Ladder.createLadder(width, height, connectionGenerator);
         outputView.printLadder(ladder);
     }
 }
