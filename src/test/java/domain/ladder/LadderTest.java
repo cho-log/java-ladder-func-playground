@@ -24,8 +24,15 @@ public class LadderTest {
     @Test
     void 사다리_넓이가_서로_다르면_예외가_발생한다() {
         // given
-        List<Boolean> line1 = List.of(true, false, true);
-        List<Boolean> line2 = List.of(true, false);
+        List<Connection> line1 = List.of(
+                Connection.CONNECTED,
+                Connection.DISCONNECTED,
+                Connection.CONNECTED
+        );
+        List<Connection> line2 = List.of(
+                Connection.CONNECTED,
+                Connection.DISCONNECTED
+        );
 
         List<Line> lines = List.of(
                 new Line(line1),
@@ -39,8 +46,16 @@ public class LadderTest {
     @Test
     void 유효한_Line_정보로_사다리를_생성한다() {
         // given
-        List<Boolean> line1 = List.of(true, false, true);
-        List<Boolean> line2 = List.of(true, false, true);
+        List<Connection> line1 = List.of(
+                Connection.CONNECTED,
+                Connection.DISCONNECTED,
+                Connection.CONNECTED
+        );
+        List<Connection> line2 = List.of(
+                Connection.CONNECTED,
+                Connection.DISCONNECTED,
+                Connection.CONNECTED
+        );
 
         List<Line> lines = List.of(
                 new Line(line1),
@@ -57,8 +72,16 @@ public class LadderTest {
     @Test
     void 출발점에서_도착점을_찾는다() {
         // given
-        List<Boolean> line1 = List.of(true, false, true);
-        List<Boolean> line2 = List.of(false, true, false);
+        List<Connection> line1 = List.of(
+                Connection.CONNECTED,
+                Connection.DISCONNECTED,
+                Connection.CONNECTED
+        );
+        List<Connection> line2 = List.of(
+                Connection.DISCONNECTED,
+                Connection.CONNECTED,
+                Connection.DISCONNECTED
+        );
 
         List<Line> lines = List.of(
                 new Line(line1),

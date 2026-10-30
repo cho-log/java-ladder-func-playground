@@ -2,6 +2,7 @@ package view;
 
 import domain.game.GameResult;
 import domain.game.GameResults;
+import domain.ladder.Connection;
 import domain.ladder.Ladder;
 import domain.ladder.LadderResults;
 import domain.ladder.Line;
@@ -32,7 +33,7 @@ public class OutputView {
     private String formatLine(Line line) {
         List<String> result = new ArrayList<>();
 
-        for (Boolean point : line.getPoints()) {
+        for (Connection point : line.getPoints()) {
             result.add("|");
             result.add(addHyphenIfConnected(point));
         }
@@ -41,8 +42,8 @@ public class OutputView {
         return String.join("", result);
     }
 
-    private String addHyphenIfConnected(Boolean point) {
-        if (point) {
+    private String addHyphenIfConnected(Connection point) {
+        if (point.isConnected()) {
             return "-----";
         }
         return "     ";

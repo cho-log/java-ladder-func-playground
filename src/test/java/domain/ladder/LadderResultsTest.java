@@ -15,8 +15,16 @@ public class LadderResultsTest {
     @Test
     void 시작_위치에_대한_도착_위치를_반환한다() {
         // given
-        List<Boolean> line1 = List.of(true, false, true);
-        List<Boolean> line2 = List.of(false, true, false);
+        List<Connection> line1 = List.of(
+                Connection.CONNECTED,
+                Connection.DISCONNECTED,
+                Connection.CONNECTED
+        );
+        List<Connection> line2 = List.of(
+                Connection.DISCONNECTED,
+                Connection.CONNECTED,
+                Connection.DISCONNECTED
+        );
 
         List<Line> lines = List.of(
                 new Line(line1),
@@ -37,8 +45,16 @@ public class LadderResultsTest {
     @Test
     void 시작_위치가_사다리_범위를_넘어가면_예외가_발생한다() {
         // given
-        List<Boolean> line1 = List.of(true, false, true);
-        List<Boolean> line2 = List.of(false, true, false);
+        List<Connection> line1 = List.of(
+                Connection.CONNECTED,
+                Connection.DISCONNECTED,
+                Connection.CONNECTED
+        );
+        List<Connection> line2 = List.of(
+                Connection.DISCONNECTED,
+                Connection.CONNECTED,
+                Connection.DISCONNECTED
+        );
 
         List<Line> lines = List.of(
                 new Line(line1),

@@ -7,27 +7,36 @@ import java.util.Random;
 public class ConnectionGenerator {
     private final Random random = new Random();
 
-    public List<Boolean> generatePoints(Width width) {
-        List<Boolean> points = new ArrayList<>();
+    public List<Connection> generatePoints(Width width) {
+        List<Connection> points = new ArrayList<>();
         int pointCount = width.getConnectionSlotCount();
 
         for (int i = 0; i < pointCount; i++) {
-            boolean point = generatePoint(points);
+            Connection point = generatePoint(points);
             points.add(point);
         }
 
         return List.copyOf(points);
     }
 
-    private boolean generatePoint(List<Boolean> points) {
+    private Connection generatePoint(List<Connection> points) {
         if (points.isEmpty()) {
-            return random.nextBoolean();
+            boolean randomBoolean = random.nextBoolean();
+            return returnConnection(randomBoolean);
         }
 
-        if (points.get(points.size() - 1)) {
-            return false;
+        if (points.get(points.size() - 1).isConnected()) {
+            return Connection.DISCONNECTED;
         }
 
-        return random.nextBoolean();
+        boolean randomBoolean = random.nextBoolean();
+        return returnConnection(randomBoolean);
+    }
+
+    private Connection returnConnection(boolean connected) {
+        if (connected) {
+            return Connection.CONNECTED;
+        }
+        return Connection.DISCONNECTED;
     }
 }

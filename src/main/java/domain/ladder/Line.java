@@ -3,14 +3,14 @@ package domain.ladder;
 import java.util.List;
 
 public class Line {
-    private final List<Boolean> points;
+    private final List<Connection> points;
 
-    public Line(List<Boolean> points) {
+    public Line(List<Connection> points) {
         validatePoints(points);
         this.points = List.copyOf(points);
     }
 
-    private void validatePoints(List<Boolean> points) {
+    private void validatePoints(List<Connection> points) {
         if (points.isEmpty()) {
             throw new IllegalArgumentException(
                     "사다리 넓이는 2개 이상이여야 합니다."
@@ -18,22 +18,22 @@ public class Line {
         }
 
         for (int i = 0; i < points.size() - 1; i++) {
-            boolean current = points.get(i);
-            boolean next = points.get(i + 1);
+            Connection current = points.get(i);
+            Connection next = points.get(i + 1);
 
             validateAdjacentPoints(current, next);
         }
     }
 
-    private void validateAdjacentPoints(boolean currentPoint, boolean nextPoint) {
-        if (currentPoint && nextPoint) {
+    private void validateAdjacentPoints(Connection currentPoint, Connection nextPoint) {
+        if (currentPoint.isConnected() && nextPoint.isConnected()) {
             throw new IllegalArgumentException(
                     "가로줄은 연속될 수 없습니다."
             );
         }
     }
 
-    public List<Boolean> getPoints() {
+    public List<Connection> getPoints() {
         return points;
     }
 
@@ -64,7 +64,7 @@ public class Line {
     }
 
     private Position moveLeftIfConnected(Position position) {
-        if (points.get(position.getValue() - 1)) {
+        if (points.get(position.getValue() - 1).isConnected()) {
             return position.moveLeft();
         }
 
@@ -72,7 +72,7 @@ public class Line {
     }
 
     private Position moveRightIfConnected(Position position) {
-        if (points.get(position.getValue())) {
+        if (points.get(position.getValue()).isConnected()) {
             return position.moveRight();
         }
 

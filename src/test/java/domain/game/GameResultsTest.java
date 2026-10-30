@@ -1,5 +1,6 @@
 package domain.game;
 
+import domain.ladder.Connection;
 import domain.ladder.Ladder;
 import domain.ladder.LadderResults;
 import domain.ladder.Line;
@@ -40,8 +41,16 @@ public class GameResultsTest {
         Participants participants = createParticipants();
         Outcomes outcomes = createOutcomes();
         LadderResults ladderResults = new LadderResults(new Width(4), new Ladder(List.of(
-                new Line(List.of(true, false, true)),
-                new Line(List.of(false, true, false))
+                new Line(List.of(
+                        Connection.CONNECTED,
+                        Connection.DISCONNECTED,
+                        Connection.CONNECTED
+                )),
+                new Line(List.of(
+                        Connection.DISCONNECTED,
+                        Connection.CONNECTED,
+                        Connection.DISCONNECTED
+                ))
         )));
 
         // when & then
@@ -107,9 +116,9 @@ public class GameResultsTest {
         return new LadderResults(
                 new Width(3),
                 new Ladder(List.of(
-                        new Line(List.of(true, false)),
-                        new Line(List.of(false, true)),
-                        new Line(List.of(true, false))
+                        new Line(List.of(Connection.CONNECTED, Connection.DISCONNECTED)),
+                        new Line(List.of(Connection.DISCONNECTED, Connection.CONNECTED)),
+                        new Line(List.of(Connection.CONNECTED, Connection.DISCONNECTED))
                 ))
         );
     }
