@@ -1,5 +1,6 @@
 package controller;
 
+import domain.GameResults;
 import domain.Height;
 import domain.Ladder;
 import domain.LadderFactory;
@@ -42,7 +43,9 @@ public class LadderController {
         Ladder ladder = ladderFactory.createLadder(width, height);
         LadderResults results = new LadderResults(width, ladder);
 
-        outputView.printLadder(ladder);
+        GameResults gameResults = new GameResults(participants, outcomes, results);
+
+        outputView.printLadder(ladder, gameResults, outcomes);
         outputView.printResult(results);
     }
 

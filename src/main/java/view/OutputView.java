@@ -1,20 +1,32 @@
 package view;
 
+import domain.GameResult;
+import domain.GameResults;
 import domain.Ladder;
 import domain.LadderResults;
 import domain.Line;
+import domain.Outcomes;
 import domain.Position;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OutputView {
-    public void printLadder(Ladder ladder) {
-        System.out.println("\n실행결과\n");
+    public void printLadder(Ladder ladder, GameResults results, Outcomes outcomes) {
+        System.out.println("\n사다리 결과\n");
 
+        printParticipants(results);
         for (Line line : ladder.getLines()) {
             System.out.println("     " + formatLine(line));
         }
+        printOutcomes(outcomes);
+    }
+
+    private void printParticipants(GameResults results) {
+        for (GameResult gameResult : results.getGameResults()) {
+            System.out.print(gameResult.getParticipant().getName() + "  ");
+        }
+        System.out.println();
     }
 
     private String formatLine(Line line) {
@@ -34,6 +46,14 @@ public class OutputView {
         result.add("|");
 
         return String.join("", result);
+    }
+
+    private void printOutcomes(Outcomes outcomes) {
+        for (int index = 0; index < outcomes.getSize(); index++) {
+            Position position = new Position(index);
+            System.out.print(outcomes.getOutcomeByPosition(position).getOutcome() + "  ");
+        }
+        System.out.println();
     }
 
     public void printError(String error) {
