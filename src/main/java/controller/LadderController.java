@@ -1,5 +1,6 @@
 package controller;
 
+import domain.EndPositions;
 import domain.Height;
 import domain.Ladder;
 import domain.Width;
@@ -10,19 +11,17 @@ import view.OutputView;
 public class LadderController {
     private final InputView inputView;
     private final OutputView outputView;
-    private final ConnectionGenerator connectionGenerator;
-
-    public LadderController(InputView inputView, OutputView outputView, ConnectionGenerator connectionGenerator) {
+    public LadderController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.connectionGenerator = connectionGenerator;
     }
 
-    public void run() {
+    public void run(ConnectionGenerator connectionGenerator) {
         Width width = new Width(inputView.getWidth());
         Height height = new Height(inputView.getHeight());
-
         Ladder ladder = Ladder.createLadder(width, height, connectionGenerator);
+
         outputView.printLadder(ladder);
+        outputView.printEndPositions(ladder.findEndPositions(width));
     }
 }

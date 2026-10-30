@@ -1,15 +1,17 @@
 package view;
 
 import domain.Connection;
+import domain.EndPositions;
 import domain.Ladder;
 import domain.Line;
+import domain.Position;
+import java.util.List;
 
 public class OutputView {
     private String formatConnection(Connection connection){
         if (connection == Connection.CONNECTED) {
             return "-----";
         }
-
         return "     ";
     }
 
@@ -27,6 +29,14 @@ public class OutputView {
         System.out.println();
         for (Line line : ladder.getLines()) {
             printLine(line);
+        }
+    }
+
+    public void printEndPositions(EndPositions endPositions){
+        List<Position> positions = endPositions.getEndPositions();
+        System.out.println();
+        for (int i = 0; i < positions.size(); i++) {
+            System.out.println(i + " -> " + positions.get(i).getPosition());
         }
     }
 }

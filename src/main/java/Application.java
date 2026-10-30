@@ -11,7 +11,7 @@ public class Application {
         OutputView outputView = new OutputView();
         ConnectionGenerator connectionGenerator = new RandomConnectionGenerator();
 
-        LadderController ladderController = new LadderController(inputView, outputView, connectionGenerator);
-        ladderController.run();
+        LadderController ladderController = new LadderController(inputView, outputView);
+        ladderController.run(connectionGenerator);
     }
 }

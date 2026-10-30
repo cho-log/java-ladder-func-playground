@@ -8,7 +8,7 @@ import java.util.List;
 * 목록의 순서가 시작 위치
  */
 
-public class EndPositions {
+public class    EndPositions {
     private final List<Position> endPositions;
     public EndPositions(List<Position> endPositions) {
         this.endPositions = endPositions;
