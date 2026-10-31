@@ -1,15 +1,12 @@
 package view;
 
 import domain.Connection;
-import domain.EndPositions;
 import domain.Ladder;
 import domain.Line;
-import domain.Position;
 import domain.game.Name;
 import domain.game.Names;
 import domain.game.Prize;
 import domain.game.Prizes;
-import java.util.List;
 
 public class OutputView {
     private static final String CELL_FORMAT = "%6s";
@@ -41,7 +38,7 @@ public class OutputView {
     private void printPrizes(Prizes prizes) {
         StringBuilder builder = new StringBuilder();
         for(Prize prize : prizes.getPrizes()) {
-            builder.append(String.format(CELL_FORMAT, prize.getPrize());
+            builder.append(String.format(CELL_FORMAT, prize.getPrize()));
         }
         System.out.println(builder);
     }
@@ -59,8 +56,13 @@ public class OutputView {
     }
 
     public void printOneResult(Prize prize) {
-        System.out.println("실행 결과");
+        printResultTitle();
         System.out.println(prize.getPrize());
+    }
+
+    public void printResultTitle() {
+        System.out.println();
+        System.out.println("실행 결과");
     }
 
     public void printNameAndPrize(Name name, Prize prize) {
