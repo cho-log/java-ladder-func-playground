@@ -1,7 +1,8 @@
 package domain.ladder;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LadderResults {
     private final List<Position> destinations;
@@ -11,14 +12,10 @@ public class LadderResults {
     }
 
     private List<Position> calculateResult(Width width, Ladder ladder) {
-        List<Position> results = new ArrayList<>();
-
-        for (int i = 0; i < width.getWidth(); i++) {
-            Position start = new Position(i);
-            results.add(ladder.findDestination(start));
-        }
-
-        return List.copyOf(results);
+        return IntStream.range(0, width.getWidth())
+                        .mapToObj(Position::new)
+                        .map(ladder::findDestination)
+                        .collect(Collectors.toUnmodifiableList());
     }
 
     public Position getDestination(Position start) {

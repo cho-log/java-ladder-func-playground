@@ -9,8 +9,8 @@ import domain.outcome.Outcomes;
 import domain.ladder.Position;
 import domain.participant.Participants;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class OutputView {
     private static final int COLUMN_WIDTH = 6;
@@ -59,15 +59,9 @@ public class OutputView {
     }
 
     private String formatLine(Line line) {
-        List<String> result = new ArrayList<>();
-
-        for (Connection connection : line.getPoints()) {
-            result.add("|");
-            result.add(formatConnection(connection));
-        }
-        result.add("|");
-
-        return String.join("", result);
+        return line.getPoints().stream()
+                   .map(connection -> "|" + formatConnection(connection))
+                   .collect(Collectors.joining("", "", "|"));
     }
 
     private String formatConnection(Connection connection) {
@@ -88,13 +82,9 @@ public class OutputView {
     }
 
     private int getDisplayWidth(String value) {
-        int width = 0;
-
-        for (int index = 0; index < value.length(); index++) {
-            width += getCharacterWidth(value.charAt(index));
-        }
-
-        return width;
+        return IntStream.range(0, value.length())
+                        .map(index -> getCharacterWidth(value.charAt(index)))
+                        .sum();
     }
 
     private int getCharacterWidth(char character) {
