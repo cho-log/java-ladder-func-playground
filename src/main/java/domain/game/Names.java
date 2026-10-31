@@ -31,7 +31,7 @@ public class Names {
         return new Position(index);
     }
 
-    public Width toWIdth() {
+    public Width toWidth() {
         return new Width(names.size());
     }
 
