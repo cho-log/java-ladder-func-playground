@@ -9,6 +9,17 @@ import org.junit.jupiter.api.Test;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class NameTest {
+    @Test
+    void 이름이_비어있으면_오류가_발생한다() {
+        assertThatThrownBy(() -> new Name(""))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 이름이_공백이면_오류가_발생한다() {
+        assertThatThrownBy(() -> new Name(" "))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 
     @Test
     void 이름이_5글자_이하면_생성된다() {
