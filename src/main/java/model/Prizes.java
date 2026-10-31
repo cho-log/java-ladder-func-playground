@@ -13,6 +13,7 @@ public class Prizes {
                 .map(Prize::new)
                 .toList();
     }
+
     public List<String> getPrizes() {
         return prizes.stream()
                 .map(Prize::getPrize)

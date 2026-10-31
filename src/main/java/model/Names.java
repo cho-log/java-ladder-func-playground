@@ -15,13 +15,14 @@ public class Names {
         this.names = names;
     }
 
-    public int getIndex(String name){
+    public int getIndex(String name) {
         return names.indexOf(name);
     }
 
-    public int getSize(){
+    public int getSize() {
         return names.size();
     }
+
     public List<String> getNames() {
         return names.stream()
                 .map(Name::getName)
