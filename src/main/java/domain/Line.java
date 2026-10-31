@@ -34,7 +34,7 @@ public class Line {
         if (connections.isEmpty()){
             return false;
         }
-        return connections.get(connections.size()-1).equals(Connection.CONNECTED);
+        return connections.get(connections.size()-1).isConnected();
     }
 
     public List<Connection> getConnections(){
@@ -58,7 +58,7 @@ public class Line {
         if (rightIndex >= connections.size()) {
             return false;
         }
-        return connections.get(rightIndex).equals(Connection.CONNECTED);
+        return connections.get(rightIndex).isConnected();
     }
 
     private boolean isLeftConnected(Position position){
@@ -66,6 +66,6 @@ public class Line {
         if (leftIndex < 0) {
             return false;
         }
-        return connections.get(leftIndex).equals(Connection.CONNECTED);
+        return connections.get(leftIndex).isConnected();
     }
 }
