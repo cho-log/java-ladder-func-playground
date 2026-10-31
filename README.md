@@ -23,3 +23,58 @@
    2. 결과를 보고싶은 사람의 결과를 출력한다.
 3. all이 입력될 때까지 과정 4를 반복한다.
    1. all이 입력되면 입력받은 이름 순으로 모두의 결과를 출력한다.
+
+
+### 패키지 / 클래스 구조
+```
+
+├─main
+│  └─java
+│      │  Application.java
+│      │  
+│      ├─controller
+│      │      LadderController.java
+│      │      
+│      ├─domain
+│      │  │  Connection.java
+│      │  │  EndPositions.java
+│      │  │  Height.java
+│      │  │  Ladder.java
+│      │  │  Line.java
+│      │  │  Position.java
+│      │  │  Width.java
+│      │  │  
+│      │  ├─game
+│      │  │      Name.java
+│      │  │      Names.java
+│      │  │      Prize.java
+│      │  │      Prizes.java
+│      │  │      
+│      │  └─random
+│      │          ConnectionGenerator.java
+│      │          RandomConnectionGenerator.java
+│      │          
+│      ├─exception
+│      │      ErrorMessage.java
+│      │      
+│      └─view
+│              InputView.java
+│              OutputView.java
+│              
+└─test
+    └─java
+        └─domain
+            │  EndPositionsTest.java
+            │  FixedConnectionGenerator.java
+            │  HeightTest.java
+            │  LadderTest.java
+            │  LineTest.java
+            │  PositionTest.java
+            │  WidthTest.java
+            │  
+            └─game
+                    NamesTest.java
+                    NameTest.java
+                    PrizesTest.java
+                    PrizeTest.java
+```
