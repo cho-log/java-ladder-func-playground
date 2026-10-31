@@ -10,7 +10,8 @@ public enum ErrorMessage {
     PRIZE_IS_EMPTY("실행 결과는 비워둘 수 없습니다."),
     NAME_TOO_LONG("이름은 5자 이하여야 합니다."),
     PRIZE_NUMBER_IS_NOT_NAME_NUMBER("실행 결과 개수는 이름 개수와 동일해야 합니다."),
-    NOT_IN_NAMES("결과를 보고싶은 사람은 참여할 사람 내에 있는 사람이어야 합니다.");
+    NOT_IN_NAMES("결과를 보고싶은 사람은 참여할 사람 내에 있는 사람이어야 합니다."),
+    NAME_NOT_FOUND("이름이 목록에 존재하지 않습니다.");
 
     private final String message;
 
