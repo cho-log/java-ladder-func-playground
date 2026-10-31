@@ -51,20 +51,7 @@ public class LadderController {
 
         outputView.printGameResult(participants, ladder, outcomes);
 
-        requestResults(participants, gameResults);
-    }
-
-    private void requestResults(Participants participants, GameResults gameResults) {
-        String target = inputView.readResultTarget();
-
-        while (!"all".equals(target)) {
-            Participant participant = participants.getParticipant(target);
-            GameResult gameResult = gameResults.getGameResult(participant);
-            outputView.printPersonalGameResult(gameResult);
-
-            target = inputView.readResultTarget();
-        }
-
-        outputView.printAllGameResults(gameResults);
+        ResultController resultController = new ResultController(inputView, outputView);
+        resultController.run(participants, gameResults);
     }
 }
