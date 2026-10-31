@@ -12,7 +12,7 @@ public class OutputView {
     private static final String CELL_FORMAT = "%6s";
 
     private String formatConnection(Connection connection){
-        if (connection == Connection.CONNECTED) {
+        if (connection.isConnected()) {
             return "-----";
         }
         return "     ";
