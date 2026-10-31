@@ -13,6 +13,10 @@ public class Name {
     }
 
     private void validateName(String name){
+        if (name.isBlank()) {
+            throw new IllegalArgumentException(ErrorMessage.NAME_IS_EMPTY.getMessage());
+        }
+
         if (name.length() > MAX_NAME_LENGTH) {
             throw new IllegalArgumentException(ErrorMessage.NAME_TOO_LONG.getMessage());
         }
