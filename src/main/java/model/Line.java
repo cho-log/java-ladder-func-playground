@@ -39,6 +39,6 @@ public class Line {
     }
 
     public List<Boolean> getLine() {
-        return points;
+        return List.copyOf(points);
     }
 }
