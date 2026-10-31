@@ -1,6 +1,5 @@
 package controller;
 
-import domain.game.GameResult;
 import domain.game.GameResults;
 import domain.game.GameSetup;
 import domain.ladder.Height;
@@ -8,7 +7,6 @@ import domain.ladder.Ladder;
 import domain.ladder.LadderFactory;
 import domain.ladder.LadderResults;
 import domain.outcome.Outcomes;
-import domain.participant.Participant;
 import domain.participant.Participants;
 import domain.ladder.Width;
 import parser.GameInputParser;
@@ -36,21 +34,39 @@ public class LadderController {
 
     public void runApp() {
         GameInputParser parser = new GameInputParser();
-        Participants participants = new Participants(parser.parseParticipants(inputView.readParticipantNames()));
-        Outcomes outcomes = new Outcomes(parser.parseOutcomes(inputView.readOutcomeValues()));
-
-        GameSetup gameSetup = new GameSetup(participants, outcomes);
-
-        Width width = gameSetup.getWidth();
-        Height height = new Height(inputView.readHeight());
-
-        Ladder ladder = ladderFactory.createLadder(width, height);
-        LadderResults results = new LadderResults(width, ladder);
-
-        GameResults gameResults = new GameResults(participants, outcomes, results);
-
+        Participants participants = readParticipants(parser);
+        Outcomes outcomes = readOutcomes(parser);
+        Width width = new GameSetup(participants, outcomes).getWidth();
+        Ladder ladder = createLadder(width);
+        GameResults gameResults = createGameResults(participants, outcomes, width, ladder);
         outputView.printGameResult(participants, ladder, outcomes);
+        requestResults(participants, gameResults);
+    }
 
+    private Participants readParticipants(GameInputParser parser) {
+        return new Participants(parser.parseParticipants(inputView.readParticipantNames()));
+    }
+
+    private Outcomes readOutcomes(GameInputParser parser) {
+        return new Outcomes(parser.parseOutcomes(inputView.readOutcomeValues()));
+    }
+
+    private Ladder createLadder(Width width) {
+        Height height = new Height(inputView.readHeight());
+        return ladderFactory.createLadder(width, height);
+    }
+
+    private GameResults createGameResults(
+            Participants participants,
+            Outcomes outcomes,
+            Width width,
+            Ladder ladder
+    ) {
+        LadderResults ladderResults = new LadderResults(width, ladder);
+        return new GameResults(participants, outcomes, ladderResults);
+    }
+
+    private void requestResults(Participants participants, GameResults gameResults) {
         ResultController resultController = new ResultController(inputView, outputView);
         resultController.run(participants, gameResults);
     }
