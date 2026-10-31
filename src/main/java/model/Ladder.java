@@ -9,12 +9,12 @@ public class Ladder {
 
     public Ladder(int width, int height, PointGenerator generator) {
         lines = new ArrayList<>();
-        generateLines(height,width,generator);
+        generateLines(height, width, generator);
     }
 
-    private void generateLines(int height,int width, PointGenerator generator) {
+    private void generateLines(int height, int width, PointGenerator generator) {
         for (int i = 0; i < height; i++) {
-            lines.add(new Line(width,generator));
+            lines.add(new Line(width, generator));
         }
     }
 

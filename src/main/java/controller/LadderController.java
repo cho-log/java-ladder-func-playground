@@ -32,7 +32,7 @@ public class LadderController {
         OutputView.printSingleResult(ladderResult.findResultOf(name));
     }
 
-    private PointGenerator pointGenerator(){
+    private PointGenerator pointGenerator() {
         return new RandomPointGenerator();
     }
 }
