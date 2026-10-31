@@ -20,4 +20,8 @@ public class Width {
     public int connectionCount() {
         return width - 1;
     }
+
+    public int getWidth() {
+        return width;
+    }
 }
