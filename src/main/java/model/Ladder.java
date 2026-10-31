@@ -2,20 +2,19 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import model.generator.PointGenerator;
 
 public class Ladder {
     private final List<Line> lines;
-    private final int width;
 
-    public Ladder(int width, int height) {
+    public Ladder(int width, int height, PointGenerator generator) {
         lines = new ArrayList<>();
-        this.width = width;
-        generateLines(height);
+        generateLines(height,width,generator);
     }
 
-    private void generateLines(int height) {
+    private void generateLines(int height,int width, PointGenerator generator) {
         for (int i = 0; i < height; i++) {
-            lines.add(new Line(width));
+            lines.add(new Line(width,generator));
         }
     }
 

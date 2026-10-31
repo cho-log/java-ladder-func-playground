@@ -2,14 +2,15 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+import model.generator.PointGenerator;
 
 public class Line {
-    private static final Random random = new Random();
     private final List<Boolean> points;
+    private final PointGenerator generator;
 
-    public Line(int width) {
+    public Line(int width, PointGenerator generator) {
         points = new ArrayList<>();
+        this.generator = generator;
         generateLine(width - 1);
     }
 
@@ -24,7 +25,7 @@ public class Line {
             points.add(false);
             return;
         }
-        points.add(random.nextBoolean());
+        points.add(generator.generate());
     }
 
     public int moveLine(int index) {

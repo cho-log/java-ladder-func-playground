@@ -15,9 +15,6 @@ public class Names {
         this.names = names;
     }
 
-    public int getIndex(String name) {
-        return names.indexOf(name);
-    }
 
     public int getSize() {
         return names.size();
