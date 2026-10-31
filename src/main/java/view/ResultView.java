@@ -1,0 +1,78 @@
+package view;
+
+import domain.Connection;
+import domain.GameResults;
+import domain.Ladder;
+import domain.Line;
+import domain.Outcome;
+import domain.Outcomes;
+import domain.ParticipantName;
+import domain.Participants;
+import domain.ResultQuery;
+
+import java.util.stream.Collectors;
+
+public class ResultView {
+    private static final int MIN_COLUMN_WIDTH = 6;
+    private static final String VERTICAL_LINE = "|";
+
+    public static void printGame(Participants participants, Ladder ladder, Outcomes outcomes) {
+        System.out.println("\n사다리 결과");
+        int columnWidth = calculateColumnWidth(outcomes);
+        printNames(participants, columnWidth);
+        printLadder(ladder, columnWidth);
+        printOutcomes(outcomes, columnWidth);
+    }
+
+    private static int calculateColumnWidth(Outcomes outcomes) {
+        return Math.max(MIN_COLUMN_WIDTH, outcomes.getValues().stream()
+                .map(Outcome::getValue)
+                .mapToInt(String::length)
+                .max().orElse(0) + 1);
+    }
+
+    private static void printNames(Participants participants, int columnWidth) {
+        System.out.println(participants.getNames().stream()
+                .map(ParticipantName::getValue)
+                .map(name -> String.format("%-" + columnWidth + "s", name))
+                .collect(Collectors.joining()));
+    }
+
+    private static void printLadder(Ladder ladder, int columnWidth) {
+        ladder.getLines().forEach(line -> printLine(line, columnWidth));
+    }
+
+    private static void printLine(Line line, int columnWidth) {
+        System.out.println(VERTICAL_LINE + line.getConnections().stream()
+                .map(connection -> toSymbol(connection, columnWidth - 1) + VERTICAL_LINE)
+                .collect(Collectors.joining()));
+    }
+
+    private static String toSymbol(Connection connection, int width) {
+        if (connection == Connection.CONNECTED) {
+            return "-".repeat(width);
+        }
+        return " ".repeat(width);
+    }
+
+    private static void printOutcomes(Outcomes outcomes, int columnWidth) {
+        System.out.println(outcomes.getValues().stream()
+                .map(Outcome::getValue)
+                .map(value -> String.format("%-" + columnWidth + "s", value))
+                .collect(Collectors.joining()));
+    }
+
+    public static void printResults(ResultQuery query, GameResults results) {
+        System.out.println("\n실행 결과");
+        if (query.isAll()) {
+            printAll(results);
+            return;
+        }
+        System.out.println(results.getResult(query.getName()).getValue());
+    }
+
+    private static void printAll(GameResults results) {
+        results.getResults().forEach((name, outcome) ->
+                System.out.println(name.getValue() + " : " + outcome.getValue()));
+    }
+}
