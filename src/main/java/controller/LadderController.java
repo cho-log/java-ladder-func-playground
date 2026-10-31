@@ -15,24 +15,24 @@ import view.OutputView;
 
 public class LadderController {
     private final InputView inputView;
-    private final OutputView outputView;
     private final LadderFactory ladderFactory;
 
-    public LadderController(InputView inputView, OutputView outputView, LadderFactory ladderFactory) {
+    public LadderController(InputView inputView, LadderFactory ladderFactory) {
         this.inputView = inputView;
-        this.outputView = outputView;
         this.ladderFactory = ladderFactory;
     }
 
     public void run() {
+        OutputView outputView = new OutputView();
+
         try {
-            runApp();
+            runApp(outputView);
         } catch (IllegalArgumentException e) {
             outputView.printError(e.getMessage());
         }
     }
 
-    public void runApp() {
+    public void runApp(OutputView outputView) {
         GameInputParser parser = new GameInputParser();
         Participants participants = readParticipants(parser);
         Outcomes outcomes = readOutcomes(parser);
@@ -40,7 +40,7 @@ public class LadderController {
         Ladder ladder = createLadder(width);
         GameResults gameResults = createGameResults(participants, outcomes, width, ladder);
         outputView.printGameResult(participants, ladder, outcomes);
-        requestResults(participants, gameResults);
+        requestResults(participants, gameResults, outputView);
     }
 
     private Participants readParticipants(GameInputParser parser) {
@@ -66,7 +66,10 @@ public class LadderController {
         return new GameResults(participants, outcomes, ladderResults);
     }
 
-    private void requestResults(Participants participants, GameResults gameResults) {
+    private void requestResults(
+            Participants participants,
+            GameResults gameResults,
+            OutputView outputView) {
         ResultController resultController = new ResultController(inputView, outputView);
         resultController.run(participants, gameResults);
     }
