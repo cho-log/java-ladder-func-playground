@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ladder {
-    private final ArrayList<Line> lines;
+    private final List<Line> lines;
     private final int width;
 
     public Ladder(int width,int height) {
@@ -13,7 +13,7 @@ public class Ladder {
         generateLines(height);
     }
 
-    public void generateLines(int height){
+    private void generateLines(int height){
         for (int i = 0; i < height ; i++) {
             lines.add(new Line(width));
         }
@@ -30,7 +30,4 @@ public class Ladder {
         return List.copyOf(lines);
     }
 
-    public int getWidth(){
-        return width;
-    }
 }

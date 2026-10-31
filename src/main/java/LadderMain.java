@@ -2,14 +2,24 @@ import model.Ladder;
 import model.LadderResult;
 import view.InputView;
 import view.OutputView;
+import model.Names;
+import model.Prizes;
 
 public class LadderMain {
     public static void main(String[] args) {
+        Names names =new Names(InputView.inputNames());
+        Prizes prizes =new Prizes(InputView.inputResults(),names.getSize());
+        Ladder ladder=new Ladder(names.getSize(),InputView.inputHeight());
+        OutputView.printLadder(ladder,names, prizes);
 
-        Ladder ladder=new Ladder(InputView.inputWidth(),InputView.inputHeight());
-        OutputView.printLadder(ladder);
+        LadderResult ladderResult= new LadderResult(names,prizes,ladder);
 
-        LadderResult ladderResult= new LadderResult(ladder);
-        OutputView.printResult(ladderResult.getResults());
+        String name = InputView.inputName();
+
+        if (name.equals("all")) {
+            OutputView.printAllResults(ladderResult.findAllResults());
+            return;
+        }
+        OutputView.printSingleResult(ladderResult.findResultOf(name));
     }
 }
