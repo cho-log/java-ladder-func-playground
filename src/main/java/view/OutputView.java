@@ -1,19 +1,68 @@
 package view;
 
 import domain.Ladder;
-import domain.LadderResult;
 import domain.Line;
+import domain.Name;
+import domain.Names;
+import domain.PlayerPrize;
+import domain.PlayerPrizes;
 import domain.Point;
-import domain.Position;
-import java.util.List;
+import domain.Prize;
+import domain.Prizes;
 
 public class OutputView {
+
+    public void printLadderResult(Names names, Ladder ladder, Prizes prizes) {
+        System.out.println(MessageFormat.RESULT_LADDER.message());
+        System.out.println();
+        System.out.println(formatNames(names));
+        printLadder(ladder);
+        System.out.println(formatPrizes(prizes));
+        System.out.println();
+    }
+
+    public void printPlayerPrize(PlayerPrize playerPrize) {
+        System.out.println(MessageFormat.RESULT_TITLE.message());
+        System.out.println(playerPrize.prize().value());
+        System.out.println();
+    }
+
+    public void printAllPlayerPrizes(PlayerPrizes playerPrizes) {
+        System.out.println(MessageFormat.RESULT_TITLE.message());
+        for (PlayerPrize playerPrize : playerPrizes.all()) {
+            System.out.println(formatPlayerPrize(playerPrize));
+        }
+        System.out.println();
+    }
 
     public void printLadder(Ladder ladder) {
         for (Line line : ladder.lines()) {
             System.out.println(formatLine(line));
         }
     }
+
+    private String formatNames(Names names) {
+        StringBuilder builder = new StringBuilder(LadderFormat.MARGIN.symbol());
+        for (Name name : names.names()) {
+            builder.append(String.format(LadderFormat.CELL.symbol(), name.value()));
+        }
+        return builder.toString();
+    }
+
+    private String formatPrizes(Prizes prizes) {
+        StringBuilder builder = new StringBuilder(LadderFormat.MARGIN.symbol());
+        for (Prize prize : prizes.prizes()) {
+            builder.append(String.format(LadderFormat.CELL.symbol(), prize.value()));
+        }
+        return builder.toString();
+    }
+
+    private String formatPlayerPrize(PlayerPrize playerPrize) {
+        return playerPrize.name().value()
+                + MessageFormat.RESULT_SEPARATOR.message()
+                + playerPrize.prize().value();
+    }
+
 
     //stringBuilder는 문자열을 더할때 사용하는것 append로 뒤에 붙인다.
     //[연결, 안이어, 연결] 일때
@@ -35,17 +84,5 @@ public class OutputView {
         return LadderFormat.EMPTY.symbol(); //연결되어있지 않으면 공백 5칸을 반환
     }
 
-
-    public void printResult(LadderResult result) {
-        System.out.println();
-        List<Position> arrivals = result.arrivals();
-        for (int start = 0; start < arrivals.size(); start++) {
-            System.out.println(formatArrival(start, arrivals.get(start)));
-        }
-    }
-
-    private String formatArrival(int start, Position arrival) {
-        return start + MessageFormat.RESULT_ARROW.message() + arrival.value();
-    }
 
 }

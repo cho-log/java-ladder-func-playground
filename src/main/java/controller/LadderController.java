@@ -1,9 +1,11 @@
 package controller;
 
-import domain.BooleanGenerator;
 import domain.Ladder;
 import domain.LadderGame;
 import domain.LadderSize;
+import domain.Names;
+import domain.PlayerPrizes;
+import domain.Prizes;
 import domain.RandomBooleanGenerator;
 import view.InputView;
 import view.OutputView;
@@ -21,10 +23,21 @@ public class LadderController {
     }
 
     public void run() {
-        LadderSize width = inputView.readWidth();
+        Names names = inputView.readNames();
+        Prizes prizes = inputView.readPrizes();
         LadderSize height = inputView.readHeight();
-        Ladder ladder = Ladder.create(height, width, new RandomBooleanGenerator());
-        outputView.printLadder(ladder);
-        outputView.printResult(new LadderGame(ladder).play()); // 사다리를 타고 내려간 최종 위치들을 반환
+        Ladder ladder = Ladder.create(height, new LadderSize(names.size()), new RandomBooleanGenerator());
+        outputView.printLadderResult(names, ladder, prizes);
+        showResults(PlayerPrizes.of(names, prizes, new LadderGame(ladder).play()));
+    }
+
+    private void showResults(PlayerPrizes playerPrizes) {
+        String target = inputView.readTarget();
+        while (!target.equals("all")) { //all이 입력되기 전 까지는 계속해서 결과를 보여준다.
+            outputView.printPlayerPrize(playerPrizes.find(target));
+            target = inputView.readTarget();
+        }
+        outputView.printAllPlayerPrizes(playerPrizes);//all이 입력되면 모든 결과를 보여준다.
     }
 }
+
