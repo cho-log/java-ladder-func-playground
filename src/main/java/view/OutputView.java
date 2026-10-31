@@ -4,72 +4,109 @@ import domain.game.GameResult;
 import domain.game.GameResults;
 import domain.ladder.Connection;
 import domain.ladder.Ladder;
-import domain.ladder.LadderResults;
 import domain.ladder.Line;
 import domain.outcome.Outcomes;
 import domain.ladder.Position;
+import domain.participant.Participants;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class OutputView {
-    public void printLadder(Ladder ladder, GameResults results, Outcomes outcomes) {
-        System.out.println("\n사다리 결과\n");
+    private static final int COLUMN_WIDTH = 6;
+    private static final String LABEL_INDENT = "   ";
+    private static final String LADDER_INDENT = "     ";
 
-        printParticipants(results);
-        for (Line line : ladder.getLines()) {
-            System.out.println("     " + formatLine(line));
-        }
+    public void printGameResult(
+            Participants participants,
+            Ladder ladder,
+            Outcomes outcomes
+    ) {
+        System.out.println("\n사다리 결과\n");
+        printParticipants(participants);
+        printLadder(ladder);
         printOutcomes(outcomes);
     }
 
-    private void printParticipants(GameResults results) {
-        for (GameResult gameResult : results.getGameResults()) {
-            System.out.print(gameResult.getParticipant().getName() + "  ");
+    private void printParticipants(Participants participants) {
+        StringBuilder line = new StringBuilder(LABEL_INDENT);
+
+        for (int index = 0; index < participants.getSize(); index++) {
+            Position position = new Position(index);
+            String name = participants.getParticipantByPosition(position).getName();
+            appendCentered(line, name);
         }
-        System.out.println();
+
+        System.out.println(line);
+    }
+
+    private void printLadder(Ladder ladder) {
+        for (Line line : ladder.getLines()) {
+            System.out.println(LADDER_INDENT + formatLine(line));
+        }
+    }
+
+    private void printOutcomes(Outcomes outcomes) {
+        StringBuilder line = new StringBuilder(LABEL_INDENT);
+
+        for (int index = 0; index < outcomes.getSize(); index++) {
+            Position position = new Position(index);
+            String value = outcomes.getOutcomeByPosition(position).getOutcome();
+            appendCentered(line, value);
+        }
+
+        System.out.println(line);
     }
 
     private String formatLine(Line line) {
         List<String> result = new ArrayList<>();
 
-        for (Connection point : line.getPoints()) {
+        for (Connection connection : line.getPoints()) {
             result.add("|");
-            result.add(addHyphenIfConnected(point));
+            result.add(formatConnection(connection));
         }
         result.add("|");
 
         return String.join("", result);
     }
 
-    private String addHyphenIfConnected(Connection point) {
-        if (point.isConnected()) {
+    private String formatConnection(Connection connection) {
+        if (connection.isConnected()) {
             return "-----";
         }
         return "     ";
     }
 
-    private void printOutcomes(Outcomes outcomes) {
-        for (int index = 0; index < outcomes.getSize(); index++) {
-            Position position = new Position(index);
-            System.out.print(outcomes.getOutcomeByPosition(position).getOutcome() + "  ");
+    private void appendCentered(StringBuilder line, String value) {
+        int remaining = Math.max(0, COLUMN_WIDTH - getDisplayWidth(value));
+        int leftPadding = remaining / 2;
+        int rightPadding = remaining - leftPadding;
+
+        line.append(" ".repeat(leftPadding));
+        line.append(value);
+        line.append(" ".repeat(rightPadding));
+    }
+
+    private int getDisplayWidth(String value) {
+        int width = 0;
+
+        for (int index = 0; index < value.length(); index++) {
+            width += getCharacterWidth(value.charAt(index));
         }
-        System.out.println();
+
+        return width;
+    }
+
+    private int getCharacterWidth(char character) {
+        if (character >= '가' && character <= '힣') {
+            return 2;
+        }
+
+        return 1;
     }
 
     public void printError(String error) {
         System.out.println(error);
-    }
-
-    public void printResult(LadderResults results) {
-        System.out.println();
-
-        for (int i = 0; i < results.size(); i++) {
-            Position start = new Position(i);
-            Position destination = results.getDestination(start);
-
-            System.out.println(start.getValue() + " -> " + destination.getValue());
-        }
     }
 
     public void printPersonalGameResult(GameResult gameResult) {

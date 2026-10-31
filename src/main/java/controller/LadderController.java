@@ -49,7 +49,7 @@ public class LadderController {
 
         GameResults gameResults = new GameResults(participants, outcomes, results);
 
-        outputView.printLadder(ladder, gameResults, outcomes);
+        outputView.printGameResult(participants, ladder, outcomes);
 
         requestResults(participants, gameResults);
     }
