@@ -4,7 +4,7 @@ import exception.ErrorMessage;
 
 public class Prize {
     private final String prize;
-    private Prize(String prize){
+    public Prize(String prize){
         validatePrize(prize);
         this.prize = prize;
     }

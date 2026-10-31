@@ -10,7 +10,7 @@ import java.util.List;
 public class Prizes {
     private final List<Prize> prizes;
 
-    public Prizes(List<Prize> prizes, Width width) {
+    private Prizes(List<Prize> prizes, Width width) {
         validatePrize(prizes, width);
         this.prizes = prizes;
     }
