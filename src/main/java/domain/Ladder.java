@@ -32,7 +32,7 @@ public class Ladder {
 
     public EndPositions findEndPositions(Width width) {
         List<Position> endPositions = new ArrayList<>();
-        for (int i = 0; i <= width.connectionCount(); i++) {
+        for (int i = 0; i < width.getWidth(); i++) {
             endPositions.add(findEndPosition(new Position(i)));
         }
         return new EndPositions(endPositions);
