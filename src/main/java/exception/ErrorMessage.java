@@ -10,7 +10,8 @@ public enum ErrorMessage {
     NAME_TOO_LONG("이름은 5자 이하여야 합니다."),
     PRIZE_NUMBER_IS_NOT_NAME_NUMBER("실행 결과 개수는 이름 개수와 동일해야 합니다."),
     NAME_NOT_FOUND("이름이 목록에 존재하지 않습니다."),
-    DUPLICATE_NAME("사용자의 이름은 중복이 허용되지 않습니다.");
+    DUPLICATE_NAME("참여자의 이름은 중복이 허용되지 않습니다."),
+    NAME_IS_RESERVED("all은 참여자의 이름이 될 수 없습니다.");
 
     private final String message;
 
