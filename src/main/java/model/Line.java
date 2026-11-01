@@ -6,21 +6,19 @@ import model.generator.PointGenerator;
 
 public class Line {
     private final List<Boolean> points;
-    private final PointGenerator generator;
 
     public Line(int width, PointGenerator generator) {
         points = new ArrayList<>();
-        this.generator = generator;
-        generateLine(width - 1);
+        generateLine(width - 1, generator);
     }
 
-    private void generateLine(int width) {
+    private void generateLine(int width, PointGenerator generator) {
         for (int i = 0; i < width; i++) {
-            addPoint(i);
+            addPoint(i, generator);
         }
     }
 
-    private void addPoint(int index) {
+    private void addPoint(int index, PointGenerator generator) {
         if (index > 0 && points.get(index - 1)) {
             points.add(false);
             return;
