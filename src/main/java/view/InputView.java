@@ -41,7 +41,7 @@ public class InputView {
     }
 
     private List<String> toList(String line) {
-        return Arrays.stream(line.split(","))
+        return Arrays.stream(line.split(",", -1))
                 .map(String::trim)
                 .toList();
     }
