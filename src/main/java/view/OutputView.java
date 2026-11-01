@@ -11,7 +11,7 @@ import domain.game.Prizes;
 public class OutputView {
     private static final String CELL_FORMAT = "%6s";
 
-    private String formatConnection(Connection connection){
+    private String formatConnection(Connection connection) {
         if (connection.isConnected()) {
             return "-----";
         }
@@ -29,7 +29,7 @@ public class OutputView {
 
     private void printNames(Names names) {
         StringBuilder builder = new StringBuilder();
-        for(Name name : names.getNames()) {
+        for (Name name : names.getNames()) {
             builder.append(String.format(CELL_FORMAT, name.getName()));
         }
         System.out.println(builder);
@@ -37,7 +37,7 @@ public class OutputView {
 
     private void printPrizes(Prizes prizes) {
         StringBuilder builder = new StringBuilder();
-        for(Prize prize : prizes.getPrizes()) {
+        for (Prize prize : prizes.getPrizes()) {
             builder.append(String.format(CELL_FORMAT, prize.getPrize()));
         }
         System.out.println(builder);

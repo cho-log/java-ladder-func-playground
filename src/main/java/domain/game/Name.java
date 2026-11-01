@@ -7,12 +7,12 @@ public class Name {
     private static final int MAX_NAME_LENGTH = 5;
     private final String name;
 
-    public Name(String name){
+    public Name(String name) {
         validateName(name);
         this.name = name;
     }
 
-    private void validateName(String name){
+    private void validateName(String name) {
         if (name.isBlank()) {
             throw new IllegalArgumentException(ErrorMessage.NAME_IS_EMPTY.getMessage());
         }
@@ -22,7 +22,7 @@ public class Name {
         }
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 

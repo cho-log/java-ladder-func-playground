@@ -4,12 +4,13 @@ import java.util.Collections;
 import java.util.List;
 
 /*
-* 도착 위치 목록
-* 목록의 순서가 시작 위치
+ * 도착 위치 목록
+ * 목록의 순서가 시작 위치
  */
 
-public class    EndPositions {
+public class EndPositions {
     private final List<Position> endPositions;
+
     public EndPositions(List<Position> endPositions) {
         this.endPositions = endPositions;
     }

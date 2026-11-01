@@ -35,7 +35,7 @@ public class InputView {
     private int parseNumber(String input, String errorMessage) {
         try {
             return Integer.parseInt(input.trim());
-        }  catch (NumberFormatException exception) {
+        } catch (NumberFormatException exception) {
             throw new IllegalArgumentException(errorMessage);
         }
     }

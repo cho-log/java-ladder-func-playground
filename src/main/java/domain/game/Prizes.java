@@ -15,18 +15,18 @@ public class Prizes {
         this.prizes = prizes;
     }
 
-    private void validatePrize(List<Prize> prizes, Width width) {
-        if (width.getWidth() != prizes.size()) {
-            throw new IllegalArgumentException(ErrorMessage.PRIZE_NUMBER_IS_NOT_NAME_NUMBER.getMessage());
-        }
-    }
-
     public static Prizes createPrizes(List<String> inputPrizes, Width width) {
         List<Prize> prizes = new ArrayList<>();
         for (String inputPrize : inputPrizes) {
             prizes.add(new Prize(inputPrize));
         }
         return new Prizes(prizes, width);
+    }
+
+    private void validatePrize(List<Prize> prizes, Width width) {
+        if (width.getWidth() != prizes.size()) {
+            throw new IllegalArgumentException(ErrorMessage.PRIZE_NUMBER_IS_NOT_NAME_NUMBER.getMessage());
+        }
     }
 
     public Prize findPrize(Position endPosition) {

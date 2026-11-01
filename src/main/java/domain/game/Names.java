@@ -25,7 +25,7 @@ public class Names {
 
     public Position findPosition(Name name) {
         int index = names.indexOf(name);
-        if (index == NOT_FOUND){
+        if (index == NOT_FOUND) {
             throw new IllegalArgumentException(ErrorMessage.NAME_NOT_FOUND.getMessage());
         }
         return new Position(index);

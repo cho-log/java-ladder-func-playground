@@ -8,7 +8,7 @@ public class RandomConnectionGenerator implements ConnectionGenerator {
 
     @Override
     public Connection generate() {
-        if (random.nextBoolean()){
+        if (random.nextBoolean()) {
             return Connection.CONNECTED;
         }
         return Connection.NOT_CONNECTED;
