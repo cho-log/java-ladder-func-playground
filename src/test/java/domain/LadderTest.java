@@ -10,10 +10,8 @@ import org.junit.jupiter.api.Test;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class LadderTest {
-    private static final ConnectionGenerator ALWAYS_CONNECTED =
-            new FixedConnectionGenerator(Connection.CONNECTED);
-    private static final ConnectionGenerator NEVER_CONNECTED =
-            new FixedConnectionGenerator(Connection.NOT_CONNECTED);
+    private static final ConnectionGenerator ALWAYS_CONNECTED = () -> Connection.CONNECTED;
+    private static final ConnectionGenerator NEVER_CONNECTED = () -> Connection.NOT_CONNECTED;
 
     @Test
     void 높이만큼_줄이_생성된다() {

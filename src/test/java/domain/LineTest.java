@@ -9,10 +9,8 @@ import org.junit.jupiter.api.Test;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class LineTest {
-    private static final ConnectionGenerator ALWAYS_CONNECTED =
-            new FixedConnectionGenerator(Connection.CONNECTED);
-    private static final ConnectionGenerator NEVER_CONNECTED =
-            new FixedConnectionGenerator(Connection.NOT_CONNECTED);
+    private static final ConnectionGenerator ALWAYS_CONNECTED = () -> Connection.CONNECTED;
+    private static final ConnectionGenerator NEVER_CONNECTED = () -> Connection.NOT_CONNECTED;
 
     @Test
     void 칸_개수는_넓이보다_1_작다() {
