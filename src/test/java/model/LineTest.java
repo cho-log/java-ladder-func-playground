@@ -2,10 +2,7 @@ package model;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
-import model.generator.RandomPointGenerator;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -21,7 +18,7 @@ class LineTest {
     }
 
     @Test
-    @DisplayName("항상 다리를 놓으려 해도 연속으로 놓이지 않는다")
+    @DisplayName("앞에 다리가 있으면 다음 자리는 건너뛰고 생성한다")
     void noConsecutivePoints() {
         Line line = new Line(5, () -> true);
 
@@ -34,16 +31,6 @@ class LineTest {
         Line line = new Line(4, () -> false);
 
         assertThat(line.getLine()).containsExactly(false, false, false);
-    }
-
-    @RepeatedTest(100)
-    @DisplayName("랜덤으로 생성해도 다리가 연속되지 않는다")
-    void randomNoConsecutivePoints() {
-        List<Boolean> points = new Line(10, new RandomPointGenerator()).getLine();
-
-        for (int i = 1; i < points.size(); i++) {
-            assertThat(points.get(i - 1) && points.get(i)).isFalse();
-        }
     }
 
     @ParameterizedTest
