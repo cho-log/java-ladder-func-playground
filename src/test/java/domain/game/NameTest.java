@@ -38,4 +38,10 @@ class NameTest {
     void 글자가_같으면_같은_이름이다() {
         assertThat(new Name("neo")).isEqualTo(new Name("neo"));
     }
+
+    @Test
+    void 사용자의_이름이_all이면_오류가_발생한다() {
+        assertThatThrownBy(() -> new Name("all"))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
