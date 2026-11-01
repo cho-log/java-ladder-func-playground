@@ -3,6 +3,7 @@ package model;
 import java.util.Objects;
 
 public class Name {
+    public static final String ALL = "all";
     private static final int MAX_LENGTH = 5;
     private final String name;
 
@@ -12,6 +13,9 @@ public class Name {
         }
         if (name.length() > MAX_LENGTH) {
             throw new IllegalArgumentException("이름은 5자 이하여야 합니다.");
+        }
+        if (name.equals("all")) {
+            throw new IllegalArgumentException("all은 사용할 수 없는 이름입니다.");
         }
         this.name = name;
     }

@@ -2,6 +2,7 @@ package controller;
 
 import model.Ladder;
 import model.LadderResult;
+import model.Name;
 import model.Names;
 import model.Prizes;
 import model.generator.PointGenerator;
@@ -10,8 +11,6 @@ import view.InputView;
 import view.OutputView;
 
 public class LadderController {
-    private static final String ALL = "all";
-
     public void run() {
         Names names = new Names(InputView.inputNames());
         Prizes prizes = new Prizes(InputView.inputResults(), names.getSize());
@@ -25,7 +24,7 @@ public class LadderController {
     private void printResult(LadderResult ladderResult) {
         String name = InputView.inputName();
 
-        if (name.equals(ALL)) {
+        if (Name.ALL.equals(name)) {
             OutputView.printAllResults(ladderResult.findAllResults());
             return;
         }
