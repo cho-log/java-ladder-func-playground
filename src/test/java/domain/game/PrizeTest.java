@@ -15,6 +15,7 @@ class PrizeTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
     void 결과_값이_공백이면_오류가_발생한다() {
         assertThatThrownBy(() -> new Prize(" "))
                 .isInstanceOf(IllegalArgumentException.class);
