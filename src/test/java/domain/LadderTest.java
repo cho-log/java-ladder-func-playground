@@ -27,7 +27,7 @@ class LadderTest {
         Width width = new Width(4);
         Ladder ladder = Ladder.createLadder(width, new Height(1), ALWAYS_CONNECTED);
 
-        assertThat(toNumbers(ladder.findEndPositions(width))).containsExactly(1, 0, 3, 2);
+        assertThat(toNumbers(ladder.findEndPositions())).containsExactly(1, 0, 3, 2);
     }
 
     @Test
@@ -35,7 +35,7 @@ class LadderTest {
         Width width = new Width(4);
         Ladder ladder = Ladder.createLadder(width, new Height(3), NEVER_CONNECTED);
 
-        assertThat(toNumbers(ladder.findEndPositions(width))).containsExactly(0, 1, 2, 3);
+        assertThat(toNumbers(ladder.findEndPositions())).containsExactly(0, 1, 2, 3);
     }
 
     private List<Integer> toNumbers(EndPositions endPositions) {

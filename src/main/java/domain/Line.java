@@ -69,4 +69,8 @@ public class Line {
         }
         return connections.get(leftIndex).isConnected();
     }
+
+    public int width() {
+        return connections.size() + 1;
+    }
 }

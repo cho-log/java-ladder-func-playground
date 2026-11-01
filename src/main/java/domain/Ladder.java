@@ -31,9 +31,9 @@ public class Ladder {
         return position;
     }
 
-    public EndPositions findEndPositions(Width width) {
+    public EndPositions findEndPositions() {
         List<Position> endPositions = new ArrayList<>();
-        for (int i = 0; i < width.getWidth(); i++) {
+        for (int i = 0; i < lines.get(0).width(); i++) {
             endPositions.add(findEndPosition(new Position(i)));
         }
         return new EndPositions(endPositions);

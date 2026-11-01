@@ -32,7 +32,7 @@ public class LadderController {
         Ladder ladder = Ladder.createLadder(width, height, connectionGenerator);
 
         outputView.printLadder(ladder, names, prizes);
-        showResults(names, ladder.findEndPositions(width), prizes);
+        showResults(names, ladder.findEndPositions(), prizes);
     }
 
     private void showResults(Names names, EndPositions endPositions, Prizes prizes) {
