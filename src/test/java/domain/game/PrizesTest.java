@@ -25,4 +25,10 @@ class PrizesTest {
 
         assertThat(prizes.findPrize(new Position(1)).getPrize()).isEqualTo("5000");
     }
+
+    @Test
+    void 결과_목록에_빈_이름이_있으면_오류가_발생한다() {
+        assertThatThrownBy(() -> Names.createNames(List.of("꽝", "100", "")))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
