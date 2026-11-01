@@ -1,8 +1,6 @@
 package model;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Names {
     private final List<Name> names;
@@ -27,11 +25,10 @@ public class Names {
     }
 
     private void validateDuplicate(List<Name> names) {
-        Set<String> unique = new HashSet<>();
-        for (Name name : names) {
-            unique.add(name.getName());
-        }
-        if (unique.size() != names.size()) {
+        long distinctCount = names.stream()
+                .distinct()
+                .count();
+        if (distinctCount != names.size()) {
             throw new IllegalArgumentException("참가자 이름은 중복될 수 없습니다.");
         }
     }
