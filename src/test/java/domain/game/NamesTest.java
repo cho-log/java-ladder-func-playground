@@ -41,4 +41,10 @@ class NamesTest {
         assertThatThrownBy(() -> Names.createNames(List.of("neo", "brie", "")))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 이름_목록에_중복이_있으면_오류가_발생한다() {
+        assertThatThrownBy(() -> Names.createNames(List.of("neo", "brie", "brie")))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
