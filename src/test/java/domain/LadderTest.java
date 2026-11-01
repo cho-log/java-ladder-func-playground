@@ -3,9 +3,11 @@ package domain;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import domain.random.ConnectionGenerator;
+import domain.random.RandomConnectionGenerator;
 import java.util.List;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
@@ -34,6 +36,13 @@ class LadderTest {
         Ladder ladder = Ladder.createLadder(width, new Height(3), NEVER_CONNECTED);
 
         assertThat(toNumbers(ladder.findEndPositions())).containsExactly(0, 1, 2, 3);
+    }
+
+    @RepeatedTest(100)
+    void 어떤_사다리든_도착_위치는_겹치지_않는다() {
+        Ladder ladder = Ladder.createLadder(new Width(4), new Height(5), new RandomConnectionGenerator());
+
+        assertThat(toNumbers(ladder.findEndPositions())).containsExactlyInAnyOrder(0, 1, 2, 3);
     }
 
     private List<Integer> toNumbers(EndPositions endPositions) {
