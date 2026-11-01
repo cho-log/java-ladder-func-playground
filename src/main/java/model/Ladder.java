@@ -7,9 +7,9 @@ import model.generator.PointGenerator;
 public class Ladder {
     private final List<Line> lines;
 
-    public Ladder(int width, int height, PointGenerator generator) {
+    public Ladder(int width, Height height, PointGenerator generator) {
         lines = new ArrayList<>();
-        generateLines(height, width, generator);
+        generateLines(height.getHeight(), width, generator);
     }
 
     private void generateLines(int height, int width, PointGenerator generator) {

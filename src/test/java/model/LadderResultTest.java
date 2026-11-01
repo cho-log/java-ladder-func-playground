@@ -19,7 +19,7 @@ class LadderResultTest {
     @CsvSource({"neo, 5000", "brown, 꽝", "brie, 3000", "tommy, 꽝"})
     @DisplayName("사다리를 타고 도착한 위치의 결과를 받는다")
     void findResultOf(String name, String expected) {
-        Ladder ladder = new Ladder(4, 1, () -> true);
+        Ladder ladder = new Ladder(4, new Height(1), () -> true);
         LadderResult result = new LadderResult(names, prizes, ladder);
 
         assertThat(result.findResultOf(name)).isEqualTo(new Prize(expected));
@@ -28,7 +28,7 @@ class LadderResultTest {
     @Test
     @DisplayName("다리가 없으면 바로 아래 결과를 받는다")
     void findResultWithoutPoints() {
-        Ladder ladder = new Ladder(4, 3, () -> false);
+        Ladder ladder = new Ladder(4, new Height(3), () -> false);
         LadderResult result = new LadderResult(names, prizes, ladder);
 
         assertThat(result.findResultOf("neo")).isEqualTo(new Prize("꽝"));
@@ -38,7 +38,7 @@ class LadderResultTest {
     @Test
     @DisplayName("전체 결과는 참가자 입력 순서대로 반환된다")
     void findAllResults() {
-        Ladder ladder = new Ladder(4, 1, () -> true);
+        Ladder ladder = new Ladder(4, new Height(1), () -> true);
         LadderResult result = new LadderResult(names, prizes, ladder);
 
         assertThat(result.findAllResults()).containsExactly(
@@ -52,7 +52,7 @@ class LadderResultTest {
     @Test
     @DisplayName("존재하지 않는 참가자를 조회하면 예외가 발생한다")
     void findResultOfUnknownName() {
-        Ladder ladder = new Ladder(4, 1, () -> true);
+        Ladder ladder = new Ladder(4, new Height(3), () -> true);
         LadderResult result = new LadderResult(names, prizes, ladder);
 
         assertThatThrownBy(() -> result.findResultOf("pobi"))
