@@ -1,0 +1,25 @@
+package exception;
+
+public enum ErrorMessage {
+    HEIGHT_IS_NOT_INTEGER("높이는 정수여야 합니다."),
+    WIDTH_IS_BIGGER_THAN_2("넓이는 2 이상이어야 합니다."),
+    HEIGHT_IS_BIGGER_THAN_0("높이는 1 이상이어야 합니다."),
+    POSITION_IS_NEGATIVE("위치는 0 이상이어야 합니다."),
+    NAME_IS_EMPTY("이름은 비워둘 수 없습니다."),
+    PRIZE_IS_EMPTY("실행 결과는 비워둘 수 없습니다."),
+    NAME_TOO_LONG("이름은 5자 이하여야 합니다."),
+    PRIZE_NUMBER_IS_NOT_NAME_NUMBER("실행 결과 개수는 이름 개수와 동일해야 합니다."),
+    NAME_NOT_FOUND("이름이 목록에 존재하지 않습니다."),
+    DUPLICATE_NAME("참여자의 이름은 중복이 허용되지 않습니다."),
+    NAME_IS_RESERVED("all은 참여자의 이름이 될 수 없습니다.");
+
+    private final String message;
+
+    ErrorMessage(String message) {
+        this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+}
