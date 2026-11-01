@@ -20,4 +20,8 @@ public class Prizes {
                 .toList();
     }
 
+    public Prize get(int index) {
+        return prizes.get(index);
+    }
+
 }

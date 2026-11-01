@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Map;
 import model.Ladder;
 import model.Line;
+import model.Name;
 import model.Names;
+import model.Prize;
 import model.Prizes;
 
 public class OutputView {
@@ -34,15 +36,15 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printSingleResult(String result) {
+    public static void printSingleResult(Prize result) {
         System.out.println("실행 결과");
-        System.out.println(result);
+        System.out.println(result.getPrize());
     }
 
-    public static void printAllResults(Map<String, String> results) {
+    public static void printAllResults(Map<Name, Prize> results) {
         System.out.println("실행 결과");
-        for (Map.Entry<String, String> entry : results.entrySet()) {
-            System.out.println(entry.getKey() + " : " + entry.getValue());
+        for (Map.Entry<Name, Prize> entry : results.entrySet()) {
+            System.out.println(entry.getKey().getName() + " : " + entry.getValue().getPrize());
         }
     }
 }

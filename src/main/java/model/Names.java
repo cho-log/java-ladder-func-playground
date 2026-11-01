@@ -24,6 +24,10 @@ public class Names {
                 .toList();
     }
 
+    public Name get(int index) {
+        return names.get(index);
+    }
+
     private void validateDuplicate(List<Name> names) {
         long distinctCount = names.stream()
                 .distinct()

@@ -2,30 +2,27 @@ package model;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public class LadderResult {
-    private final Map<String, String> ladderResults;
+    private final Map<Name, Prize> ladderResults;
 
     public LadderResult(Names names, Prizes prizes, Ladder ladder) {
         ladderResults = new LinkedHashMap<>();
-        List<String> nameList = names.getNames();
-        List<String> prizeList = prizes.getPrizes();
-        for (int i = 0; i < nameList.size(); i++) {
-            int end = ladder.move(i);
-            ladderResults.put(nameList.get(i), prizeList.get(end));
+        for (int i = 0; i < names.getSize(); i++) {
+            ladderResults.put(names.get(i), prizes.get(ladder.move(i)));
         }
     }
 
-    public String findResultOf(String name) {
-        if (!ladderResults.containsKey(name)) {
+    public Prize findResultOf(String name) {
+        Name target = new Name(name);
+        if (!ladderResults.containsKey(target)) {
             throw new IllegalArgumentException("존재하지 않는 참가자입니다.");
         }
-        return ladderResults.get(name);
+        return ladderResults.get(target);
     }
 
-    public Map<String, String> findAllResults() {
+    public Map<Name, Prize> findAllResults() {
         return Collections.unmodifiableMap(ladderResults);
     }
 }

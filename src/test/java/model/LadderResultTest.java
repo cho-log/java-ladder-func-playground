@@ -22,7 +22,7 @@ class LadderResultTest {
         Ladder ladder = new Ladder(4, 1, () -> true);
         LadderResult result = new LadderResult(names, prizes, ladder);
 
-        assertThat(result.findResultOf(name)).isEqualTo(expected);
+        assertThat(result.findResultOf(name)).isEqualTo(new Prize(expected));
     }
 
     @Test
@@ -31,8 +31,8 @@ class LadderResultTest {
         Ladder ladder = new Ladder(4, 3, () -> false);
         LadderResult result = new LadderResult(names, prizes, ladder);
 
-        assertThat(result.findResultOf("neo")).isEqualTo("꽝");
-        assertThat(result.findResultOf("brown")).isEqualTo("5000");
+        assertThat(result.findResultOf("neo")).isEqualTo(new Prize("꽝"));
+        assertThat(result.findResultOf("brown")).isEqualTo(new Prize("5000"));
     }
 
     @Test
@@ -42,10 +42,10 @@ class LadderResultTest {
         LadderResult result = new LadderResult(names, prizes, ladder);
 
         assertThat(result.findAllResults()).containsExactly(
-                entry("neo", "5000"),
-                entry("brown", "꽝"),
-                entry("brie", "3000"),
-                entry("tommy", "꽝")
+                entry(new Name("neo"), new Prize("5000")),
+                entry(new Name("brown"), new Prize("꽝")),
+                entry(new Name("brie"), new Prize("3000")),
+                entry(new Name("tommy"), new Prize("꽝"))
         );
     }
 
