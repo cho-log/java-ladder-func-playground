@@ -5,38 +5,32 @@ import java.util.List;
 import model.generator.PointGenerator;
 
 public class Line {
-    private final List<Boolean> points;
+    private final Points points;
 
     public Line(int width, PointGenerator generator) {
-        points = new ArrayList<>();
-        generateLine(width - 1, generator);
+        this.points = new Points(generateLine(width - 1, generator));
     }
 
-    private void generateLine(int width, PointGenerator generator) {
-        for (int i = 0; i < width; i++) {
-            addPoint(i, generator);
+    private List<Boolean> generateLine(int size, PointGenerator generator) {
+        List<Boolean> points = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            boolean prev = i > 0 && points.get(i - 1);
+            points.add(!prev && generator.generate());
         }
-    }
-
-    private void addPoint(int index, PointGenerator generator) {
-        if (index > 0 && points.get(index - 1)) {
-            points.add(false);
-            return;
-        }
-        points.add(generator.generate());
+        return points;
     }
 
     public int moveLine(int index) {
-        if (index > 0 && points.get(index - 1)) {
+        if (points.hasPointAt(index - 1)) {
             return index - 1;
         }
-        if (index < points.size() && points.get(index)) {
+        if (points.hasPointAt(index)) {
             return index + 1;
         }
         return index;
     }
 
     public List<Boolean> getLine() {
-        return List.copyOf(points);
+        return points.getPoints();
     }
 }
