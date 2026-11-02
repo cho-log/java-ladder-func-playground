@@ -1,8 +1,6 @@
 package domain.game;
 
 import domain.Position;
-import domain.Width;
-import exception.ErrorMessage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,23 +8,16 @@ import java.util.List;
 public class Prizes {
     private final List<Prize> prizes;
 
-    private Prizes(List<Prize> prizes, Width width) {
-        validatePrize(prizes, width);
+    private Prizes(List<Prize> prizes) {
         this.prizes = prizes;
     }
 
-    public static Prizes createPrizes(List<String> inputPrizes, Width width) {
+    public static Prizes createPrizes(List<String> inputPrizes) {
         List<Prize> prizes = new ArrayList<>();
         for (String inputPrize : inputPrizes) {
             prizes.add(new Prize(inputPrize));
         }
-        return new Prizes(prizes, width);
-    }
-
-    private void validatePrize(List<Prize> prizes, Width width) {
-        if (width.getWidth() != prizes.size()) {
-            throw new IllegalArgumentException(ErrorMessage.PRIZE_NUMBER_IS_NOT_NAME_NUMBER.getMessage());
-        }
+        return new Prizes(prizes);
     }
 
     public Prize findPrize(Position endPosition) {

@@ -1,13 +1,10 @@
 package controller;
 
-import domain.EndPositions;
 import domain.Height;
 import domain.Ladder;
-import domain.Position;
-import domain.Width;
+import domain.game.GameResult;
 import domain.game.Name;
 import domain.game.Names;
-import domain.game.Prize;
 import domain.game.Prizes;
 import domain.random.ConnectionGenerator;
 import view.InputView;
@@ -26,34 +23,21 @@ public class LadderController {
 
     public void run(ConnectionGenerator connectionGenerator) {
         Names names = Names.createNames(inputView.readNames());
-        Width width = names.toWidth();
-        Prizes prizes = Prizes.createPrizes(inputView.readPrizes(), width);
+        Prizes prizes = Prizes.createPrizes(inputView.readPrizes());
         Height height = new Height(inputView.readHeight());
-        Ladder ladder = Ladder.createLadder(width, height, connectionGenerator);
+        Ladder ladder = Ladder.createLadder(names.toWidth(), height, connectionGenerator);
+        GameResult gameResult = GameResult.of(names, ladder, prizes);
 
         outputView.printLadder(ladder, names, prizes);
-        showResults(names, ladder.findEndPositions(), prizes);
+        showResults(gameResult);
     }
 
-    private void showResults(Names names, EndPositions endPositions, Prizes prizes) {
+    private void showResults(GameResult gameResult) {
         String targetName = inputView.readTargetName();
         while (!targetName.equals(ALL)) {
-            outputView.printOneResult(findPrize(new Name(targetName), names, endPositions, prizes));
+            outputView.printOneResult(gameResult.findPrize(new Name(targetName)));
             targetName = inputView.readTargetName();
         }
-        printAllResults(names, endPositions, prizes);
-    }
-
-    private void printAllResults(Names names, EndPositions endPositions, Prizes prizes) {
-        outputView.printResultTitle();
-        for (Name name : names.getNames()) {
-            outputView.printNameAndPrize(name, findPrize(name, names, endPositions, prizes));
-        }
-    }
-
-    private Prize findPrize(Name name, Names names, EndPositions endPositions, Prizes prizes) {
-        Position startPosition = names.findPosition(name);
-        Position endPosition = endPositions.findEndPosition(startPosition);
-        return prizes.findPrize(endPosition);
+        outputView.printAllResults(gameResult);
     }
 }

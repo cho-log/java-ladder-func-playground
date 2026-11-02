@@ -3,10 +3,12 @@ package view;
 import domain.Connection;
 import domain.Ladder;
 import domain.Line;
+import domain.game.GameResult;
 import domain.game.Name;
 import domain.game.Names;
 import domain.game.Prize;
 import domain.game.Prizes;
+import java.util.Map;
 
 public class OutputView {
     private static final String CELL_FORMAT = "%6s";
@@ -60,12 +62,19 @@ public class OutputView {
         System.out.println(prize.getPrize());
     }
 
+    public void printAllResults(GameResult gameResult) {
+        printResultTitle();
+        for (Map.Entry<Name, Prize> result : gameResult.getResults().entrySet()) {
+            printNameAndPrize(result.getKey(), result.getValue());
+        }
+    }
+
     public void printResultTitle() {
         System.out.println();
         System.out.println("실행 결과");
     }
 
-    public void printNameAndPrize(Name name, Prize prize) {
+    private void printNameAndPrize(Name name, Prize prize) {
         System.out.println(name.getName() + " : " + prize.getPrize());
     }
 }
