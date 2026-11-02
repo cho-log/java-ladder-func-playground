@@ -69,6 +69,10 @@ public class OutputView {
         }
     }
 
+    public void printError(String message) {
+        System.out.println(message);
+    }
+
     public void printResultTitle() {
         System.out.println();
         System.out.println("실행 결과");

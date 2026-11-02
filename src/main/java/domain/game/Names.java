@@ -1,6 +1,5 @@
 package domain.game;
 
-import domain.Position;
 import domain.Width;
 import exception.ErrorMessage;
 import java.util.ArrayList;
@@ -9,7 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 
 public class Names {
-    private static final int NOT_FOUND = -1;
+    private static final int MINIMUM_PARTICIPANTS = 2;
     private final List<Name> names;
 
     private Names(List<Name> names) {
@@ -22,8 +21,15 @@ public class Names {
             names.add(new Name(inputName));
         }
 
+        validateEnoughParticipants(names);
         validateNotDuplicate(names);
         return new Names(names);
+    }
+
+    private static void validateEnoughParticipants(List<Name> names) {
+        if (names.size() < MINIMUM_PARTICIPANTS) {
+            throw new IllegalArgumentException(ErrorMessage.NOT_ENOUGH_PARTICIPANTS.getMessage());
+        }
     }
 
     private static void validateNotDuplicate(List<Name> names) {

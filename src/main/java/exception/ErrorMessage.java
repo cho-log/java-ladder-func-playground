@@ -11,7 +11,8 @@ public enum ErrorMessage {
     PRIZE_NUMBER_IS_NOT_NAME_NUMBER("실행 결과 개수는 이름 개수와 동일해야 합니다."),
     NAME_NOT_FOUND("이름이 목록에 존재하지 않습니다."),
     DUPLICATE_NAME("참여자의 이름은 중복이 허용되지 않습니다."),
-    NAME_IS_RESERVED("all은 참여자의 이름이 될 수 없습니다.");
+    NAME_IS_RESERVED("all은 참여자의 이름이 될 수 없습니다."),
+    NOT_ENOUGH_PARTICIPANTS("참여자는 2명 이상이어야 합니다.");
 
     private final String message;
 

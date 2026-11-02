@@ -3,10 +3,10 @@ package controller;
 import domain.Height;
 import domain.Ladder;
 import domain.game.GameResult;
-import domain.game.Name;
 import domain.game.Names;
 import domain.game.Prizes;
 import domain.random.ConnectionGenerator;
+import java.util.function.Supplier;
 import view.InputView;
 import view.OutputView;
 
@@ -22,9 +22,9 @@ public class LadderController {
     }
 
     public void run(ConnectionGenerator connectionGenerator) {
-        Names names = Names.createNames(inputView.readNames());
-        Prizes prizes = Prizes.createPrizes(inputView.readPrizes());
-        Height height = new Height(inputView.readHeight());
+        Names names = retry(() -> Names.createNames(inputView.readNames()));
+        Prizes prizes = retry(() -> readPrizes(names));
+        Height height = retry(() -> new Height(inputView.readHeight()));
         Ladder ladder = Ladder.createLadder(names.toWidth(), height, connectionGenerator);
         GameResult gameResult = GameResult.of(names, ladder, prizes);
 
@@ -32,12 +32,35 @@ public class LadderController {
         showResults(gameResult);
     }
 
+    private Prizes readPrizes(Names names) {
+        Prizes prizes = Prizes.createPrizes(inputView.readPrizes());
+        GameResult.validateSameCount(names, prizes);
+        return prizes;
+    }
+
     private void showResults(GameResult gameResult) {
         String targetName = inputView.readTargetName();
         while (!targetName.equals(ALL)) {
-            outputView.printOneResult(gameResult.findPrize(new Name(targetName)));
+            showOneResult(gameResult, targetName);
             targetName = inputView.readTargetName();
         }
         outputView.printAllResults(gameResult);
+    }
+
+    private void showOneResult(GameResult gameResult, String targetName) {
+        try {
+            outputView.printOneResult(gameResult.findPrize(targetName));
+        } catch (IllegalArgumentException exception) {
+            outputView.printError(exception.getMessage());
+        }
+    }
+
+    private <T> T retry(Supplier<T> supplier) {
+        try {
+            return supplier.get();
+        } catch (IllegalArgumentException exception) {
+            outputView.printError(exception.getMessage());
+            return retry(supplier);
+        }
     }
 }
