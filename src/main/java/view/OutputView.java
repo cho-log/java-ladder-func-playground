@@ -73,7 +73,7 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public void printResultTitle() {
+    private void printResultTitle() {
         System.out.println();
         System.out.println("실행 결과");
     }
