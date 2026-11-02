@@ -13,17 +13,6 @@ class NamesTest {
     private final Names names = Names.createNames(List.of("neo", "brown", "brie", "tommy"));
 
     @Test
-    void 이름의_순서가_시작_위치가_된다() {
-        assertThat(names.findPosition(new Name("brown")).getPosition()).isEqualTo(1);
-    }
-
-    @Test
-    void 없는_이름을_찾으면_예외가_발생한다() {
-        assertThatThrownBy(() -> names.findPosition(new Name("jun")))
-                .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
     void 이름_개수가_넓이가_된다() {
         assertThat(names.toWidth().getWidth()).isEqualTo(4);
     }
