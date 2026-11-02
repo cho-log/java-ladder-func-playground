@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import domain.random.ConnectionGenerator;
 import domain.random.RandomConnectionGenerator;
 import java.util.List;
+import java.util.stream.IntStream;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.RepeatedTest;
@@ -24,29 +25,29 @@ class LadderTest {
 
     @Test
     void 연결된_칸을_따라_도착_위치가_바뀐다() {
-        Width width = new Width(4);
-        Ladder ladder = Ladder.createLadder(width, new Height(1), ALWAYS_CONNECTED);
+        Ladder ladder = Ladder.createLadder(new Width(4), new Height(1), ALWAYS_CONNECTED);
 
-        assertThat(toNumbers(ladder.findEndPositions())).containsExactly(1, 0, 3, 2);
+        assertThat(findEndNumbers(ladder)).containsExactly(1, 0, 3, 2);
     }
 
     @Test
     void 연결된_칸이_없으면_시작_위치에_그대로_도착한다() {
-        Width width = new Width(4);
-        Ladder ladder = Ladder.createLadder(width, new Height(3), NEVER_CONNECTED);
+        Ladder ladder = Ladder.createLadder(new Width(4), new Height(3), NEVER_CONNECTED);
 
-        assertThat(toNumbers(ladder.findEndPositions())).containsExactly(0, 1, 2, 3);
+        assertThat(findEndNumbers(ladder)).containsExactly(0, 1, 2, 3);
     }
 
     @RepeatedTest(100)
     void 어떤_사다리든_도착_위치는_겹치지_않는다() {
         Ladder ladder = Ladder.createLadder(new Width(4), new Height(5), new RandomConnectionGenerator());
 
-        assertThat(toNumbers(ladder.findEndPositions())).containsExactlyInAnyOrder(0, 1, 2, 3);
+        assertThat(findEndNumbers(ladder)).containsExactlyInAnyOrder(0, 1, 2, 3);
     }
 
-    private List<Integer> toNumbers(EndPositions endPositions) {
-        return endPositions.getEndPositions().stream()
+    private List<Integer> findEndNumbers(Ladder ladder) {
+        return IntStream.range(0, ladder.getLines().get(0).width())
+                .mapToObj(Position::new)
+                .map(ladder::findEndPosition)
                 .map(Position::getPosition)
                 .toList();
     }

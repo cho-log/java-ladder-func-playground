@@ -1,6 +1,5 @@
 package domain.game;
 
-import domain.EndPositions;
 import domain.Ladder;
 import domain.Position;
 import exception.ErrorMessage;
@@ -16,13 +15,12 @@ public class GameResult {
         this.results = results;
     }
 
-    public static GameResult of(Names names, Ladder ladder, Prizes prizes)  {
+    public static GameResult of(Names names, Ladder ladder, Prizes prizes) {
         validateSameCount(names, prizes);
-        EndPositions endPositions = ladder.findEndPositions();
         List<Name> participants = names.getNames();
         Map<Name, Prize> results = new LinkedHashMap<>();
-        for(int index = 0; index < participants.size(); index++) {
-            Position endPosition = endPositions.findEndPosition(new Position(index));
+        for (int index = 0; index < participants.size(); index++) {
+            Position endPosition = ladder.findEndPosition(new Position(index));
             results.put(participants.get(index), prizes.findPrize(endPosition));
         }
         return new GameResult(results);

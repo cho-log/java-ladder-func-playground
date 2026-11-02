@@ -24,18 +24,10 @@ public class Ladder {
         return Collections.unmodifiableList(lines);
     }
 
-    private Position findEndPosition(Position position) {
+    public Position findEndPosition(Position position) {
         for (Line line : lines) {
             position = line.move(position);
         }
         return position;
-    }
-
-    public EndPositions findEndPositions() {
-        List<Position> endPositions = IntStream.range(0, lines.get(0).width())
-                .mapToObj(Position::new)
-                .map(this::findEndPosition)
-                .toList();
-        return new EndPositions(endPositions);
     }
 }
