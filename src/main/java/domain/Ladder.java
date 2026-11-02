@@ -1,9 +1,10 @@
 package domain;
 
 import domain.random.ConnectionGenerator;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Ladder {
     private final List<Line> lines;
@@ -13,10 +14,9 @@ public class Ladder {
     }
 
     public static Ladder createLadder(Width width, Height height, ConnectionGenerator connectionGenerator) {
-        List<Line> lines = new ArrayList<>();
-        for (int i = 0; i < height.getHeight(); i++) {
-            lines.add(Line.createLine(width, connectionGenerator));
-        }
+        List<Line> lines = Stream.generate(() -> Line.createLine(width, connectionGenerator))
+                .limit(height.getHeight())
+                .toList();
         return new Ladder(lines);
     }
 
@@ -32,10 +32,10 @@ public class Ladder {
     }
 
     public EndPositions findEndPositions() {
-        List<Position> endPositions = new ArrayList<>();
-        for (int i = 0; i < lines.get(0).width(); i++) {
-            endPositions.add(findEndPosition(new Position(i)));
-        }
+        List<Position> endPositions = IntStream.range(0, lines.get(0).width())
+                .mapToObj(Position::new)
+                .map(this::findEndPosition)
+                .toList();
         return new EndPositions(endPositions);
     }
 }

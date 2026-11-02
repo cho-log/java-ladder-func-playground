@@ -1,7 +1,6 @@
 package domain.game;
 
 import domain.Position;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -13,10 +12,9 @@ public class Prizes {
     }
 
     public static Prizes createPrizes(List<String> inputPrizes) {
-        List<Prize> prizes = new ArrayList<>();
-        for (String inputPrize : inputPrizes) {
-            prizes.add(new Prize(inputPrize));
-        }
+        List<Prize> prizes = inputPrizes.stream()
+                .map(Prize::new)
+                .toList();
         return new Prizes(prizes);
     }
 

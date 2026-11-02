@@ -16,10 +16,9 @@ public class Names {
     }
 
     public static Names createNames(List<String> inputNames) {
-        List<Name> names = new ArrayList<>();
-        for (String inputName : inputNames) {
-            names.add(new Name(inputName));
-        }
+        List<Name> names = inputNames.stream()
+                .map(Name::new)
+                .toList();
 
         validateEnoughParticipants(names);
         validateNotDuplicate(names);
