@@ -18,10 +18,8 @@ class NamesTest {
     }
 
     @Test
-    void 이름이_1개면_넓이를_만들_수_없다() {
-        Names oneName = Names.createNames(List.of("neo"));
-
-        assertThatThrownBy(oneName::toWidth)
+    void 참여자가_1명이면_오류가_발생한다() {
+        assertThatThrownBy(() -> Names.createNames(List.of("neo")))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
