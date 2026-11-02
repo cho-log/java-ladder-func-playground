@@ -2,7 +2,6 @@ package domain.game;
 
 import domain.Width;
 import exception.ErrorMessage;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
