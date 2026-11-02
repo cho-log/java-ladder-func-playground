@@ -21,7 +21,7 @@ public class Name {
             throw new IllegalArgumentException(ErrorMessage.NAME_TOO_LONG.getMessage());
         }
 
-        if (name == "all") {
+        if (name.equals("all")) {
             throw new IllegalArgumentException(ErrorMessage.NAME_IS_RESERVED.getMessage());
         }
     }

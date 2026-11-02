@@ -27,8 +27,8 @@ class PrizesTest {
     }
 
     @Test
-    void 결과_목록에_빈_이름이_있으면_오류가_발생한다() {
-        assertThatThrownBy(() -> Names.createNames(List.of("꽝", "100", "")))
+    void 결과_목록에_빈_결과가_있으면_오류가_발생한다() {
+        assertThatThrownBy(() -> Prizes.createPrizes(List.of("꽝", "100", ""), new Width(3)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }
