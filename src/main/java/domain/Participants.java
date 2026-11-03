@@ -8,16 +8,23 @@ public class Participants {
 
     public Participants(List<String> names) {
         this.names = createNames(names);
-        validateNames();
+        validateNotEmpty();
+        validateDuplicateNames();
     }
 
     private List<Participant> createNames(List<String> names) {
         return names.stream().map(Participant::new).toList();
     }
 
-    private void validateNames() {
-        if (names.isEmpty() || new HashSet<>(names).size() != names.size()) {
-            throw new IllegalArgumentException("참여자는 한 명 이상이어야 하며 이름이 중복될 수 없습니다.");
+    private void validateNotEmpty() {
+        if (names.isEmpty()) {
+            throw new IllegalArgumentException("참여자는 한 명 이상이어야 합니다.");
+        }
+    }
+
+    private void validateDuplicateNames() {
+        if (new HashSet<>(names).size() != names.size()) {
+            throw new IllegalArgumentException("참여자 이름이 중복될 수 없습니다.");
         }
     }
 
