@@ -6,12 +6,8 @@ import java.util.Random;
 public class RandomConnectionGenerator implements ConnectionGenerator {
     private final Random random;
 
-    public RandomConnectionGenerator() {
+    public RandomConnectionGenerator(Random random) {
         this.random = new Random();
-    }
-
-    public RandomConnectionGenerator(long seed) {
-        this.random = new Random(seed);
     }
 
     @Override
