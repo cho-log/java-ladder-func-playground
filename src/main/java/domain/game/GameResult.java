@@ -39,12 +39,11 @@ public class GameResult {
         }
     }
 
-    public Prize findPrize(String targetName) {
-        return results.entrySet().stream()
-                .filter(result -> result.getKey().getName().equals(targetName))
-                .map(Map.Entry::getValue)
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.NAME_NOT_FOUND.getMessage()));
+    public Prize findPrize(Name name) {
+        if (!results.containsKey(name)) {
+            throw new IllegalArgumentException(ErrorMessage.NAME_NOT_FOUND.getMessage());
+        }
+        return results.get(name);
     }
 
     public Map<Name, Prize> getResults() {

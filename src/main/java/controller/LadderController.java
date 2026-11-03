@@ -3,6 +3,7 @@ package controller;
 import domain.Height;
 import domain.Ladder;
 import domain.game.GameResult;
+import domain.game.Name;
 import domain.game.Names;
 import domain.game.Prizes;
 import domain.random.ConnectionGenerator;
@@ -63,7 +64,7 @@ public class LadderController {
 
     private void showOneResult(GameResult gameResult, String targetName) {
         try {
-            outputView.printOneResult(gameResult.findPrize(targetName));
+            outputView.printOneResult(gameResult.findPrize(new Name(targetName)));
         } catch (IllegalArgumentException exception) {
             outputView.printError(exception.getMessage());
         }
