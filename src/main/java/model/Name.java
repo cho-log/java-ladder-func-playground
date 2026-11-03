@@ -14,7 +14,7 @@ public class Name {
         if (name.length() > MAX_LENGTH) {
             throw new IllegalArgumentException("이름은 5자 이하여야 합니다.");
         }
-        if (name.equals("all")) {
+        if (name.equals(ALL)) {
             throw new IllegalArgumentException("all은 사용할 수 없는 이름입니다.");
         }
         this.name = name;
