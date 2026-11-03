@@ -41,5 +41,5 @@ public class LadderGeneratorTest {
                 Connection.CONNECTED);
         assertEquals(expected, ladder.getLines().get(0).getPoints());
     }
-    
+
 }

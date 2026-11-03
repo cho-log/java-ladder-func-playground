@@ -49,4 +49,27 @@ public class Line {
         return points.get(index).isConnected();
     }
 
+    public int move(int position) {
+        if (canMoveLeft(position)) {
+            return position - 1;
+        }
+        if (canMoveRight(position)) {
+            return position + 1;
+        }
+        return position;
+    }
+
+    private boolean canMoveLeft(int position) {
+        if (position == 0) {
+            return false;
+        }
+        return points.get(position - 1).isConnected();
+    }
+
+    private boolean canMoveRight(int position) {
+        if (position >= points.size()) {
+            return false;
+        }
+        return points.get(position).isConnected();
+    }
 }

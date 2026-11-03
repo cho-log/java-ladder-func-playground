@@ -50,7 +50,11 @@ public class Ladder {
         return lines.get(0).size() + 1;
     }
 
-    public boolean isConnected(int row, int column) {
-        return lines.get(row).isConnectedPoint(column);
+    public int move(int start) {
+        int position = start;
+        for (Line line : lines) {
+            position = line.move(position);
+        }
+        return position;
     }
 }

@@ -20,39 +20,9 @@ public class LadderGame {
     public List<Integer> getResult() {
         List<Integer> resultList = new ArrayList<>();
         for (int i = 0; i < ladder.getColumn(); i++) {
-            resultList.add(playGame(i));
+            resultList.add(ladder.move(i));
         }
         return resultList;
     }
 
-    private int playGame(int position) {
-        for (int row = 0; row < ladder.getRow(); row++) {
-            position = move(row, position);
-        }
-        return position;
-    }
-
-    private int move(int row, int position) {
-        if (canMoveLeft(row, position)) {
-            return position - 1;
-        }
-        if (canMoveRight(row, position)) {
-            return position + 1;
-        }
-        return position;
-    }
-
-    private boolean canMoveLeft(int row, int position) {
-        if (position == 0) {
-            return false;
-        }
-        return ladder.isConnected(row, position - 1);
-    }
-
-    private boolean canMoveRight(int row, int position) {
-        if (position == ladder.getColumn() - 1) {
-            return false;
-        }
-        return ladder.isConnected(row, position);
-    }
 }

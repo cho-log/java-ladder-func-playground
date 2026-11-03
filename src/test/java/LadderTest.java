@@ -13,20 +13,6 @@ import org.junit.jupiter.api.Test;
 public class LadderTest {
 
     @Test
-    void 사다리의_연결_상태를_정확하게_조회한다() {
-        Line line = new Line(List.of(
-                Connection.CONNECTED,
-                Connection.DISCONNECTED,
-                Connection.CONNECTED
-        ));
-        Ladder ladder = new Ladder(List.of(line));
-
-        assertTrue(ladder.isConnected(0, 0));
-        assertFalse(ladder.isConnected(0, 1));
-        assertTrue(ladder.isConnected(0, 2));
-    }
-
-    @Test
     void 사다리의_행과_열_개수를_정확하게_반환한다() {
         Line line = new Line(List.of(
                 Connection.CONNECTED,
