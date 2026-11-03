@@ -5,18 +5,19 @@ import domain.GameResult;
 import domain.Ladder;
 import domain.Line;
 import domain.Name;
+import domain.NameResultPairs;
 import domain.Result;
 import java.util.List;
 import java.util.Map;
 
 public class OutputView {
-    public static void printLadder(Ladder ladder, List<Name> names, List<Result> results) {
+    public static void printLadder(Ladder ladder, NameResultPairs nameResultPairs) {
         System.out.println("사다리 결과\n");
-        printNames(names);
+        printNames(nameResultPairs.getNames());
         for (Line line : ladder.getLines()) {
             printLine(line);
         }
-        printResults(results);
+        printResults(nameResultPairs.getResults());
     }
 
     private static void printNames(List<Name> names) {

@@ -6,6 +6,7 @@ import domain.Ladder;
 import domain.LadderGame;
 import domain.LadderGenerator;
 import domain.Name;
+import domain.NameResultPairs;
 import domain.Names;
 import domain.Result;
 import domain.Results;
@@ -18,10 +19,11 @@ import view.OutputView;
 public class Controller {
     public void run() {
         Names names = new Names(inputNameList(InputView.inputNames()));
-        Results results = new Results(inputResultList(InputView.inputResults()), names);
-        Ladder ladder = createLadder(names.size());
-        GameResult gameResult = createGameResult(ladder, names, results);
-        OutputView.printLadder(ladder, names.getNames(), results.getResults());
+        Results results = new Results(inputResultList(InputView.inputResults()));
+        NameResultPairs nameResultPairs = new NameResultPairs(names, results);
+        Ladder ladder = createLadder(nameResultPairs.size());
+        GameResult gameResult = createGameResult(ladder, nameResultPairs);
+        OutputView.printLadder(ladder, nameResultPairs);
         printSelectedResult(gameResult);
     }
 
@@ -31,10 +33,10 @@ public class Controller {
         return new LadderGenerator().generate(row, column);
     }
 
-    private GameResult createGameResult(Ladder ladder, Names names, Results results) {
+    private GameResult createGameResult(Ladder ladder, NameResultPairs nameResultPairs) {
         LadderGame ladderGame = new LadderGame(ladder);
         List<Integer> positions = ladderGame.getResult();
-        return new GameResult(names, positions, results);
+        return new GameResult(nameResultPairs, positions);
     }
 
     private void printSelectedResult(GameResult gameResult) {

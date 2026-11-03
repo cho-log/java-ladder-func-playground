@@ -10,24 +10,24 @@ import java.util.Set;
 public class GameResult {
     private final Map<Name, Result> results;
 
-    public GameResult(Names names, List<Integer> positions, Results gameResults) {
-        validateSize(names, positions, gameResults);
+    public GameResult(NameResultPairs nameResultPairs, List<Integer> positions) {
+        validateSize(nameResultPairs, positions);
         results = new LinkedHashMap<>();
-        initializeResults(names, positions, gameResults);
+        initializeResults(nameResultPairs, positions);
     }
 
-    private void validateSize(Names names, List<Integer> positions, Results gameResults) {
-        if (names == null || positions == null || gameResults == null) {
+    private void validateSize(NameResultPairs nameResultPairs, List<Integer> positions) {
+        if (nameResultPairs == null || positions == null) {
             throw new IllegalArgumentException("결과 목록은 null일 수 없습니다.");
         }
-        if (names.size() != positions.size() || names.size() != gameResults.size()) {
-            throw new IllegalArgumentException("이름과 결과의 개수가 일치해야 합니다.");
+        if (nameResultPairs.size() != positions.size()) {
+            throw new IllegalArgumentException("참여자와 도착 위치의 개수가 일치해야 합니다.");
         }
     }
 
-    private void initializeResults(Names names, List<Integer> positions, Results gameResults) {
-        for (int index = 0; index < names.size(); index++) {
-            addResult(names.get(index), gameResults.get(positions.get(index)));
+    private void initializeResults(NameResultPairs nameResultPairs, List<Integer> positions) {
+        for (int index = 0; index < nameResultPairs.size(); index++) {
+            addResult(nameResultPairs.getName(index), nameResultPairs.getResult(positions.get(index)));
         }
     }
 

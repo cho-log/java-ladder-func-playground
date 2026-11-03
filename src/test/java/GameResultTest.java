@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import domain.GameResult;
 import domain.Name;
+import domain.NameResultPairs;
 import domain.Names;
 import domain.Result;
 import domain.Results;
@@ -24,9 +25,9 @@ public class GameResultTest {
                 new Result("꽝"),
                 new Result("5000"),
                 new Result("10000")
-        ), names.size());
+        ));
 
-        GameResult gameResult = new GameResult(names, List.of(2, 0, 1), results);
+        GameResult gameResult = new GameResult(new NameResultPairs(names, results), List.of(2, 0, 1));
 
         assertEquals("10000", gameResult.findResult(new Name("neo")).getValue());
         assertEquals("꽝", gameResult.findResult(new Name("brown")).getValue());
@@ -38,8 +39,8 @@ public class GameResultTest {
         Names names = new Names(List.of(new Name("neo"),
                 new Name("brown"),new Name("brie")));
         Results results = new Results(List.of(new Result("꽝"),
-                new Result("5000"),new Result("10000")), names.size());
-        GameResult gameResult = new GameResult(names, List.of(0, 1, 2), results);
+                new Result("5000"),new Result("10000")));
+        GameResult gameResult = new GameResult(new NameResultPairs(names, results), List.of(0, 1, 2));
         List<Name> actualNames = new ArrayList<>();
         for (Map.Entry<Name, Result> entry : gameResult.getResultEntries()) {
             actualNames.add(entry.getKey());
@@ -48,22 +49,23 @@ public class GameResultTest {
     }
 
     @Test
-    void 이름과_실행_결과_개수가_다르면_예외가_발생한다() {
+    void 참여자와_도착_위치_개수가_다르면_예외가_발생한다() {
         Names names = new Names(List.of(
                 new Name("neo"),
                 new Name("brown")
         ));
-        Results results = new Results(List.of(new Result("꽝")), 1);
+        Results results = new Results(List.of(new Result("꽝"), new Result("5000")));
+        NameResultPairs nameResultPairs = new NameResultPairs(names, results);
 
         assertThrows(IllegalArgumentException.class,
-                () -> new GameResult(names, List.of(0, 1), results));
+                () -> new GameResult(nameResultPairs, List.of(0)));
     }
 
     @Test
     void 존재하지_않는_참여자를_조회하면_예외가_발생한다() {
         Names names = new Names(List.of(new Name("neo")));
-        Results results = new Results(List.of(new Result("꽝")), names.size());
-        GameResult gameResult = new GameResult(names, List.of(0), results);
+        Results results = new Results(List.of(new Result("꽝")));
+        GameResult gameResult = new GameResult(new NameResultPairs(names, results), List.of(0));
 
         assertThrows(IllegalArgumentException.class,
                 () -> gameResult.findResult(new Name("brown")));
