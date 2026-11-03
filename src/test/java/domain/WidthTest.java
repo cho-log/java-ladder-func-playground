@@ -12,15 +12,15 @@ import org.junit.jupiter.api.Test;
 class WidthTest {
 
     @Test
-    void 넓이가_2_이상이면_생성된다() {
-        Width width = new Width(2);
+    void 넓이가_1_이상이면_생성된다() {
+        Width width = new Width(1);
 
-        assertThat(width.getWidth()).isEqualTo(2);
+        assertThat(width.getWidth()).isEqualTo(1);
     }
 
     @Test
-    void 넓이가_2_미만이면_예외가_발생한다() {
-        assertThatThrownBy(() -> new Width(1))
+    void 넓이가_1_미만이면_예외가_발생한다() {
+        assertThatThrownBy(() -> new Width(0))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.MINIMUM_WIDTH.getMessage());
     }

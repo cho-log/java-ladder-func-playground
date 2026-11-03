@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import domain.Connection;
 import domain.Height;
 import domain.Ladder;
+import domain.Width;
 import exception.ErrorMessage;
 import java.util.List;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -50,6 +51,15 @@ class GameResultTest {
         assertThatThrownBy(() -> GameResult.validateSameCount(names, threePrizes))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.PRIZE_COUNT_MISMATCH.getMessage());
+    }
+
+    @Test
+    void 사다리_넓이와_참여자_수가_다르면_오류가_발생한다() {
+        Ladder narrowLadder = Ladder.createLadder(new Width(3), new Height(1), () -> Connection.CONNECTED);
+
+        assertThatThrownBy(() -> GameResult.of(names, narrowLadder, prizes))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.LADDER_WIDTH_MISMATCH.getMessage());
     }
 
     @Test
