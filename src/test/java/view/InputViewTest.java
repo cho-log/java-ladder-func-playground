@@ -4,6 +4,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Scanner;
+import domain.Outcomes;
+import domain.LadderWidth;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -33,7 +35,8 @@ class InputViewTest {
     @ParameterizedTest
     @ValueSource(strings = {"꽝,", ",5000", "꽝,,5000"})
     void rejectsEmptyOutcomeInCommaSeparatedInput(String input) {
-        assertThatThrownBy(() -> InputView.readOutcomes(new Scanner(input)))
+        assertThatThrownBy(() -> Outcomes.of(new LadderWidth(input.split(",", -1).length),
+                InputView.readOutcomes(new Scanner(input))))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

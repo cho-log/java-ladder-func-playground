@@ -13,8 +13,7 @@ public class Application {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Participants participants = InputView.readParticipants(scanner);
-        Outcomes outcomes = InputView.readOutcomes(scanner);
-        outcomes.validateCount(participants.getWidth());
+        Outcomes outcomes = Outcomes.of(participants.getWidth(), InputView.readOutcomes(scanner));
         LadderHeight height = InputView.readHeight(scanner);
         LadderGame game = new LadderGame(participants, outcomes, height, new RandomConnectionGenerator());
         ResultView.printGame(participants, game.getLadder(), outcomes);

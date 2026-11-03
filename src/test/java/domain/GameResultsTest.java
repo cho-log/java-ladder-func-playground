@@ -38,7 +38,7 @@ class GameResultsTest {
     @Test
     void rejectsOutcomeCountDifferentFromParticipantCount() {
         Participants participants = new Participants(List.of("neo", "brie"));
-        assertThatThrownBy(() -> new LadderGame(participants, new Outcomes(List.of("꽝")),
+        assertThatThrownBy(() -> new LadderGame(participants, Outcomes.of(participants.getWidth(), List.of("꽝")),
                 new LadderHeight(2), () -> Connection.DISCONNECTED))
                 .isInstanceOf(IllegalArgumentException.class);
     }
@@ -46,7 +46,7 @@ class GameResultsTest {
     @Test
     void allowsDuplicateOutcomes() {
         Participants participants = new Participants(List.of("neo", "brie"));
-        LadderGame game = new LadderGame(participants, new Outcomes(List.of("꽝", "꽝")),
+        LadderGame game = new LadderGame(participants, Outcomes.of(participants.getWidth(), List.of("꽝", "꽝")),
                 new LadderHeight(1), () -> Connection.CONNECTED);
         assertThat(game.getResults().getResults().values()).extracting(Outcome::getValue)
                 .containsExactly("꽝", "꽝");
@@ -60,7 +60,7 @@ class GameResultsTest {
 
     private LadderGame createGame() {
         return new LadderGame(new Participants(List.of("neo", "brown", "brie")),
-                new Outcomes(List.of("꽝", "5000", "3000")), new LadderHeight(2),
+                Outcomes.of(new LadderWidth(3), List.of("꽝", "5000", "3000")), new LadderHeight(2),
                 new FixedConnectionGenerator(List.of(
                         Connection.CONNECTED, Connection.DISCONNECTED, Connection.CONNECTED)));
     }

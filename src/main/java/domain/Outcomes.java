@@ -5,8 +5,14 @@ import java.util.List;
 public class Outcomes {
     private final List<Outcome> values;
 
-    public Outcomes(List<String> values) {
+    private Outcomes(List<String> values) {
         this.values = createOutcomes(values);
+    }
+
+    public static Outcomes of(LadderWidth width, List<String> values) {
+        Outcomes outcomes = new Outcomes(values);
+        outcomes.validateCount(width);
+        return outcomes;
     }
 
     private List<Outcome> createOutcomes(List<String> values) {

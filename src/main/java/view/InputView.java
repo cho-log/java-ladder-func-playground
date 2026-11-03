@@ -1,7 +1,6 @@
 package view;
 
 import domain.LadderHeight;
-import domain.Outcomes;
 import domain.Participants;
 import domain.ResultQuery;
 
@@ -15,9 +14,9 @@ public class InputView {
         return new Participants(readValues(scanner));
     }
 
-    public static Outcomes readOutcomes(Scanner scanner) {
+    public static List<String> readOutcomes(Scanner scanner) {
         System.out.println("실행 결과를 입력하세요. (결과는 쉼표(,)로 구분하세요)");
-        return new Outcomes(readValues(scanner));
+        return readValues(scanner);
     }
 
     private static List<String> readValues(Scanner scanner) {
