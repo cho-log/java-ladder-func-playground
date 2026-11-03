@@ -13,8 +13,24 @@ public class Participants {
     }
 
     private void validate(List<Participant> participants) {
+        validateMinimumSize(participants);
+        validateUniqueName(participants);
+    }
+
+    private void validateMinimumSize(List<Participant> participants) {
         if (participants.size() < 2) {
             throw new IllegalArgumentException("참여자는 최소 두 명이여야 합니다.");
+        }
+    }
+
+    private void validateUniqueName(List<Participant> participants) {
+        long uniqueNameCount = participants.stream()
+                                           .map(Participant::getName)
+                                           .distinct()
+                                           .count();
+
+        if (uniqueNameCount != participants.size()) {
+            throw new IllegalArgumentException("참여자 이름은 중복될 수 없습니다.");
         }
     }
 

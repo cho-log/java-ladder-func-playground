@@ -44,6 +44,33 @@ public class ParticipantsTest {
         assertThrows(IllegalArgumentException.class, () -> participants.getParticipant(findName));
     }
 
+    @Test
+    void 참여자_이름이_중복되면_예외가_발생한다() {
+        // given
+        Participant participant1 = new Participant("neo");
+        Participant participant2 = new Participant("neo");
+
+        // when
+        List<Participant> participants = List.of(participant1, participant2);
+
+        // then
+        assertThrows(IllegalArgumentException.class, () -> new Participants(participants));
+    }
+
+    @Test
+    void 공백을_제거한_참여자_이름이_중복되면_예외가_발생한다() {
+        // given
+        Participant participant1 = new Participant("neo");
+        Participant participant2 = new Participant("   neo   ");
+
+        // when
+        List<Participant> participants = List.of(participant1, participant2);
+
+        // then
+        assertThrows(IllegalArgumentException.class, () -> new Participants(participants));
+    }
+
+
     private Participants createParticipants() {
         return new Participants(List.of(
                 new Participant("neo"),
