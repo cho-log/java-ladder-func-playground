@@ -5,7 +5,6 @@ public class LadderGame {
     private final GameResults results;
 
     public LadderGame(Participants participants, Outcomes outcomes, LadderHeight height, ConnectionGenerator generator) {
-        outcomes.validateCount(participants.getWidth());
         this.ladder = new Ladder(participants.getWidth(), height, generator);
         this.results = new GameResults(participants, outcomes, ladder);
     }
