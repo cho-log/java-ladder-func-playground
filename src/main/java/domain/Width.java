@@ -3,7 +3,7 @@ package domain;
 import exception.ErrorMessage;
 
 public class Width {
-    private static final int MINIMUM_WIDTH = 2;
+    private static final int MINIMUM_WIDTH = 1;
     private final int width;
 
     public Width(int width) {
