@@ -20,14 +20,6 @@ public class Line {
         return List.copyOf(connections);
     }
 
-    public List<Connection> getConnections() {
-        return connections;
-    }
-
-    public LadderWidth getWidth() {
-        return new LadderWidth(connections.size() + 1);
-    }
-
     public Position move(Position position) {
         validatePosition(position);
         if (isConnected(position.getValue() - 1)) {
@@ -48,5 +40,13 @@ public class Line {
         if (position.getValue() >= getWidth().getValue()) {
             throw new IllegalArgumentException("사다리 범위 안의 위치여야 합니다.");
         }
+    }
+
+    public List<Connection> getConnections() {
+        return connections;
+    }
+
+    public LadderWidth getWidth() {
+        return new LadderWidth(connections.size() + 1);
     }
 }
