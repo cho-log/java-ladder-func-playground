@@ -47,7 +47,7 @@ class GameResultsTest {
     @Test
     void rejectsOutcomeCountDifferentFromParticipantCount() {
         Participants participants = new Participants(List.of("neo", "brie"));
-        assertThatThrownBy(() -> new LadderGame(participants, Outcomes.of(participants.getWidth(), List.of("꽝")),
+        assertThatThrownBy(() -> new LadderGame(participants, Outcomes.of(new LadderWidth(1), List.of("꽝")),
                 new LadderHeight(2), () -> Connection.DISCONNECTED))
                 .isInstanceOf(IllegalArgumentException.class);
     }
