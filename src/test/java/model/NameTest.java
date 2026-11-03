@@ -37,4 +37,18 @@ class NameTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("이름은 비어 있을 수 없습니다.");
     }
+
+    @Test
+    @DisplayName("all은 참가자 이름으로 사용할 수 없다")
+    void nameAll() {
+        assertThatThrownBy(() -> new Name("all"))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("all은 사용할 수 없는 이름입니다.");
+    }
+
+    @Test
+    @DisplayName("같은 이름을 담은 Name은 같은 객체로 취급된다")
+    void equalName() {
+        assertThat(new Name("pobi")).isEqualTo(new Name("pobi"));
+    }
 }
