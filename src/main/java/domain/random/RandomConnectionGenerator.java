@@ -4,7 +4,15 @@ import domain.Connection;
 import java.util.Random;
 
 public class RandomConnectionGenerator implements ConnectionGenerator {
-    private final Random random = new Random();
+    private final Random random;
+
+    public RandomConnectionGenerator() {
+        this.random = new Random();
+    }
+
+    public RandomConnectionGenerator(long seed) {
+        this.random = new Random(seed);
+    }
 
     @Override
     public Connection generate() {
