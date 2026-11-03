@@ -23,23 +23,14 @@ class GameResultTest {
     void 이름으로_결과를_찾는다() {
         GameResult gameResult = GameResult.of(names, ladder, prizes);
 
-        assertThat(gameResult.findPrize("neo").getPrize()).isEqualTo("5000");
+        assertThat(gameResult.findPrize(new Name("neo")).getPrize()).isEqualTo("5000");
     }
 
     @Test
     void 없는_이름을_찾으면_오류가_발생한다() {
         GameResult gameResult = GameResult.of(names, ladder, prizes);
 
-        assertThatThrownBy(() -> gameResult.findPrize("jun"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.NAME_NOT_FOUND.getMessage());
-    }
-
-    @Test
-    void 다섯_글자가_넘는_이름을_찾아도_없는_이름_오류가_발생한다() {
-        GameResult gameResult = GameResult.of(names, ladder, prizes);
-
-        assertThatThrownBy(() -> gameResult.findPrize("abcdef"))
+        assertThatThrownBy(() -> gameResult.findPrize(new Name("jun")))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorMessage.NAME_NOT_FOUND.getMessage());
     }
