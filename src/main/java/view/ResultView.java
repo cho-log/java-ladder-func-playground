@@ -68,7 +68,9 @@ public class ResultView {
             printAll(results);
             return;
         }
-        System.out.println(results.getResult(query.getName()).getValue());
+        Participant name = query.getName();
+        Outcome result = results.getResult(name);
+        System.out.println(result.getValue());
     }
 
     private static void printAll(GameResults results) {
