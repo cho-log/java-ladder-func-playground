@@ -50,9 +50,9 @@ public class OutputView {
         System.out.print("     |");
     }
 
-    public static void printResult(GameResult gameResult, Name name) {
+    public static void printResult(String result) {
         System.out.println("실행 결과");
-        System.out.println(gameResult.findResult(name).getValue());
+        System.out.println(result);
     }
 
     public static void printAllResult(GameResult gameResult) {

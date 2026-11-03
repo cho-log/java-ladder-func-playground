@@ -52,7 +52,7 @@ public class Controller {
             OutputView.printAllResult(gameResult);
             return true;
         }
-        OutputView.printResult(gameResult, new Name(input));
+        OutputView.printResult(gameResult.findResult(new Name(input)).getValue());
         return false;
     }
 
