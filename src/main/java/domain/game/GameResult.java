@@ -32,6 +32,12 @@ public class GameResult {
         }
     }
 
+    private static void validateLadderWidth(Names names, Ladder ladder) {
+        if (names.getNames().size() != ladder.width()) {
+            throw new IllegalArgumentException(ErrorMessage.LADDER_WIDTH_MISMATCH.getMessage());
+        }
+    }
+
     public Prize findPrize(String targetName) {
         return results.entrySet().stream()
                 .filter(result -> result.getKey().getName().equals(targetName))
