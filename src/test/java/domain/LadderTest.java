@@ -9,6 +9,7 @@ import java.util.stream.IntStream;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.RepetitionInfo;
 import org.junit.jupiter.api.Test;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
@@ -38,8 +39,9 @@ class LadderTest {
     }
 
     @RepeatedTest(100)
-    void 어떤_사다리든_도착_위치는_겹치지_않는다() {
-        Ladder ladder = Ladder.createLadder(new Width(4), new Height(5), new RandomConnectionGenerator());
+    void 어떤_사다리든_도착_위치는_겹치지_않는다(RepetitionInfo repetitionInfo) {
+        long seed = repetitionInfo.getCurrentRepetition();
+        Ladder ladder = Ladder.createLadder(new Width(4), new Height(5), new RandomConnectionGenerator(seed));
 
         assertThat(findEndNumbers(ladder)).containsExactlyInAnyOrder(0, 1, 2, 3);
     }
