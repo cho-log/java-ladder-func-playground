@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import domain.random.ConnectionGenerator;
 import domain.random.RandomConnectionGenerator;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.IntStream;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -40,8 +41,8 @@ class LadderTest {
 
     @RepeatedTest(100)
     void 어떤_사다리든_도착_위치는_겹치지_않는다(RepetitionInfo repetitionInfo) {
-        long seed = repetitionInfo.getCurrentRepetition();
-        Ladder ladder = Ladder.createLadder(new Width(4), new Height(5), new RandomConnectionGenerator(seed));
+        Random random  = new Random(repetitionInfo.getCurrentRepetition());
+        Ladder ladder = Ladder.createLadder(new Width(4), new Height(5), new RandomConnectionGenerator(random));
 
         assertThat(findEndNumbers(ladder)).containsExactlyInAnyOrder(0, 1, 2, 3);
     }
