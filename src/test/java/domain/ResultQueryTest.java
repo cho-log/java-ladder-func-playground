@@ -12,7 +12,7 @@ class ResultQueryTest {
     void distinguishesAllFromIndividualName() {
         assertThat(new ResultQuery(" all ").isAll()).isTrue();
         assertThat(new ResultQuery("neo").isAll()).isFalse();
-        assertThat(new ResultQuery(" neo ").getName()).isEqualTo(new ParticipantName("neo"));
+        assertThat(new ResultQuery(" neo ").getName()).isEqualTo(new Participant("neo"));
     }
 
     @ParameterizedTest

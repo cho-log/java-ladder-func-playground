@@ -4,15 +4,15 @@ import java.util.HashSet;
 import java.util.List;
 
 public class Participants {
-    private final List<ParticipantName> names;
+    private final List<Participant> names;
 
     public Participants(List<String> names) {
         this.names = createNames(names);
         validateNames();
     }
 
-    private List<ParticipantName> createNames(List<String> names) {
-        return names.stream().map(ParticipantName::new).toList();
+    private List<Participant> createNames(List<String> names) {
+        return names.stream().map(Participant::new).toList();
     }
 
     private void validateNames() {
@@ -25,11 +25,11 @@ public class Participants {
         return new LadderWidth(names.size());
     }
 
-    public ParticipantName get(Position position) {
+    public Participant getParticipant(Position position) {
         return names.get(position.getValue());
     }
 
-    public List<ParticipantName> getNames() {
+    public List<Participant> getNames() {
         return names;
     }
 }

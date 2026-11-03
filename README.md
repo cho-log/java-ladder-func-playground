@@ -45,7 +45,7 @@ neo,brown,brie,tommy
 
 ### 추가된 객체
 
-- ParticipantName / Participants: 이름 검증과 참여 순서 관리
+- Participant / Participants: 이름 검증과 참여 순서 관리
 - Outcome / Outcomes: 결과 값과 결과 개수 검증
 - LadderGame: 한 번의 사다리 생성과 결과 계산 연결
 - GameResults: 참여자별 결과와 조회

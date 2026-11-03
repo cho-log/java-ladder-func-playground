@@ -11,27 +11,27 @@ class GameResultsTest {
     @Test
     void matchesEachParticipantToDestinationOutcome() {
         GameResults results = createGame().getResults();
-        assertThat(results.getResult(new ParticipantName("neo")).getValue()).isEqualTo("3000");
-        assertThat(results.getResult(new ParticipantName("brown")).getValue()).isEqualTo("꽝");
-        assertThat(results.getResult(new ParticipantName("brie")).getValue()).isEqualTo("5000");
+        assertThat(results.getResult(new Participant("neo")).getValue()).isEqualTo("3000");
+        assertThat(results.getResult(new Participant("brown")).getValue()).isEqualTo("꽝");
+        assertThat(results.getResult(new Participant("brie")).getValue()).isEqualTo("5000");
     }
 
     @Test
     void returnsAllResultsInParticipantOrder() {
-        assertThat(createGame().getResults().getResults().keySet()).extracting(ParticipantName::getValue)
+        assertThat(createGame().getResults().getResults().keySet()).extracting(Participant::getValue)
                 .containsExactly("neo", "brown", "brie");
     }
 
     @Test
     void keepsResultsWhenQueriedSeveralTimes() {
         GameResults results = createGame().getResults();
-        assertThat(results.getResult(new ParticipantName("neo")).getValue()).isEqualTo("3000");
-        assertThat(results.getResult(new ParticipantName("neo")).getValue()).isEqualTo("3000");
+        assertThat(results.getResult(new Participant("neo")).getValue()).isEqualTo("3000");
+        assertThat(results.getResult(new Participant("neo")).getValue()).isEqualTo("3000");
     }
 
     @Test
     void rejectsUnknownParticipant() {
-        assertThatThrownBy(() -> createGame().getResults().getResult(new ParticipantName("tommy")))
+        assertThatThrownBy(() -> createGame().getResults().getResult(new Participant("tommy")))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

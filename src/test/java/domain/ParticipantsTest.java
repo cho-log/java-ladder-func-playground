@@ -13,13 +13,13 @@ class ParticipantsTest {
     @ParameterizedTest
     @ValueSource(strings = {"", " ", "abcdef", "all"})
     void rejectsInvalidName(String name) {
-        assertThatThrownBy(() -> new ParticipantName(name)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Participant(name)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void acceptsFiveCharactersAndTrimsWhitespace() {
-        assertThat(new ParticipantName(" brown ").getValue()).isEqualTo("brown");
-        assertThat(new ParticipantName(" neo ")).isEqualTo(new ParticipantName("neo"));
+        assertThat(new Participant(" brown ").getValue()).isEqualTo("brown");
+        assertThat(new Participant(" neo ")).isEqualTo(new Participant("neo"));
     }
 
     @Test
@@ -36,7 +36,7 @@ class ParticipantsTest {
     @Test
     void preservesInputOrderAndUsesParticipantCountAsWidth() {
         Participants participants = new Participants(List.of("neo", "brown", "brie"));
-        assertThat(participants.getNames()).extracting(ParticipantName::getValue)
+        assertThat(participants.getNames()).extracting(Participant::getValue)
                 .containsExactly("neo", "brown", "brie");
         assertThat(participants.getWidth().getValue()).isEqualTo(3);
     }

@@ -1,10 +1,10 @@
 package domain;
 
-public class ParticipantName {
+public class Participant {
     private static final int MAX_LENGTH = 5;
     private final String value;
 
-    public ParticipantName(String value) {
+    public Participant(String value) {
         String name = value.trim();
         validate(name);
         this.value = name;
@@ -22,10 +22,10 @@ public class ParticipantName {
 
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof ParticipantName)) {
+        if (!(other instanceof Participant)) {
             return false;
         }
-        return value.equals(((ParticipantName) other).value);
+        return value.equals(((Participant) other).value);
     }
 
     @Override

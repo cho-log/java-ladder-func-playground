@@ -14,7 +14,7 @@ public class ResultQuery {
         return value.equals("all");
     }
 
-    public ParticipantName getName() {
-        return new ParticipantName(value);
+    public Participant getName() {
+        return new Participant(value);
     }
 }

@@ -6,7 +6,7 @@ import domain.Ladder;
 import domain.Line;
 import domain.Outcome;
 import domain.Outcomes;
-import domain.ParticipantName;
+import domain.Participant;
 import domain.Participants;
 import domain.ResultQuery;
 
@@ -33,7 +33,7 @@ public class ResultView {
 
     private static void printNames(Participants participants, int columnWidth) {
         System.out.println(participants.getNames().stream()
-                .map(ParticipantName::getValue)
+                .map(Participant::getValue)
                 .map(name -> String.format("%-" + columnWidth + "s", name))
                 .collect(Collectors.joining()));
     }
