@@ -6,6 +6,8 @@ import domain.game.GameResult;
 import domain.game.Names;
 import domain.game.Prizes;
 import domain.random.ConnectionGenerator;
+import exception.ErrorMessage;
+import java.util.List;
 import java.util.function.Supplier;
 import view.InputView;
 import view.OutputView;
@@ -22,7 +24,7 @@ public class LadderController {
     }
 
     public void run(ConnectionGenerator connectionGenerator) {
-        Names names = retry(() -> Names.createNames(inputView.readNames()));
+        Names names = retry(this::readNames);
         Prizes prizes = retry(() -> readPrizes(names));
         Height height = retry(() -> new Height(inputView.readHeight()));
         Ladder ladder = Ladder.createLadder(names.toWidth(), height, connectionGenerator);
@@ -30,6 +32,18 @@ public class LadderController {
 
         outputView.printLadder(ladder, names, prizes);
         showResults(gameResult);
+    }
+
+    private Names readNames() {
+        List<String> inputNames = inputView.readNames();
+        validateNotCommand(inputNames);
+        return Names.createNames(inputNames);
+    }
+
+    private void validateNotCommand(List<String> inputNames) {
+        if (inputNames.contains(ALL)) {
+            throw new IllegalArgumentException(ErrorMessage.NAME_IS_RESERVED.getMessage());
+        }
     }
 
     private Prizes readPrizes(Names names) {

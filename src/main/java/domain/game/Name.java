@@ -20,10 +20,6 @@ public class Name {
         if (name.length() > MAX_NAME_LENGTH) {
             throw new IllegalArgumentException(ErrorMessage.NAME_TOO_LONG.getMessage());
         }
-
-        if (name.equals("all")) {
-            throw new IllegalArgumentException(ErrorMessage.NAME_IS_RESERVED.getMessage());
-        }
     }
 
     public String getName() {
