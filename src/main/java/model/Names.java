@@ -4,11 +4,13 @@ import java.util.List;
 
 public class Names {
     private final List<Name> names;
+    private static final int MIN_WIDTH = 2;
 
     public Names(List<String> inputs) {
         List<Name> names = inputs.stream()
                 .map(Name::new)
                 .toList();
+        validateSize(names);
         validateDuplicate(names);
         this.names = names;
     }
@@ -26,6 +28,12 @@ public class Names {
 
     public Name get(int index) {
         return names.get(index);
+    }
+
+    private void validateSize(List<Name> names) {
+        if (names.size() < MIN_WIDTH) {
+            throw new IllegalArgumentException("참가자는 2명 이상이어야 합니다.");
+        }
     }
 
     private void validateDuplicate(List<Name> names) {

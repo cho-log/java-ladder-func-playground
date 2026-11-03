@@ -41,4 +41,11 @@ class NamesTest {
                 .hasMessage("이름은 5자 이하여야 합니다.");
     }
 
+    @Test
+    @DisplayName("참가자가 2명보다 적으면 예외가 발생한다")
+    void tooFewNames() {
+        assertThatThrownBy(() -> new Names(List.of("neo")))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("참가자는 2명 이상이어야 합니다.");
+    }
 }
