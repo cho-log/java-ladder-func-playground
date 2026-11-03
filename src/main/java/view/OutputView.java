@@ -66,4 +66,8 @@ public class OutputView {
         System.out.println(entry.getKey().getValue() + " : " + entry.getValue().getValue());
     }
 
+    public static void printError(String message) {
+        System.out.println("error: " + message);
+    }
+
 }

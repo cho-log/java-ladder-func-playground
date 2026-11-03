@@ -18,7 +18,11 @@ public class InputView {
 
     public static int inputRow() {
         System.out.println("최대 사다리 높이는 몇 개인가요?");
-        return Integer.parseInt(scanner.nextLine());
+        try {
+            return Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("사다리 높이는 숫자로 입력해야 합니다.");
+        }
     }
 
     public static String inputResultName() {

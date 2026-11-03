@@ -13,23 +13,34 @@ import domain.Results;
 import domain.RowCount;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
 import view.InputView;
 import view.OutputView;
 
 public class Controller {
     public void run() {
-        Names names = new Names(inputNameList(InputView.inputNames()));
-        Results results = new Results(inputResultList(InputView.inputResults()));
-        NameResultPairs nameResultPairs = new NameResultPairs(names, results);
+        Names names = retry(this::readNames);
+        NameResultPairs nameResultPairs = retry(() -> readNameResultPairs(names));
         Ladder ladder = createLadder(nameResultPairs.size());
         GameResult gameResult = createGameResult(ladder, nameResultPairs);
         OutputView.printLadder(ladder, nameResultPairs);
         printSelectedResult(gameResult);
     }
 
+    private Names readNames() {
+        String input = InputView.inputNames();
+        return new Names(inputNameList(input));
+    }
+
+    private NameResultPairs readNameResultPairs(Names names) {
+        String input = InputView.inputResults();
+        Results results = new Results(inputResultList(input));
+        return new NameResultPairs(names, results);
+    }
+
     private Ladder createLadder(int nameCount) {
         ColumnCount column = new ColumnCount(nameCount);
-        RowCount row = new RowCount(InputView.inputRow());
+        RowCount row = retry(() -> new RowCount(InputView.inputRow()));
         return new LadderGenerator().generate(row, column);
     }
 
@@ -42,12 +53,12 @@ public class Controller {
     private void printSelectedResult(GameResult gameResult) {
         boolean finished = false;
         while (!finished) {
-            String input = InputView.inputResultName();
-            finished = processResultRequest(gameResult, input);
+            finished = retry(() -> processResultRequest(gameResult));
         }
     }
 
-    private boolean processResultRequest(GameResult gameResult, String input) {
+    private boolean processResultRequest(GameResult gameResult) {
+        String input = InputView.inputResultName();
         if (input.equals("all")) {
             OutputView.printAllResult(gameResult);
             return true;
@@ -68,5 +79,14 @@ public class Controller {
                 .map(String::trim)
                 .map(Result::new)
                 .toList();
+    }
+
+    private <T> T retry(Supplier<T> supplier) {
+        try {
+            return supplier.get();
+        } catch (IllegalArgumentException e) {
+            OutputView.printError(e.getMessage());
+            return retry(supplier);
+        }
     }
 }
