@@ -7,7 +7,7 @@ public class RandomConnectionGenerator implements ConnectionGenerator {
     private final Random random;
 
     public RandomConnectionGenerator(Random random) {
-        this.random = new Random();
+        this.random = random;
     }
 
     @Override
