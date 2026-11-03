@@ -1,9 +1,10 @@
-import domain.GameResults;
 import domain.LadderGame;
-import domain.LadderHeight;
-import domain.Outcomes;
-import domain.Participants;
-import domain.RandomConnectionGenerator;
+import domain.connection.RandomConnectionGenerator;
+import domain.ladder.LadderHeight;
+import domain.participant.Participants;
+import domain.result.GameResults;
+import domain.result.Outcomes;
+
 import view.InputView;
 import view.ResultView;
 

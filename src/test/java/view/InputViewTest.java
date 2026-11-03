@@ -1,11 +1,12 @@
 package view;
 
+import domain.ladder.LadderWidth;
+import domain.result.Outcomes;
+
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Scanner;
-import domain.Outcomes;
-import domain.LadderWidth;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;

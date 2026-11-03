@@ -1,4 +1,4 @@
-package domain;
+package domain.participant;
 
 public class Participant {
     private static final int MAX_LENGTH = 5;

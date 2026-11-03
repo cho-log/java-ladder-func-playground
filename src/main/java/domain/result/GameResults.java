@@ -1,4 +1,9 @@
-package domain;
+package domain.result;
+
+import domain.ladder.Ladder;
+import domain.ladder.LadderPath;
+import domain.participant.Participant;
+import domain.participant.Participants;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;

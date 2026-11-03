@@ -1,5 +1,8 @@
 package domain;
 
+import domain.connection.Connection;
+import domain.connection.ConnectionGenerator;
+
 import java.util.List;
 
 class FixedConnectionGenerator implements ConnectionGenerator {

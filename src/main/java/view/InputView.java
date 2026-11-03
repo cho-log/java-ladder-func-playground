@@ -1,8 +1,8 @@
 package view;
 
-import domain.LadderHeight;
-import domain.Participants;
-import domain.ResultQuery;
+import domain.ladder.LadderHeight;
+import domain.participant.Participants;
+import domain.result.ResultQuery;
 
 import java.util.Arrays;
 import java.util.List;

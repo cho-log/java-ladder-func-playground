@@ -1,4 +1,7 @@
-package domain;
+package domain.ladder;
+
+import domain.connection.Connection;
+import domain.connection.ConnectionGenerator;
 
 import java.util.ArrayList;
 import java.util.List;

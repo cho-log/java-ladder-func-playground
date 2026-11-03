@@ -1,5 +1,9 @@
 package domain;
 
+import domain.connection.Connection;
+import domain.ladder.LadderWidth;
+import domain.ladder.Line;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

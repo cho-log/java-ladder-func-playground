@@ -1,14 +1,14 @@
 package view;
 
-import domain.Connection;
-import domain.GameResults;
-import domain.Ladder;
-import domain.Line;
-import domain.Outcome;
-import domain.Outcomes;
-import domain.Participant;
-import domain.Participants;
-import domain.ResultQuery;
+import domain.connection.Connection;
+import domain.ladder.Ladder;
+import domain.ladder.Line;
+import domain.participant.Participant;
+import domain.participant.Participants;
+import domain.result.GameResults;
+import domain.result.Outcome;
+import domain.result.Outcomes;
+import domain.result.ResultQuery;
 
 import java.util.stream.Collectors;
 

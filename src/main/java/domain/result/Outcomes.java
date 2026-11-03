@@ -1,4 +1,7 @@
-package domain;
+package domain.result;
+
+import domain.ladder.LadderWidth;
+import domain.ladder.Position;
 
 import java.util.List;
 

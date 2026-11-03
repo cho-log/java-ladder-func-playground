@@ -1,4 +1,7 @@
-package domain;
+package domain.participant;
+
+import domain.ladder.LadderWidth;
+import domain.ladder.Position;
 
 import java.util.HashSet;
 import java.util.List;

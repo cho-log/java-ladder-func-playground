@@ -1,5 +1,10 @@
 package domain;
 
+import domain.connection.Connection;
+import domain.ladder.Ladder;
+import domain.ladder.LadderHeight;
+import domain.ladder.LadderWidth;
+
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

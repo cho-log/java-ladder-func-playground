@@ -1,4 +1,4 @@
-package domain;
+package domain.connection;
 
 @FunctionalInterface
 public interface ConnectionGenerator {

@@ -1,4 +1,6 @@
-package domain;
+package domain.ladder;
+
+import domain.connection.ConnectionGenerator;
 
 import java.util.List;
 import java.util.stream.IntStream;
