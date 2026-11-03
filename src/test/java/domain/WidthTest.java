@@ -3,6 +3,7 @@ package domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import exception.ErrorMessage;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,8 @@ class WidthTest {
     @Test
     void 넓이가_2_미만이면_예외가_발생한다() {
         assertThatThrownBy(() -> new Width(1))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.MINIMUM_WIDTH.getMessage());
     }
 
     @Test

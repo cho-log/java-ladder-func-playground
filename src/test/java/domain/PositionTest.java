@@ -3,6 +3,7 @@ package domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import exception.ErrorMessage;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,8 @@ class PositionTest {
     @Test
     void 위치가_음수면_예외가_발생한다() {
         assertThatThrownBy(() -> new Position(-1))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.POSITION_IS_NEGATIVE.getMessage());
     }
 
     @Test
@@ -42,6 +44,7 @@ class PositionTest {
         Position position = new Position(0);
 
         assertThatThrownBy(position::moveToLeft)
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.POSITION_IS_NEGATIVE.getMessage());
     }
 }

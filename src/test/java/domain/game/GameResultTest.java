@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import domain.Connection;
 import domain.Height;
 import domain.Ladder;
+import exception.ErrorMessage;
 import java.util.List;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -30,7 +31,7 @@ class GameResultTest {
 
         assertThatThrownBy(() -> gameResult.findPrize("jun"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("이름이 목록에 존재하지 않습니다.");
+                .hasMessage(ErrorMessage.NAME_NOT_FOUND.getMessage());
     }
 
     @Test
@@ -39,7 +40,7 @@ class GameResultTest {
 
         assertThatThrownBy(() -> gameResult.findPrize("abcdef"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("이름이 목록에 존재하지 않습니다.");
+                .hasMessage(ErrorMessage.NAME_NOT_FOUND.getMessage());
     }
 
     @Test
@@ -47,7 +48,8 @@ class GameResultTest {
         Prizes threePrizes = Prizes.createPrizes(List.of("꽝", "5000", "꽝"));
 
         assertThatThrownBy(() -> GameResult.validateSameCount(names, threePrizes))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.PRIZE_COUNT_MISMATCH.getMessage());
     }
 
     @Test

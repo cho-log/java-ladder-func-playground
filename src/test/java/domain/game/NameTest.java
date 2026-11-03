@@ -3,6 +3,7 @@ package domain.game;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import exception.ErrorMessage;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
@@ -12,13 +13,15 @@ class NameTest {
     @Test
     void 이름이_비어있으면_오류가_발생한다() {
         assertThatThrownBy(() -> new Name(""))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.NAME_IS_EMPTY.getMessage());
     }
 
     @Test
     void 이름이_공백이면_오류가_발생한다() {
         assertThatThrownBy(() -> new Name(" "))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.NAME_IS_EMPTY.getMessage());
     }
 
     @Test
@@ -31,7 +34,8 @@ class NameTest {
     @Test
     void 이름이_5글자를_넘으면_예외가_발생한다() {
         assertThatThrownBy(() -> new Name("tommyy"))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.NAME_TOO_LONG.getMessage());
     }
 
     @Test
@@ -42,6 +46,7 @@ class NameTest {
     @Test
     void 사용자의_이름이_all이면_오류가_발생한다() {
         assertThatThrownBy(() -> new Name("all"))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.NAME_IS_RESERVED.getMessage());
     }
 }

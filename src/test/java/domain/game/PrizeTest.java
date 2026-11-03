@@ -3,6 +3,7 @@ package domain.game;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import exception.ErrorMessage;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
@@ -12,13 +13,15 @@ class PrizeTest {
     @Test
     void 결과_값이_비어있으면_오류가_발생한다() {
         assertThatThrownBy(() -> new Prize(""))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.PRIZE_IS_EMPTY.getMessage());
     }
 
     @Test
     void 결과_값이_공백이면_오류가_발생한다() {
         assertThatThrownBy(() -> new Prize(" "))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.PRIZE_IS_EMPTY.getMessage());
     }
 
     @Test

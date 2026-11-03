@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import domain.Position;
+import exception.ErrorMessage;
 import java.util.List;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -22,6 +23,7 @@ class PrizesTest {
     @Test
     void 결과_목록에_빈_값이_있으면_오류가_발생한다() {
         assertThatThrownBy(() -> Prizes.createPrizes(List.of("꽝", "100", "")))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.PRIZE_IS_EMPTY.getMessage());
     }
 }
