@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class LadderGame {
     private final Ladder ladder;
@@ -18,11 +19,10 @@ public class LadderGame {
     }
 
     public List<Integer> getResult() {
-        List<Integer> resultList = new ArrayList<>();
-        for (int i = 0; i < ladder.getColumn(); i++) {
-            resultList.add(ladder.move(i));
-        }
-        return resultList;
+        return IntStream.range(0, ladder.getColumn())
+                .map(ladder::move)
+                .boxed()
+                .toList();
     }
 
 }
