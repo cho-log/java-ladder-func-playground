@@ -13,11 +13,11 @@ public class Name {
     }
 
     private void validate(String value) {
+        if (value == null || value.isBlank()) {
+            throw new IllegalArgumentException("이름을 공백으로 생성할 수 없습니다.");
+        }
         if (value.length() > MAX_NAME_LENGTH) {
             throw new IllegalArgumentException("이름은 최대 5글자 입니다.");
-        }
-        if (value.isBlank()) {
-            throw new IllegalArgumentException("이름을 공백으로 생성할 수 없습니다.");
         }
     }
 
