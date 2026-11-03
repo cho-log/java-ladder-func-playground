@@ -17,6 +17,7 @@ public class GameResult {
 
     public static GameResult of(Names names, Ladder ladder, Prizes prizes) {
         validateSameCount(names, prizes);
+        validateLadderWidth(names, ladder);
         List<Name> participants = names.getNames();
         Map<Name, Prize> results = new LinkedHashMap<>();
         for (int index = 0; index < participants.size(); index++) {
