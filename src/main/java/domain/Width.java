@@ -13,7 +13,7 @@ public class Width {
 
     private void validateWidth(int width) {
         if (width < MINIMUM_WIDTH) {
-            throw new IllegalArgumentException(ErrorMessage.WIDTH_IS_BIGGER_THAN_2.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.MINIMUM_WIDTH.getMessage());
         }
     }
 

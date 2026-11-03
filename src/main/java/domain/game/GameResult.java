@@ -28,7 +28,7 @@ public class GameResult {
 
     public static void validateSameCount(Names names, Prizes prizes) {
         if (names.getNames().size() != prizes.getPrizes().size()) {
-            throw new IllegalArgumentException(ErrorMessage.PRIZE_NUMBER_IS_NOT_NAME_NUMBER.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.PRIZE_COUNT_MISMATCH.getMessage());
         }
     }
 

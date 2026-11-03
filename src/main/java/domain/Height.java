@@ -13,7 +13,7 @@ public class Height {
 
     private void validateHeight(int height) {
         if (height < MINIMUM_HEIGHT) {
-            throw new IllegalArgumentException(ErrorMessage.HEIGHT_IS_BIGGER_THAN_0.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.MINIMUM_HEIGHT.getMessage());
         }
     }
 
