@@ -3,9 +3,18 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.function.BooleanSupplier;
 
 public class LadderGenerator {
-    private static final Random RANDOM = new Random();
+    private final BooleanSupplier connectionStrategy;
+
+    public LadderGenerator(BooleanSupplier connectionStrategy) {
+        this.connectionStrategy = connectionStrategy;
+    }
+
+    public LadderGenerator() {
+        this.connectionStrategy = new Random()::nextBoolean;
+    }
 
     public Ladder generate(RowCount row, ColumnCount column) {
         List<Line> lines = new ArrayList<>();
@@ -25,13 +34,13 @@ public class LadderGenerator {
 
     private Connection createPoint(List<Connection> points, int index) {
         if (index == 0 || !points.get(index - 1).isConnected()) {
-            return createRandomConnection();
+            return createConnection();
         }
         return Connection.DISCONNECTED;
     }
 
-    private Connection createRandomConnection() {
-        if (RANDOM.nextBoolean()) {
+    private Connection createConnection() {
+        if (connectionStrategy.getAsBoolean()) {
             return Connection.CONNECTED;
         }
         return Connection.DISCONNECTED;

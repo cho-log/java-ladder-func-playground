@@ -1,5 +1,4 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import domain.ColumnCount;
 import domain.Connection;
@@ -32,26 +31,15 @@ public class LadderGeneratorTest {
     }
 
     @Test
-    void 인접한_가로선은_서로_겹치지_않는다() {
-        LadderGenerator generator = new LadderGenerator();
+    void 연결된_가로선_다음은_항상_끊긴다() {
+        LadderGenerator generator = new LadderGenerator(() -> true);
+        Ladder ladder = generator.generate(new RowCount(1), new ColumnCount(4));
 
-        for (int attempt = 0; attempt < 100; attempt++) {
-            Ladder ladder = generator.generate(new RowCount(4), new ColumnCount(4));
-            assertNoOverlappingConnections(ladder);
-        }
+        List<Connection> expected = List.of(
+                Connection.CONNECTED,
+                Connection.DISCONNECTED,
+                Connection.CONNECTED);
+        assertEquals(expected, ladder.getLines().get(0).getPoints());
     }
-
-    private void assertNoOverlappingConnections(Ladder ladder) {
-        for (Line line : ladder.getLines()) {
-            assertNoOverlappingPoints(line.getPoints());
-        }
-    }
-
-    private void assertNoOverlappingPoints(List<Connection> points) {
-        for (int index = 1; index < points.size(); index++) {
-            boolean overlapping = points.get(index - 1).isConnected()
-                    && points.get(index).isConnected();
-            assertFalse(overlapping);
-        }
-    }
+    
 }
