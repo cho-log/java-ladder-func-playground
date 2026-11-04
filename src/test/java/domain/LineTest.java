@@ -3,8 +3,12 @@ package domain;
 import domain.connection.Connection;
 import domain.ladder.LadderWidth;
 import domain.ladder.Line;
+import domain.ladder.Position;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
@@ -38,4 +42,18 @@ class LineTest {
         assertThat(line.getConnections()).containsExactly(
                 Connection.DISCONNECTED, Connection.CONNECTED, Connection.DISCONNECTED);
     }
+    @ParameterizedTest
+    @CsvSource({"0, 1", "1, 0", "2, 3", "3, 2"})
+    void movesLeftOrRightOncePerLine(int start, int expected) {
+        Line line = new Line(new LadderWidth(4), () -> Connection.CONNECTED);
+        assertThat(line.move(new Position(start)).getValue()).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1, 2, 3})
+    void staysWhenNoConnectionExists(int start) {
+        Line line = new Line(new LadderWidth(4), () -> Connection.DISCONNECTED);
+        assertThat(line.move(new Position(start)).getValue()).isEqualTo(start);
+    }
+
 }
