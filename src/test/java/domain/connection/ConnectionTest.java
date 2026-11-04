@@ -1,6 +1,4 @@
-package domain;
-
-import domain.connection.Connection;
+package domain.connection;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

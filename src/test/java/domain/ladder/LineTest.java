@@ -1,9 +1,7 @@
-package domain;
+package domain.ladder;
 
+import domain.connection.FixedConnectionGenerator;
 import domain.connection.Connection;
-import domain.ladder.LadderWidth;
-import domain.ladder.Line;
-import domain.ladder.Position;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -42,6 +40,7 @@ class LineTest {
         assertThat(line.getConnections()).containsExactly(
                 Connection.DISCONNECTED, Connection.CONNECTED, Connection.DISCONNECTED);
     }
+
     @ParameterizedTest
     @CsvSource({"0, 1", "1, 0", "2, 3", "3, 2"})
     void movesLeftOrRightOncePerLine(int start, int expected) {
@@ -55,5 +54,4 @@ class LineTest {
         Line line = new Line(new LadderWidth(4), () -> Connection.DISCONNECTED);
         assertThat(line.move(new Position(start)).getValue()).isEqualTo(start);
     }
-
 }

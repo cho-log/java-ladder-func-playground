@@ -1,13 +1,12 @@
-package domain;
+package domain.result;
 
+import domain.LadderGame;
+import domain.connection.FixedConnectionGenerator;
 import domain.connection.Connection;
 import domain.ladder.LadderHeight;
 import domain.ladder.LadderWidth;
 import domain.participant.Participant;
 import domain.participant.Participants;
-import domain.result.GameResults;
-import domain.result.Outcome;
-import domain.result.Outcomes;
 
 import org.junit.jupiter.api.Test;
 

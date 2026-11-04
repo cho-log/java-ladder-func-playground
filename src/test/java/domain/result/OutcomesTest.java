@@ -1,8 +1,6 @@
-package domain;
+package domain.result;
 
 import domain.ladder.LadderWidth;
-import domain.result.Outcome;
-import domain.result.Outcomes;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

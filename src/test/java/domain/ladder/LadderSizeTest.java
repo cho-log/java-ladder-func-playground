@@ -1,9 +1,6 @@
-package domain;
+package domain.ladder;
 
 import domain.connection.Connection;
-import domain.ladder.Ladder;
-import domain.ladder.LadderHeight;
-import domain.ladder.LadderWidth;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

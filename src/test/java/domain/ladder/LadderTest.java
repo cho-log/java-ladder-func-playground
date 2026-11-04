@@ -1,10 +1,7 @@
-package domain;
+package domain.ladder;
 
+import domain.connection.FixedConnectionGenerator;
 import domain.connection.Connection;
-import domain.ladder.Ladder;
-import domain.ladder.LadderHeight;
-import domain.ladder.LadderWidth;
-import domain.ladder.Position;
 
 import org.junit.jupiter.api.Test;
 
@@ -31,6 +28,7 @@ class LadderTest {
                 assertThat(line.getConnections()).containsExactly(
                         Connection.CONNECTED, Connection.DISCONNECTED, Connection.CONNECTED));
     }
+
     @Test
     void followsSeveralLinesFromTopToBottom() {
         Ladder ladder = createCrossingLadder();

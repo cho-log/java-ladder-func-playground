@@ -1,7 +1,6 @@
-package domain;
+package domain.result;
 
 import domain.participant.Participant;
-import domain.result.ResultQuery;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

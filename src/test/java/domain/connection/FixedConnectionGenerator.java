@@ -1,15 +1,12 @@
-package domain;
-
-import domain.connection.Connection;
-import domain.connection.ConnectionGenerator;
+package domain.connection;
 
 import java.util.List;
 
-class FixedConnectionGenerator implements ConnectionGenerator {
+public class FixedConnectionGenerator implements ConnectionGenerator {
     private final List<Connection> connections;
     private int index;
 
-    FixedConnectionGenerator(List<Connection> connections) {
+    public FixedConnectionGenerator(List<Connection> connections) {
         this.connections = List.copyOf(connections);
     }
 

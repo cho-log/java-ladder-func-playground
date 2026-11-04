@@ -1,7 +1,4 @@
-package domain;
-
-import domain.participant.Participant;
-import domain.participant.Participants;
+package domain.participant;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
