@@ -1,0 +1,80 @@
+# 사다리 게임
+
+### 기능 요구사항
+
+1. 참여할 사람의 이름을 입력받는다.
+   1. 이름은 쉼표로 구분된다.
+   2. 이름에는 공백이 입력되면 안된다.
+   3. 이름은 최대 5자 이다.
+   4. 이름의 개수가 넓이가 된다.
+2. 실행 결과를 입력받는다.
+   1. 결과는 쉼표로 구분된다.
+   2. 결과는 꽝 아니면 상금으로 입력된다.
+   3. 이름의 개수와 실행 결과 개수가 다르면 안된다.
+2. 최대 사다리의 높이를 입력받는다.
+   1. 정수로 입력받는다.
+   2. 높이는 1 이상이어야한다.
+2. 사다리를 출력한다.
+   1. 연결 여부는 랜덤으로 결정한다.
+   2. 가로 라인이 겹치지 않도록 한다.
+   3. 사다리를 요구사항에 맞게 출력한다.
+4. 결과를 보고싶은 사람을 입력 받는다.
+   1. 결과를 보고싶은 사람은 참여할 사람 내에 있는 사람이어야 한다.
+   2. 결과를 보고싶은 사람의 결과를 출력한다.
+3. all이 입력될 때까지 과정 4를 반복한다.
+   1. all이 입력되면 입력받은 이름 순으로 모두의 결과를 출력한다.
+
+
+### 패키지 / 클래스 구조
+```
+
+├─main
+│  └─java
+│      │  Application.java
+│      │  
+│      ├─controller
+│      │      LadderController.java
+│      │      
+│      ├─domain
+│      │  │  Connection.java
+│      │  │  EndPositions.java
+│      │  │  Height.java
+│      │  │  Ladder.java
+│      │  │  Line.java
+│      │  │  Position.java
+│      │  │  Width.java
+│      │  │  
+│      │  ├─game
+│      │  │      Name.java
+│      │  │      Names.java
+│      │  │      Prize.java
+│      │  │      Prizes.java
+│      │  │      
+│      │  └─random
+│      │          ConnectionGenerator.java
+│      │          RandomConnectionGenerator.java
+│      │          
+│      ├─exception
+│      │      ErrorMessage.java
+│      │      
+│      └─view
+│              InputView.java
+│              OutputView.java
+│              
+└─test
+    └─java
+        └─domain
+            │  EndPositionsTest.java
+            │  FixedConnectionGenerator.java
+            │  HeightTest.java
+            │  LadderTest.java
+            │  LineTest.java
+            │  PositionTest.java
+            │  WidthTest.java
+            │  
+            └─game
+                    NamesTest.java
+                    NameTest.java
+                    PrizesTest.java
+                    PrizeTest.java
+```

@@ -1,0 +1,34 @@
+package domain;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
+import exception.ErrorMessage;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
+import org.junit.jupiter.api.Test;
+
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
+class WidthTest {
+
+    @Test
+    void 넓이가_1_이상이면_생성된다() {
+        Width width = new Width(1);
+
+        assertThat(width.getWidth()).isEqualTo(1);
+    }
+
+    @Test
+    void 넓이가_1_미만이면_예외가_발생한다() {
+        assertThatThrownBy(() -> new Width(0))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.MINIMUM_WIDTH.getMessage());
+    }
+
+    @Test
+    void 칸_개수는_넓이보다_1_작다() {
+        Width width = new Width(4);
+
+        assertThat(width.connectionCount()).isEqualTo(3);
+    }
+}
