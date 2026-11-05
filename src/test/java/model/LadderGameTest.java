@@ -45,7 +45,7 @@ class LadderGameTest {
     @DisplayName("실행 결과 개수가 참가자 수와 다르면 예외가 발생한다")
     void prizeCountMismatch() {
         // given
-        Prizes threePrizes = new Prizes(List.of("꽝", "5000", "꽝"), 4);
+        Prizes threePrizes = new Prizes(List.of("꽝", "5000", "꽝"), 3);
         Ladder ladder = new Ladder(4, new Height(1), () -> true);
 
         // when & then

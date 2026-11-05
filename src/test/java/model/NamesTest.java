@@ -23,7 +23,7 @@ class NamesTest {
     void getSize() {
         Names names = new Names(List.of("neo", "brown", "brie"));
 
-        assertThat(names.getSize()).isEqualTo(3);
+        assertThat(names.getParticipantCount()).isEqualTo(3);
     }
 
     @Test

@@ -17,7 +17,7 @@ public class LadderGame {
             throw new IllegalArgumentException("실행 결과 개수는 참가자 수와 같아야 합니다.");
         }
         if (names.getParticipantCount() != ladder.getWidth()) {
-            throw new IllegalArgumentException("사다리 크기는 참가자 수와 같아야 합니다.");
+            throw new IllegalArgumentException("사다리 너비는 참가자 수와 같아야 합니다.");
         }
     }
 

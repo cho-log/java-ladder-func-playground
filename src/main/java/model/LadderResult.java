@@ -12,11 +12,11 @@ public class LadderResult {
     }
 
     public Prize findResultOf(String name) {
-        Name target = new Name(name);
-        if (!ladderResults.containsKey(target)) {
-            throw new IllegalArgumentException("존재하지 않는 참가자입니다.");
-        }
-        return ladderResults.get(target);
+        return ladderResults.entrySet().stream()
+                .filter(entry -> entry.getKey().isSameAs(name))
+                .map(Map.Entry::getValue)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 참가자입니다."));
     }
 
     public Map<Name, Prize> findAllResults() {
