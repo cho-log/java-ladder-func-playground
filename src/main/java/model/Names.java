@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Names implements Iterable<Name> {
     private final List<Name> names;
-    private static final int MIN_WIDTH = 2;
+    private static final int MIN_PARTICIPANTS = 2;
 
     public Names(List<String> inputs) {
         List<Name> names = inputs.stream()
@@ -30,7 +30,7 @@ public class Names implements Iterable<Name> {
     }
 
     private void validateSize(List<Name> names) {
-        if (names.size() < MIN_WIDTH) {
+        if (names.size() < MIN_PARTICIPANTS) {
             throw new IllegalArgumentException("참가자는 2명 이상이어야 합니다.");
         }
     }
