@@ -2,6 +2,7 @@ package controller;
 
 import model.Height;
 import model.Ladder;
+import model.LadderGame;
 import model.LadderResult;
 import model.Name;
 import model.Names;
@@ -14,12 +15,12 @@ import view.OutputView;
 public class LadderController {
     public void run() {
         Names names = new Names(InputView.inputNames());
-        Prizes prizes = new Prizes(InputView.inputResults(), names.getSize());
-        Ladder ladder = new Ladder(names.getSize(), new Height(InputView.inputHeight()), pointGenerator());
+        Prizes prizes = new Prizes(InputView.inputResults(), names.getParticipantCount());
+        Ladder ladder = new Ladder(names.getParticipantCount(), new Height(InputView.inputHeight()), pointGenerator());
         OutputView.printLadder(ladder, names, prizes);
 
-        LadderResult ladderResult = new LadderResult(names, prizes, ladder);
-        printResult(ladderResult);
+        LadderGame ladderGame = new LadderGame(names, prizes, ladder);
+        printResult(ladderGame.getLadderResult());
     }
 
     private void printResult(LadderResult ladderResult) {

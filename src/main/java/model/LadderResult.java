@@ -7,11 +7,8 @@ import java.util.Map;
 public class LadderResult {
     private final Map<Name, Prize> ladderResults;
 
-    public LadderResult(Names names, Prizes prizes, Ladder ladder) {
-        ladderResults = new LinkedHashMap<>();
-        for (int i = 0; i < names.getSize(); i++) {
-            ladderResults.put(names.get(i), prizes.get(ladder.move(i)));
-        }
+    public LadderResult(Map<Name, Prize> ladderResults) {
+        this.ladderResults = Collections.unmodifiableMap(new LinkedHashMap<>(ladderResults));
     }
 
     public Prize findResultOf(String name) {

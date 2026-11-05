@@ -4,8 +4,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Names implements Iterable<Name> {
-    private final List<Name> names;
     private static final int MIN_PARTICIPANTS = 2;
+    private final List<Name> names;
 
     public Names(List<String> inputs) {
         List<Name> names = inputs.stream()
@@ -16,7 +16,7 @@ public class Names implements Iterable<Name> {
         this.names = names;
     }
 
-    public int getSize() {
+    public int getParticipantCount() {
         return names.size();
     }
 
