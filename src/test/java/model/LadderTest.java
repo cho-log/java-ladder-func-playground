@@ -12,9 +12,11 @@ class LadderTest {
     @Test
     @DisplayName("높이만큼 줄이 생성된다")
     void lineCount() {
-        Ladder ladder = new Ladder(4, new Height(5), () -> false);
+        Height height = new Height(5);
 
-        assertThat(ladder.getLines()).hasSize(5);
+        Ladder ladder = new Ladder(4, height, () -> false);
+
+        assertThat(ladder).hasSize(5);
     }
 
     @ParameterizedTest

@@ -1,22 +1,23 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import model.generator.PointGenerator;
 
-public class Ladder {
+public class Ladder implements Iterable<Line> {
     private final List<Line> lines;
 
     public Ladder(int width, Height height, PointGenerator generator) {
-        lines = new ArrayList<>();
-        generateLines(height.getHeight(), width, generator);
+        this.lines=generateLines(height.getHeight(), width, generator);
     }
 
-
-    private void generateLines(int height, int width, PointGenerator generator) {
+    private List<Line> generateLines(int height, int width, PointGenerator generator) {
+        List<Line> lines=new ArrayList<>();
         for (int i = 0; i < height; i++) {
             lines.add(new Line(width, generator));
         }
+        return List.copyOf(lines);
     }
 
     public int move(int position) {
@@ -27,8 +28,8 @@ public class Ladder {
         return position;
     }
 
-    public List<Line> getLines() {
-        return List.copyOf(lines);
+    @Override
+    public Iterator<Line> iterator() {
+        return lines.iterator();
     }
-
 }

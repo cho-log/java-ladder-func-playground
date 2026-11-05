@@ -14,7 +14,8 @@ class NamesTest {
     void getNames() {
         Names names = new Names(List.of("neo", "brown", "brie", "tommy"));
 
-        assertThat(names.getNames()).containsExactly("neo", "brown", "brie", "tommy");
+        assertThat(names).containsExactly(
+                new Name("neo"), new Name("brown"), new Name("brie"), new Name("tommy"));
     }
 
     @Test

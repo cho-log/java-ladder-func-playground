@@ -1,8 +1,9 @@
 package model;
 
+import java.util.Iterator;
 import java.util.List;
 
-public class Names {
+public class Names implements Iterable<Name> {
     private final List<Name> names;
     private static final int MIN_WIDTH = 2;
 
@@ -15,19 +16,17 @@ public class Names {
         this.names = names;
     }
 
-
     public int getSize() {
         return names.size();
     }
 
-    public List<String> getNames() {
-        return names.stream()
-                .map(Name::getName)
-                .toList();
-    }
-
     public Name get(int index) {
         return names.get(index);
+    }
+
+    @Override
+    public Iterator<Name> iterator() {
+        return names.iterator();
     }
 
     private void validateSize(List<Name> names) {

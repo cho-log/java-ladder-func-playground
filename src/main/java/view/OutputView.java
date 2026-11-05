@@ -18,15 +18,15 @@ public class OutputView {
     public static void printLadder(Ladder ladder, Names names, Prizes prizes) {
         System.out.println("사다리 결과");
 
-        for (String name : names.getNames()) {
-            System.out.printf(CELL_FORMAT, name);
+        for (Name name : names) {
+            System.out.printf(CELL_FORMAT, name.getName());
         }
         System.out.println();
-        for (Line line : ladder.getLines()) {
+        for (Line line : ladder) {
             printLine(line.getLine());
         }
-        for (String result : prizes.getPrizes()) {
-            System.out.printf(CELL_FORMAT, result);
+        for (Prize prize : prizes) {
+            System.out.printf(CELL_FORMAT, prize.getPrize());
         }
         System.out.println();
     }

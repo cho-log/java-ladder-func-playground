@@ -14,9 +14,13 @@ class PrizesTest {
     @Test
     @DisplayName("입력한 순서대로 실행 결과 목록을 반환한다")
     void getPrizes() {
-        Prizes prizes = new Prizes(List.of("꽝", "5000", "꽝", "3000"), 4);
+        List<String> inputs = List.of("꽝", "5000", "꽝", "3000");
 
-        assertThat(prizes.getPrizes()).containsExactly("꽝", "5000", "꽝", "3000");
+        Prizes prizes = new Prizes(inputs, 4);
+
+        assertThat(prizes)
+                .extracting(Prize::getPrize)
+                .containsExactly("꽝", "5000", "꽝", "3000");
     }
 
     @ParameterizedTest
